@@ -1,3 +1,4 @@
+const { ChildProcess } = require('child_process');
 var express = require('express');
 var download = require('image-downloader');
 var app = express();
@@ -18,3 +19,31 @@ function downloadImage(url, filepath) {
 app.listen(API_PORT, () => {
 	console.log(`Listening on localhost:${API_PORT}`)
 });
+
+
+//////////////////////////////////////////////////////////
+////////////////// Child Spawn Method() ////////////////// 
+//////////////////////////////////////////////////////////
+
+
+// 1. node.js calls python script and passes name
+// 2. python script prints hello + name
+// 3. log result 
+
+const { spawn } = require('child_process'); 
+// const { Script } = require('vm');
+var name = ["url/path"]
+
+//spawn command "send"
+const py = spawn('python3', ['py-script.py', `${JSON.stringify(name)}`])
+
+// recieve
+py.stdout.on('data', (data) => {
+    console.log(JSON.stringify(data.toString()))
+})
+
+// // check if the process has finished 
+
+// py.on('close', (code) => {
+//     console.log(`success: code ${code}`);
+// })
