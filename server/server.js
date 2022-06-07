@@ -3,7 +3,7 @@ var download = require('image-downloader');
 var app = express();
 const API_PORT = 3000;
 
-app.use(express.static('Client'));
+app.use(express.static('../Client'));
 
 
 //function which takes in URL of image and downloads it to filepath destination
