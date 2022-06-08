@@ -34,19 +34,30 @@
               <h3 class="masthead-brand">All Things Hieratic</h3>
               <nav>
                 <ul class="nav masthead-nav">
-                  <li class="active"><a href="/index.html">Home Page</a></li>
-                  <li><a href="#">Image Labeling Tools</a></li>
-                  <li><a href="/pages/ocr_system.html">OCR System</a></li>
+                  <li class="/index.html"><a href="/index.html">Home Page</a></li>
+                  <li><a href="pages/image_labeling.html">Image Labeling Tools</a></li>
+                  <li><a href="#">OCR System</a></li>
                 </ul>
               </nav>
             </div>
           </div>
 
           <div class="inner cover">
-            <h1 class="cover-heading">Image Labeling Tools for Hieratic Signs</h1>
-            <p class="lead">Our system allows you to label a single Hieratic sign and store it in our hieratic signs collection. This valuable data will help accelrate research in this field and open new doors by providing label data for future ML projects. </p>
+            <h1 class="cover-heading">Image Upload for Single Character OCR</h1>
+            <p class="lead">Our system allows you to upload a single Hieratic sign and we will return all similar characters that are already in our database.</p>
             <p class="lead">
+              
 
+              <!-- Image upload function for single character OCR as well as image display -->
+              <form action="/upload" method="POST" enctype="multipart/form-data">
+                <p>
+                  <input id="image_input" type="file" accept="image/*.png" name="hieraticSign" onchange="previewImage()">
+                </p>
+                <button>Submit</button>
+                <div>
+                  <img id="preview">
+                </div>
+              </form>
               
             </p>
           </div>
