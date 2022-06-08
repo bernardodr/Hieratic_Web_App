@@ -44,6 +44,9 @@ app.listen(API_PORT, () => {
 
 app.post('/upload', upload.single('hieraticSign'), (req, res) =>{
     return res.json({status: 'OK'})
+    //res.status(200)//.send('User Creation Successful')
+    
+    //return res.status(200).send()
 });
 
 
