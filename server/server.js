@@ -62,7 +62,7 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) =>{
 
 const { spawn } = require('child_process'); 
 // const { Script } = require('vm');
-var name = ["url/path"]
+var name = ""
 
 //spawn command "send"
 const py = spawn('python3', ['py-script.py', `${JSON.stringify(name)}`])
