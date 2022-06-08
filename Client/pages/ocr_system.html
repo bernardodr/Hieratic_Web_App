@@ -50,13 +50,14 @@
 
               <!-- Image upload function for single character OCR as well as image display -->
               <form action="/upload" method="POST" enctype="multipart/form-data">
+                <div>
+                    <img id="preview">
+                  </div>
                 <p>
                   <input id="image_input" type="file" accept="image/*.png" name="hieraticSign" onchange="previewImage()">
                 </p>
                 <button>Submit</button>
-                <div>
-                  <img id="preview">
-                </div>
+                
               </form>
               
             </p>
