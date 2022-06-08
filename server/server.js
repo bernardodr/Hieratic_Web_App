@@ -1,10 +1,27 @@
 const { ChildProcess } = require('child_process');
-var express = require('express');
-var download = require('image-downloader');
-var app = express();
+
+const express = require('express');
+const multer = require('multer');
+const uuid = require('uuid').v4;
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/')
+    },
+    filename: (req, file, cb) => {
+        const { originalname } = file;
+        // or 
+        // uuid, or fieldname see 9.00 in for unique naming system (https://youtu.be/ysS4sL6lLDU?t=544)
+        cb(null, originalname);
+    }
+});
+
+const upload = multer({ storage: storage});
+const app = express();
 const API_PORT = 3000;
 
-app.use(express.static('../Client/'));
+
+app.use(express.static('../Client'));
 
 
 //function which takes in URL of image and downloads it to filepath destination
@@ -19,6 +36,16 @@ function downloadImage(url, filepath) {
 app.listen(API_PORT, () => {
 	console.log(`Listening on localhost:${API_PORT}`)
 });
+
+
+//////////////////////////////////////////////////////////
+/////////////////// POST image upload //////////////////// 
+//////////////////////////////////////////////////////////
+
+app.post('/upload', upload.single('hieraticSign'), (req, res) =>{
+    return res.json({status: 'OK'})
+});
+
 
 
 //////////////////////////////////////////////////////////
