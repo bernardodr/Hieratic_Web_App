@@ -43,7 +43,10 @@ app.listen(API_PORT, () => {
 //////////////////////////////////////////////////////////
 
 app.post('/upload', upload.single('hieraticSign'), (req, res) =>{
-    return res.json({status: 'OK'})
+    //return res.send(+'<a href="/index.html"> </a>')
+    return res.redirect('http://localhost:3000/index.html')
+    //return res.send('<h3>Your image was uploaded</h3> <a href="/index.html">click here to go back</a>')
+    //return res.json({status: 'OK'})
     //res.status(200)//.send('User Creation Successful')
     
     //return res.status(200).send()
@@ -61,7 +64,6 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) =>{
 // 3. log result 
 
 const { spawn } = require('child_process'); 
-// const { Script } = require('vm');
 var name = ""
 
 //spawn command "send"
