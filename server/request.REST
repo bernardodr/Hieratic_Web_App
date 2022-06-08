@@ -1,0 +1,8 @@
+### Create a User
+
+POST http://localhost:3000/imageUpload'
+Content-Type: application/json
+
+{
+    "image": "uploaded_Image"
+}

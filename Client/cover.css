@@ -27,7 +27,7 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: rgba(185,163,126)
+  background-color: #333;
 }
 body {
   color: #fff;
@@ -117,6 +117,17 @@ body {
   font-weight: bold;
 }
 
+
+/* 
+* OCR Image display
+*/
+#display_image{
+  width: 375px;
+  height: 211px;
+  border: 1px solid whitesmoke;
+  background-position: center;
+  background-size: cover;
+}
 
 /*
  * Footer
