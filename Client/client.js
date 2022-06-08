@@ -1,13 +1,12 @@
-var image_input=document.querySelector('#image_input');
-var uploaded_image="";
+//function to display uploaded image. Access 'image input' id tag in html form, and displays chosen image in html img tag 'preview'
+function previewImage(){
+      var file =document.getElementById("image_input").files;
+      if (file.length>0){
+          var reader=new  FileReader();
+          reader.onload = function(event){
+              document.getElementById("preview").setAttribute("src", event.target.result);
+          }
+          reader.readAsDataURL(file[0]);
+      }
 
-
-image_input.addEventListener("change", function(){
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-        uploaded_image=reader.result;
-        document.querySelector('#display_image').style.backgroundImage=`url(${uploaded_image})`;
-    });
-    reader.readAsDataURL(this.files[0])
-})
-
+}

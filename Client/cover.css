@@ -9,7 +9,8 @@ a:hover {
   color: #fff;
 }
 
-#display_image{
+/* img tag with id 'preview' - displays uploaded image */
+#preview{
   width:300px;
   height:300px;
   
