@@ -44,7 +44,7 @@ app.listen(API_PORT, () => {
 
 app.post('/upload', upload.single('hieraticSign'), (req, res) =>{
     //return res.send(+'<a href="/index.html"> </a>')
-    return res.redirect('http://localhost:3000')
+    return res.redirect('http://localhost:3000/pages/ocr_system.html')
     //return res.send('<h3>Your image was uploaded</h3> <a href="/index.html">click here to go back</a>')
     //return res.json({status: 'OK'})
     //res.status(200)//.send('User Creation Successful')
