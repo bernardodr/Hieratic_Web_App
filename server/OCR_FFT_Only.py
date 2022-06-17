@@ -48,8 +48,8 @@ def FFT_only(location, bounds, size, C, D, g, fft_thresh, context, warp):
     new_ratio = height / width
     
     # load in aspect ratio list and pixel values for the data set
-    datalist = pd.read_csv('/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/database/Precalculated Data Set Stats/datasetstats.csv', index_col=[0])
-    pxls = pd.read_csv('/Users/danielbernardo/Desktop/PaPYrus-main fresh/Data Set and Metrics/Precalculated Data Set Stats/pxls_20.csv', index_col=[0])
+    datalist = pd.read_csv('database/Precalculated Data Set Stats/datasetstats.csv', index_col=[0])
+    pxls = pd.read_csv('database/Precalculated Data Set Stats/pxls_20.csv', index_col=[0])
     
     # filter by aspect ratio
     rows, cols = datalist.shape
@@ -110,16 +110,17 @@ def FFT_only(location, bounds, size, C, D, g, fft_thresh, context, warp):
     # print the top 10 results and save all the results
     top_40 = FFT_simil.head(40)
     top_10 = FFT_simil.head(10)
-    place = '/Users/danielbernardo/Desktop/PaPYrus-main fresh/Data Set and Metrics/Thesis Dataset Whole/' # the whole data set ("Dataset Whole"); remember the / after the folder name!
+    top_5 = FFT_simil.head(5)
+    place = 'database/Thesis Dataset Whole/' # the whole data set ("Dataset Whole"); remember the / after the folder name!
     fig = plt.figure(figsize=(20, 28))  
 
-    for i in range(len(top_10)):
-        image = Image.open(place + top_10.iat[i,0] + '.png')
-        picture = place + top_10.iat[i,0] + '.png'
+    for i in range(len(top_5)):
+        image = Image.open(place + top_5.iat[i,0] + '.png')
+        picture = place + top_5.iat[i,0] + '.png'
         fig.add_subplot(8, 5, i+1)
         plt.axis('off')
         plt.imshow(image)
-        plt.title('Number ' + str(i+1)  + '\n' + top_10.iat[i,0] + '\nFFT Score = '  + str(top_10.iat[i,1]))
+        plt.title('Number ' + str(i+1)  + '\n' + top_5.iat[i,0] + '\nFFT Score = '  + str(top_5.iat[i,1]))
         print(picture)
     plt.show()
 
@@ -129,7 +130,7 @@ def FFT_only(location, bounds, size, C, D, g, fft_thresh, context, warp):
 
 
 # identify one image with FFT only (faster, but less accurate)
-location = '/Users/danielbernardo/Desktop/A1_0004_1_1_3 copy.png' # image to be analyzed
+location = 'server/uploads/A1_0004_1_1_3 copy.png' # image to be analyzed
 bounds = 0.15 # specify range to take above and below aspect ratio
 size = 20 # size of the images (20 = best by test)
 C = size # FFT constant (size = best by test)
