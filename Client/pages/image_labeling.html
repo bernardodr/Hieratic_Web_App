@@ -9,14 +9,16 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <link rel="canonical" href="https://getbootstrap.com/docs/3.3/examples/cover/">
+    <link href="../cropperjs/dist/cropper.css" rel="stylesheet">
 
     <title>Hieratic.com</title>
 
 
     <!-- Custom styles for this template -->
     <link href="../cover.css" rel="stylesheet">
-
+    <script src="../cropperjs/dist/cropper.js"></script>
     <script src="../client.js"></script>
+    
 
  
   </head>
@@ -42,11 +44,24 @@
             </div>
           </div>
 
-          <div class="inner cover">
-            <h1 class="cover-heading">Image Labeling Tools for Hieratic Signs</h1>
-            <p class="lead">Our system allows you to label a single Hieratic sign and store it in our hieratic signs collection. This valuable data will help accelrate research in this field and open new doors by providing label data for future ML projects. </p>
-            <p class="lead">
 
+          <div class="inner cover">
+            <h1 class="cover-heading">Image Upload to Database</h1>
+            <p class="lead"> Please crop the desired character(s)</p>
+            <p class="lead"> </p>
+            
+
+              <!-- Image upload function for single character OCR as well as image display -->
+              <form action="/upload" method="POST" enctype="multipart/form-data">
+                <p>
+                  <input id="image_input1" type="file" accept="image/*.png" name="hieraticSign" onchange="previewImageCrop()">
+                </p>
+                <button>Submit</button>
+                <div>
+                  <img id="crop1">
+                </div>
+              </form>
+             
               
             </p>
           </div>
@@ -64,4 +79,5 @@
     </div>
 
   </body>
+  
 </html>

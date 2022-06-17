@@ -8,3 +8,4 @@ libraries used so far:
 4. uuid (renaming files)
 5. sys (python )
 6. child-process (module node js for communicating with python)
+7. cropperjs

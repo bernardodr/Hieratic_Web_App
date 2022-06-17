@@ -10,6 +10,17 @@ a:hover {
 }
 
 /* img tag with id 'preview' - displays uploaded image */
+#crop1{
+  width:480px;
+  height:480px;
+  
+  background-position:inherit;
+  background-size: cover;
+  display: inline-block;
+  
+  
+}
+
 #preview{
   width:300px;
   height:300px;
