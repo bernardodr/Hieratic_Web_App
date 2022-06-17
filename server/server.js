@@ -23,7 +23,7 @@ const API_PORT = 3000;
 
 app.use(express.static('../Client'));
 
-
+// Ben are you still using the download function??
 //function which takes in URL of image and downloads it to filepath destination
 function downloadImage(url, filepath) {
     return download.image({

@@ -48,7 +48,7 @@ def FFT_only(location, bounds, size, C, D, g, fft_thresh, context, warp):
     new_ratio = height / width
     
     # load in aspect ratio list and pixel values for the data set
-    datalist = pd.read_csv('/Users/danielbernardo/Desktop/PaPYrus-main fresh/Data Set and Metrics/Precalculated Data Set Stats/datasetstats.csv', index_col=[0])
+    datalist = pd.read_csv('/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/database/Precalculated Data Set Stats/datasetstats.csv', index_col=[0])
     pxls = pd.read_csv('/Users/danielbernardo/Desktop/PaPYrus-main fresh/Data Set and Metrics/Precalculated Data Set Stats/pxls_20.csv', index_col=[0])
     
     # filter by aspect ratio
@@ -129,7 +129,7 @@ def FFT_only(location, bounds, size, C, D, g, fft_thresh, context, warp):
 
 
 # identify one image with FFT only (faster, but less accurate)
-location = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/uploads/' # image to be analyzed
+location = '/Users/danielbernardo/Desktop/A1_0004_1_1_3 copy.png' # image to be analyzed
 bounds = 0.15 # specify range to take above and below aspect ratio
 size = 20 # size of the images (20 = best by test)
 C = size # FFT constant (size = best by test)
