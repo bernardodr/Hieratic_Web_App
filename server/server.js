@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
         const { originalname } = file;
         // or 
         // uuid, or fieldname see 9.00 in for unique naming system (https://youtu.be/ysS4sL6lLDU?t=544)
-        cb(null, originalname);
+        cb(null, 'upload.png');
     }
 });
 
@@ -44,6 +44,7 @@ app.listen(API_PORT, () => {
 
 app.post('/upload', upload.single('hieraticSign'), (req, res) =>{
     //return res.send(+'<a href="/index.html"> </a>')
+    OCR_FFT_RUN();
     return res.redirect('http://localhost:3000/pages/ocr_system.html')
     //return res.send('<h3>Your image was uploaded</h3> <a href="/index.html">click here to go back</a>')
     //return res.json({status: 'OK'})
@@ -64,18 +65,47 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) =>{
 // 3. log result 
 
 const { spawn } = require('child_process'); 
-var name = ""
+// var name = " Dan"
 
-//spawn command "send"
-const py = spawn('python3', ['py-script.py', `${JSON.stringify(name)}`])
+// //spawn command "send"
+// const py = spawn('python3', ['py-script.py', `${JSON.stringify(name)}`])
 
-// recieve
-py.stdout.on('data', (data) => {
-    console.log(JSON.stringify(data.toString()))
-})
+// // recieve
+// py.stdout.on('data', (data) => {
+//     console.log(JSON.stringify(data.toString()))
+// })
 
 // // check if the process has finished 
 
 // py.on('close', (code) => {
 //     console.log(`success: code ${code}`);
 // })
+
+
+/////////////////////////////////////////////////////////////////
+////////////////// Run OCR analysis /////////////////////////////
+/////////////////////////////////////////////////////////////////
+
+const OCR_FFT_RUN = function(){
+
+};
+    
+    //spawn command "send"
+    const childPython = spawn('python3',['OCR_FFT_Only.py']);
+
+    // recieve
+    childPython.stdout.on('data', (data) => {
+        
+        console.log(`stdout: + ${data}`);
+         
+        //console.log(JSON.stringify(data))
+    })
+
+    // handel errors
+    childPython.stderr.on('data', (data) => {
+        console.log(`stderr: + ${data}`);
+    })
+
+    childPython.on('close', (code) => {
+        console.log(`process exited with code: + ${code}`);
+    })
