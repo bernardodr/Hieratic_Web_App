@@ -1,5 +1,5 @@
 const { ChildProcess } = require('child_process');
-
+const { spawn } = require('child_process');
 const express = require('express');
 const multer = require('multer');
 const uuid = require('uuid').v4;
@@ -64,7 +64,7 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) =>{
 // 2. python script prints hello + name
 // 3. log result 
 
-const { spawn } = require('child_process'); 
+// const { spawn } = require('child_process'); 
 // var name = " Dan"
 
 // //spawn command "send"
@@ -87,9 +87,6 @@ const { spawn } = require('child_process');
 /////////////////////////////////////////////////////////////////
 
 const OCR_FFT_RUN = function(){
-
-};
-    
     //spawn command "send"
     const childPython = spawn('python3',['OCR_FFT_Only.py']);
 
@@ -109,3 +106,6 @@ const OCR_FFT_RUN = function(){
     childPython.on('close', (code) => {
         console.log(`process exited with code: + ${code}`);
     })
+};
+    
+    
