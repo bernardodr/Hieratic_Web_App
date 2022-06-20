@@ -105,8 +105,10 @@ const OCR_FFT_RUN = function(){
         console.log(`stdout: + ${data}`);
          
         //console.log(JSON.stringify(data))
-        imageData = data.toString();
-        //return console.log(imageData)
+        imageData = eval(`(${data})`);
+        imageData = imageData[0].toString();
+        
+        return console.log(imageData)
     })
 
     // handel errors
@@ -120,6 +122,14 @@ const OCR_FFT_RUN = function(){
     
 };
     
+
+/////////////////////////////////
+///// conver string to URL  /////
+/////////////////////////////////
+
+const stringURLConverter = function(imageData){
+    imageData = imageData.toString();
+}
     
 // // Function to send OCR results to client
 
@@ -131,7 +141,10 @@ const OCR_FFT_ONLY_RESULTS = function(){
 
 };
 app.get('/results', (req, res) => {
-    res.status(200).json(imageData);
+    
+    
+    //res.status(200).json(imageData);
+    res.sendFile(imageData);
 });
 
 // app.get('/results/:imageData', (req, res) => {
