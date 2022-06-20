@@ -42,10 +42,19 @@ app.listen(API_PORT, () => {
 /////////////////// POST image upload //////////////////// 
 //////////////////////////////////////////////////////////
 
+
+var imageData = ""
+
+
 app.post('/upload', upload.single('hieraticSign'), (req, res) =>{
     //return res.send(+'<a href="/index.html"> </a>')
+    res.redirect('http://localhost:3000/pages/ocr_system.html')
     OCR_FFT_RUN();
-    return res.redirect('http://localhost:3000/pages/ocr_system.html')
+    // OCR_FFT_ONLY_RESULTS();
+    //res.send(imageData)
+    //return res.send('<h3>Your image was uploaded</h3> <a href="/index.html">click here to go back</a>')
+
+    //return res.redirect('http://localhost:3000/pages/ocr_system.html')
     //return res.send('<h3>Your image was uploaded</h3> <a href="/index.html">click here to go back</a>')
     //return res.json({status: 'OK'})
     //res.status(200)//.send('User Creation Successful')
@@ -96,6 +105,8 @@ const OCR_FFT_RUN = function(){
         console.log(`stdout: + ${data}`);
          
         //console.log(JSON.stringify(data))
+        imageData = data.toString();
+        //return console.log(imageData)
     })
 
     // handel errors
@@ -106,6 +117,27 @@ const OCR_FFT_RUN = function(){
     childPython.on('close', (code) => {
         console.log(`process exited with code: + ${code}`);
     })
+    
 };
     
     
+// // Function to send OCR results to client
+
+// var results = JSON.stringify({"imageOne": imageData})
+
+
+const OCR_FFT_ONLY_RESULTS = function(){
+       
+
+};
+app.get('/results', (req, res) => {
+    res.status(200).json(imageData);
+});
+
+// app.get('/results/:imageData', (req, res) => {
+//     let imageData = req.params.imageData;
+
+//     if(results[imageData]){res.status(200).json(results[imageData]);}
+//     else{res.status(404).send({error: 'Image not found'});}
+//     //res.send({ img: imageData });
+//  });

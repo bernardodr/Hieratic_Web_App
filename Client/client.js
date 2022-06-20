@@ -16,3 +16,30 @@ function previewImage(){
 ///// POST Image Upload /////
 /////////////////////////////
 
+
+
+
+/////////////////////////////
+///// Get Image Results /////
+/////////////////////////////
+
+
+
+const showData = function(){
+
+    fetch('/results').then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
+    
+    // fetch('/upload/results')
+    // .then(res => {
+    //     if (res.ok){
+    //         console.log("Successful fetch")
+    //     } else{
+    //         console.log("Failed fetch")
+    //     }
+    //     res.json()
+    // })
+    // .then(data => console.log(data))
+    // .catch(error => console.error(error))
+};

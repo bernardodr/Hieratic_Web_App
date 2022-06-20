@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def main():
-    print('Python excuted from server/OCR_FFT_Only.py')
+   #print('Python excuted from server/OCR_FFT_Only.py')
     
 
     ################################################### 
@@ -36,7 +36,7 @@ def main():
     #################### Functions #################### 
     ###################################################
 
-    # FFT code (adapted from Nederhof)
+    # FFT code
     # compares the FFT results for two images
     def dist(fft_real1, fft_imag1, fft_real2, fft_imag2):
         d = 0
@@ -86,7 +86,7 @@ def main():
                     value = name[0:position]
                     saved.append(value)
 
-        print('There are ' + str(len(saved)) + ' images not filtered out by aspect ratio.') # see how many images are left after filtering
+        #print('There are ' + str(len(saved)) + ' images not filtered out by aspect ratio.') # see how many images are left after filtering
         saved_pxls = pxls.loc[pxls['0'].isin(saved)] # pixel values for saved images    
 
         # make the new image the same size as the dataset images and save its pixel values
@@ -145,8 +145,8 @@ def main():
             plt.axis('off')
             plt.imshow(image)
             plt.title('Number ' + str(i+1)  + '\n' + top_5.iat[i,0] + '\nFFT Score = '  + str(top_5.iat[i,1]))
-            print(picture)
-        found_images.append(picture)
+            #print(picture)
+            found_images.append(picture)
         #plt.show()
 
 
