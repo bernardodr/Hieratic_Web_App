@@ -139,13 +139,13 @@ def main():
         #place = 'database/Thesis Dataset Whole/' # the whole data set ("Dataset Whole"); remember the / after the folder name!
         fig = plt.figure(figsize=(20, 28))  
 
-        for i in range(len(top_1)):
-            image = Image.open(place + top_1.iat[i,0] + '.png')
-            picture = place + top_1.iat[i,0] + '.png'
+        for i in range(len(top_5)):
+            image = Image.open(place + top_5.iat[i,0] + '.png')
+            picture = place + top_5.iat[i,0] + '.png'
             fig.add_subplot(8, 5, i+1)
             plt.axis('off')
             plt.imshow(image)
-            plt.title('Number ' + str(i+1)  + '\n' + top_1.iat[i,0] + '\nFFT Score = '  + str(top_1.iat[i,1]))
+            plt.title('Number ' + str(i+1)  + '\n' + top_5.iat[i,0] + '\nFFT Score = '  + str(top_5.iat[i,1]))
             #print(picture)
             found_images.append(picture)
         #plt.show()

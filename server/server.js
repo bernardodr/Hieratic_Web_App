@@ -42,54 +42,16 @@ app.listen(API_PORT, () => {
 /////////////////// POST image upload //////////////////// 
 //////////////////////////////////////////////////////////
 
-
 var imageData = ""
-
 
 app.post('/upload', upload.single('hieraticSign'), (req, res) =>{
     //return res.send(+'<a href="/index.html"> </a>')
     res.redirect('http://localhost:3000/pages/ocr_system.html')
+    // put results on new page by sending HTML file 
+    //res.sendFile('/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/Client/Index.html')
     OCR_FFT_RUN();
-    // OCR_FFT_ONLY_RESULTS();
-    //res.send(imageData)
-    //return res.send('<h3>Your image was uploaded</h3> <a href="/index.html">click here to go back</a>')
 
-    //return res.redirect('http://localhost:3000/pages/ocr_system.html')
-    //return res.send('<h3>Your image was uploaded</h3> <a href="/index.html">click here to go back</a>')
-    //return res.json({status: 'OK'})
-    //res.status(200)//.send('User Creation Successful')
-    
-    //return res.status(200).send()
 });
-
-
-
-//////////////////////////////////////////////////////////
-////////////////// Child Spawn Method() ////////////////// 
-//////////////////////////////////////////////////////////
-
-
-// 1. node.js calls python script and passes name
-// 2. python script prints hello + name
-// 3. log result 
-
-// const { spawn } = require('child_process'); 
-// var name = " Dan"
-
-// //spawn command "send"
-// const py = spawn('python3', ['py-script.py', `${JSON.stringify(name)}`])
-
-// // recieve
-// py.stdout.on('data', (data) => {
-//     console.log(JSON.stringify(data.toString()))
-// })
-
-// // check if the process has finished 
-
-// py.on('close', (code) => {
-//     console.log(`success: code ${code}`);
-// })
-
 
 /////////////////////////////////////////////////////////////////
 ////////////////// Run OCR analysis /////////////////////////////
@@ -106,9 +68,18 @@ const OCR_FFT_RUN = function(){
          
         //console.log(JSON.stringify(data))
         imageData = eval(`(${data})`);
-        imageData = imageData[0].toString();
         
-        return console.log(imageData)
+        
+        imageJSON = {
+            "image1": imageData[0].toString(),
+            "image2": imageData[1],
+            "image3": imageData[2],
+            "image4": imageData[3],
+            "image5": imageData[4]
+        };
+        imageData = imageData[0].toString();
+        //console.log(imageJSON);
+        //return console.log(imageData)
     })
 
     // handel errors
@@ -121,36 +92,35 @@ const OCR_FFT_RUN = function(){
     })
     
 };
-    
 
-/////////////////////////////////
-///// conver string to URL  /////
-/////////////////////////////////
+//////////////////////////////////////////
+//// Get, send image file/s to client ////
+//////////////////////////////////////////
 
-const stringURLConverter = function(imageData){
-    imageData = imageData.toString();
-}
-    
-// // Function to send OCR results to client
-
-// var results = JSON.stringify({"imageOne": imageData})
-
-
-const OCR_FFT_ONLY_RESULTS = function(){
-       
-
-};
-app.get('/results', (req, res) => {
-    
+app.get('/results1', (req, res) => {
     
     //res.status(200).json(imageData);
-    res.sendFile(imageData);
+
+    //orginal 
+    //res.sendFile(imageData);
+
+    // test to see if format works
+    res.sendFile(imageJSON.image1);
 });
 
-// app.get('/results/:imageData', (req, res) => {
-//     let imageData = req.params.imageData;
+app.get('/results2', (req, res) => {
+    res.sendFile(imageJSON.image2);
+});
 
-//     if(results[imageData]){res.status(200).json(results[imageData]);}
-//     else{res.status(404).send({error: 'Image not found'});}
-//     //res.send({ img: imageData });
-//  });
+app.get('/results3', (req, res) => {
+    res.sendFile(imageJSON.image3);
+});
+
+app.get('/results4', (req, res) => {
+    res.sendFile(imageJSON.image4);
+});
+
+app.get('/results5', (req, res) => {
+    res.sendFile(imageJSON.image5);
+});
+
