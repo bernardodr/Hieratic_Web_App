@@ -4,6 +4,8 @@ const express = require('express');
 const multer = require('multer');
 const uuid = require('uuid').v4;
 
+
+/// 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/')
@@ -12,7 +14,8 @@ const storage = multer.diskStorage({
         const { originalname } = file;
         // or 
         // uuid, or fieldname see 9.00 in for unique naming system (https://youtu.be/ysS4sL6lLDU?t=544)
-        cb(null, 'upload.png');
+        cb(null, 'upload.png')
+        OCR_FFT_RUN();
     }
 });
 
@@ -23,14 +26,6 @@ const API_PORT = 3000;
 
 app.use(express.static('../Client'));
 
-// Ben are you still using the download function??
-//function which takes in URL of image and downloads it to filepath destination
-function downloadImage(url, filepath) {
-    return download.image({
-       url,
-       dest: filepath 
-    });
-}
 
 // tell the server to listen on the given port and log a message to the console (so we can see our server is doing something!)
 app.listen(API_PORT, () => {
@@ -43,21 +38,28 @@ app.listen(API_PORT, () => {
 //////////////////////////////////////////////////////////
 
 var imageData = ""
+var imageJSON = null
+
+//Original
 
 app.post('/upload', upload.single('hieraticSign'), (req, res) =>{
     //return res.send(+'<a href="/index.html"> </a>')
+    // turn below back on
+    
     res.redirect('http://localhost:3000/pages/ocr_system.html')
     // put results on new page by sending HTML file 
-    //res.sendFile('/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/Client/Index.html')
-    OCR_FFT_RUN();
+    //OCR_FFT_RUN()
 
+
+    //res.sendFile(imageJSON.image1)
+    
 });
 
 /////////////////////////////////////////////////////////////////
 ////////////////// Run OCR analysis /////////////////////////////
 /////////////////////////////////////////////////////////////////
 
-const OCR_FFT_RUN = function(){
+const OCR_FFT_RUN = async function(){
     //spawn command "send"
     const childPython = spawn('python3',['OCR_FFT_Only.py']);
 

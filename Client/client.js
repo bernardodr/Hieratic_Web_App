@@ -93,8 +93,29 @@ const showData = function(){
             document.getElementById('results5').src = URL.createObjectURL(blob);
         });
     
- 
-   
-    
+
 };
+
+// ///////////////////
+// //// TEST POST ////
+// ///////////////////
+
+
+
+// const submitFunction = async function(){
+  
+//     const options = {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'multipart/form-data'
+//             },
+//         body: ''
+//     };
+    
+//     const response = await fetch('/upload', options);
+//     const data = await response.json();
+//     console.log(data);
+    
+    
+// };
 
