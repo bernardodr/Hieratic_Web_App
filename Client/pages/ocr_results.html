@@ -16,7 +16,7 @@
     <!-- Custom styles for this template -->
     <link href="../cover.css" rel="stylesheet">
 
-    <script src="../client.js"></script>
+    <script src="../results.js"></script>
 
  
   </head>
@@ -36,35 +36,24 @@
                 <ul class="nav masthead-nav">
                   <li class="/index.html"><a href="/index.html">Home Page</a></li>
                   <li><a href="image_labeling.html">Image Labeling Tools</a></li>
-                  <li><a href="#">OCR System</a></li>
+                  <li><a href="ocr_system.html">OCR System</a></li>
                 </ul>
               </nav>
             </div>
           </div>
 
           <div class="inner cover">
-            <h1 class="cover-heading">Image Upload for Single Character OCR</h1>
-            <p class="lead">Our system allows you to upload a single Hieratic sign and we will return all similar characters that are already in our database.</p>
+            <h1 class="cover-heading">OCR Results</h1>
+            <p class="lead">Here are your results</p>
             <p class="lead">
-              
-
-              <!-- Image upload function for single character OCR as well as image display -->
-              <form action="/upload" method="POST" enctype="multipart/form-data" id="form1">
-                <div>
-                    <img id="preview" width="300" height="400">
-                  </div>
-                <p>
-                  <input id="image_input" type="file" accept="image/*.png" name="hieraticSign" onchange="previewImage()">
-                  <button onclick="">Submit</button>
-                </p>
-                
-                
-              </form>
-              
-
+          
             </p>
 
-
+            <img src = "" id = 'results1' width="100" height="100"/>
+            <img src = "" id = 'results2' width="100" height="100"/>
+            <img src = "" id = 'results3' width="100" height="100"/>
+            <img src = "" id = 'results4' width="100" height="100"/>
+            <img src = "" id = 'results5' width="100" height="100"/>
 
           </div>
 
