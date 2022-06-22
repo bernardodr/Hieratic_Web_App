@@ -12,14 +12,22 @@ a:hover {
 /* img tag with id 'preview' - displays uploaded image */
 #preview{
   width:300px;
-  height:300px;
+  height:auto;
   
   background-position:inherit;
   background-size: cover;
   display: inline-block;
-  
+  padding: 10px;
   
 }
+
+/* results cards */
+
+.card-img-top{
+  width: auto;
+  height: auto;
+}
+
 
 /* Custom default button */
 .btn-default,
@@ -96,6 +104,9 @@ body {
  
 }
 .masthead-nav > li > a {
+  position: relative;
+  left: 200px;
+  top:30px;
   padding-right: 0;
   padding-left: 0;
   font-size: 16px;
@@ -154,6 +165,7 @@ body {
   background-position: center;
   background-size: cover;
 }
+
 
 /*
  * Footer

@@ -97,11 +97,19 @@ fetch('/imageName1')
             var filename4 = imageName4.split("/").pop();
             var filename5 = imageName5.split("/").pop();
 
-            document.getElementById('imageName1').innerHTML = filename1;
-            document.getElementById('imageName2').innerHTML = filename2;
-            document.getElementById('imageName3').innerHTML = filename3;
-            document.getElementById('imageName4').innerHTML = filename4;
-            document.getElementById('imageName5').innerHTML = filename5;
+            // get Müller sign
+            var muller1 = filename1.split('_')[0];
+            var muller2 = filename2.split('_')[0];
+            var muller3 = filename3.split('_')[0];
+            var muller4 = filename4.split('_')[0];
+            var muller5 = filename5.split('_')[0];
+
+
+            document.getElementById('imageName1').innerHTML = muller1;
+            document.getElementById('imageName2').innerHTML = muller2;
+            document.getElementById('imageName3').innerHTML = muller3;
+            document.getElementById('imageName4').innerHTML = muller4;
+            document.getElementById('imageName5').innerHTML = muller5;
             return console.log(data.image2);
     })
     
