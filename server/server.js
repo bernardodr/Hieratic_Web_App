@@ -47,7 +47,7 @@ var imageJSON = null
 //////////////////////////////////////////////////////////
 
 
-app.post('/upload', async (req, res) =>{
+app.post('/upload', upload.single('hieraticSign') ,(req, res) =>{
     
     /////////////////////////////////////////////////////////////////
     ////////////////// Run OCR analysis /////////////////////////////
@@ -70,6 +70,10 @@ app.post('/upload', async (req, res) =>{
                 "image3": imageData[2],
                 "image4": imageData[3],
                 "image5": imageData[4]
+            };
+
+            imageNames = {
+                "image1": imageData[0].toString()
             };
             
             //res.sendFile(imageJSON.image1)
