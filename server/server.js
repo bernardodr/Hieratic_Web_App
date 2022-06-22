@@ -25,7 +25,7 @@ const upload = multer({ storage: storage});
 const app = express();
 const API_PORT = 3000;
 
-
+app.use(express.json());
 app.use(express.static('../Client'));
 
 
@@ -40,6 +40,7 @@ app.listen(API_PORT, () => {
 
 var imageData = ""
 var imageJSON = null
+var imageName = ''
 
 
 //////////////////////////////////////////////////////////
@@ -65,7 +66,7 @@ app.post('/upload', upload.single('hieraticSign') ,(req, res) =>{
             imageData = eval(`(${data})`);
             
             imageJSON = {
-                "image1": imageData[0].toString(),
+                "image1": imageData[0],
                 "image2": imageData[1],
                 "image3": imageData[2],
                 "image4": imageData[3],
@@ -73,11 +74,15 @@ app.post('/upload', upload.single('hieraticSign') ,(req, res) =>{
             };
 
             imageNames = {
-                "image1": imageData[0].toString()
+                "image1": imageData[0].toString(),
+                "image2": imageData[1].toString(),
+                "image3": imageData[2].toString(),
+                "image4": imageData[3].toString(),
+                "image5": imageData[4].toString()
             };
             
             //res.sendFile(imageJSON.image1)
-            //console.log(imageJSON);
+            console.log(imageNames);
         })
     
         // handel errors
@@ -105,7 +110,7 @@ app.post('/upload', upload.single('hieraticSign') ,(req, res) =>{
 
 
 app.get('/results1', (req, res) => {
-    res.sendFile(imageJSON.image2);
+    res.sendFile(imageJSON.image1);
 });
 
 app.get('/results2', (req, res) => {
@@ -128,3 +133,23 @@ app.get('/results5', (req, res) => {
 ///////////////////////////////////////////
 ///// Get, send image names to client /////
 ///////////////////////////////////////////
+
+app.get('/imageName1', (req, res) => {
+    res.send(imageJSON);
+});
+
+app.get('/imageName2', (req, res) => {
+    res.send(imageJSON.image2);
+});
+
+app.get('/imageName3', (req, res) => {
+    res.send(imageJSON.image3);
+});
+
+app.get('/imageName4', (req, res) => {
+    res.send(imageJSON.image4);
+});
+
+app.get('/imageName5', (req, res) => {
+    res.send(imageJSON.image5);
+});
