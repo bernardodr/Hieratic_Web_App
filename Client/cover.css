@@ -35,13 +35,26 @@ a:hover {
 
 #preview{
   width:300px;
-  height:300px;
+  height:auto;
   
   background-position:inherit;
   background-size: cover;
   display: inline-block;
+  padding: 10px;
   
-  
+}
+
+/* results cards */
+
+.card-img-top{
+  width: auto;
+  height: auto;
+}
+
+.card-text{
+  margin-top: 0;
+  margin-bottom: 1rem;
+  text-align: left;
 }
 
 /* Custom default button */
@@ -94,21 +107,35 @@ body {
 }
 
 
+
 /*
  * Header
  */
 .masthead-brand {
+  position: relative;
   margin-top: 10px;
   margin-bottom: 10px;
+  right: 200px;
+  top: 10px;
 }
+
+
+
 
 .masthead-nav > li {
   display: inline-block;
+  
+
 }
 .masthead-nav > li + li {
   margin-left: 20px;
+  
+ 
 }
 .masthead-nav > li > a {
+  position: relative;
+  left: 200px;
+  top:30px;
   padding-right: 0;
   padding-left: 0;
   font-size: 16px;
@@ -116,18 +143,21 @@ body {
   color: #fff; /* IE8 proofing */
   color: rgba(255,255,255,.75);
   border-bottom: 2px solid transparent;
+  
 }
 .masthead-nav > li > a:hover,
 .masthead-nav > li > a:focus {
   background-color: transparent;
   border-bottom-color: #a9a9a9;
   border-bottom-color: rgba(255,255,255,.25);
+  
 }
 .masthead-nav > .active > a,
 .masthead-nav > .active > a:hover,
 .masthead-nav > .active > a:focus {
   color: #fff;
   border-bottom-color: #fff;
+  
 }
 
 @media (min-width: 768px) {
@@ -136,6 +166,7 @@ body {
   }
   .masthead-nav {
     float: right;
+
   }
 }
 
@@ -163,6 +194,23 @@ body {
   background-position: center;
   background-size: cover;
 }
+
+/* 
+*Cards width 
+ */
+
+ 
+.card-deck {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin-right: -15px;
+    margin-left: -210px;
+    width: 1100px;
+ }
+
+
 
 /*
  * Footer
@@ -197,6 +245,7 @@ body {
   .mastfoot,
   .cover-container {
     width: 100%; /* Must be percentage or pixels for horizontal alignment */
+    
   }
 }
 

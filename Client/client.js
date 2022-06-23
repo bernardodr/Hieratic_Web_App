@@ -63,10 +63,8 @@ function binarizeCroppedImage(image){
         img_data.data[i + 1] = colour;
         img_data.data[i + 2] = colour;
         img_data.data[i + 3] = 255;
-      }
-    context.putImageData(img_data, 0, 0, 0, 0, canvas.width, canvas.height);
-       
 
+    }
 }
 
 
@@ -99,4 +97,5 @@ colorElement.forEach((c) => {
 /////////////////////////////
 ///// POST Image Upload /////
 /////////////////////////////
+
 
