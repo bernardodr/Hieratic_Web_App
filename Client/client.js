@@ -47,9 +47,10 @@ function imageCrop() {
 function binarizeCroppedImage(image){
     canvas=document.getElementById('canvas');
     context=canvas.getContext('2d');
-    canvas.width = image.width;
-    canvas.height = image.height;
-    context.drawImage(image, 0, 0);
+    
+    canvas.width = image.width*3.5;
+    canvas.height = image.height*3.5;
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
     img_data=context.getImageData(0,0, canvas.width, canvas.height);
     for (i = 0; i < img_data.data.length; i += 4) {
         let count = img_data.data[i] + img_data.data[i + 1] + img_data.data[i + 2];
@@ -63,8 +64,9 @@ function binarizeCroppedImage(image){
         img_data.data[i + 1] = colour;
         img_data.data[i + 2] = colour;
         img_data.data[i + 3] = 255;
-
-    }
+      }
+    //context.scale(35,35)
+    context.putImageData(img_data, 0, 0, 0, 0, canvas.width, canvas.height);
 }
 
 
