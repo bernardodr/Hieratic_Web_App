@@ -1,0 +1,40 @@
+[
+    {
+        "id": 1,
+        "Image_Name":"",
+        "Image_Path_Absolute": "",
+        "Image_Path_Relative":"",
+        "Gardiner_Sign": "",
+        "Instance_In_Facsimile": "",
+        "Facsimile_Maker":"",
+        "Provenance":"",
+        "Text": [
+            {
+                "Name": "",
+                "Orignal_Author": "",
+                "Time_Period": "" 
+            }
+        ] 
+    },
+    {
+        "id": 2,
+        "Image_Name":"A1_0001_1_1_2",
+        "Image_Path_Absolute": "/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/database/Thesis Dataset Whole/A1_0001_1_1_2.png",
+        "Image_Path_Relative":"database/Thesis Dataset Whole/A1_0001_1_1_2.png",
+        "Gardiner_Sign": "A1",
+        "Instance_In_Facsimile": "0001",
+        "Facsimile_Maker":"Möller",
+        "Provenance":"Thebes",
+        "Text": [
+            {
+                "Name": "Shipwrecked Sailor",
+                "Orignal_Author": "Unknown",
+                "Time_Period": "Middle Kingdom" 
+            }
+        ] 
+    }   
+
+
+        
+
+]
