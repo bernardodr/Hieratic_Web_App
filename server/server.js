@@ -1,9 +1,9 @@
 const { ChildProcess } = require('child_process');
-const { spawn } = require('child_process');
+const { spawn } = require('child_process'); // Allows for node python interaction 
 const express = require('express');
 const { rmSync } = require('fs');
-const multer = require('multer');
-const uuid = require('uuid').v4;
+const multer = require('multer'); // file upload middleware 
+const uuid = require('uuid').v4; //unique image naming
 
 
 // multer acts as middleware and stores in the client uploads in uploads directory
@@ -158,3 +158,15 @@ app.get('/imageName5', (req, res) => {
 ///////////////////////////////////////////////////////////////
 /////////////////// Zip Database of Images //////////////////// 
 ///////////////////////////////////////////////////////////////
+
+// app.get('/download', (req, res) => {
+
+//     app.get('/download', function(req, res){
+//         const file = `${__dirname}/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/README.md`;
+//         res.download(file); // Set disposition and send it.
+//       });
+
+// })
+
+
+
