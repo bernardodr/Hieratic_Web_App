@@ -14,7 +14,13 @@
                 "Orignal_Author": "",
                 "Time_Period": "" 
             }
-        ] 
+        ],
+        "User_Details": [
+            {
+                "Username": "",
+                "Upload_Date_Time":""
+            }
+        ]
     },
     {
         "id": 2,
@@ -31,7 +37,13 @@
                 "Orignal_Author": "Unknown",
                 "Time_Period": "Middle Kingdom" 
             }
-        ] 
+        ],
+        "User_Details": [
+            {
+                "Username": "Tabin",
+                "Upload_Date":"03/02/2022"
+            }
+        ]
     }   
 
 

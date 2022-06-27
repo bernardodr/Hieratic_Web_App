@@ -97,7 +97,7 @@ fetch('/imageName1')
             var filename4 = imageName4.split("/").pop();
             var filename5 = imageName5.split("/").pop();
 
-            // get Müller sign
+            // get Gardiner sign
             var muller1 = filename1.split('_')[0];
             var muller2 = filename2.split('_')[0];
             var muller3 = filename3.split('_')[0];
