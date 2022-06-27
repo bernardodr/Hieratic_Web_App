@@ -17,15 +17,15 @@ def main():
     ###################################################
 
     # load in aspect ratio list and pixel values for the data set
-    datalist = pd.read_csv('/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/database/Precalculated Data Set Stats/datasetstats.csv', index_col=[0])
-    pxls = pd.read_csv('/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/database/Precalculated Data Set Stats/A1cut_pxls_20.csv', index_col=[0])
+    datalist = pd.read_csv('../server/database/Precalculated_Data_Set_Stats/datasetstats.csv', index_col=[0])
+    pxls = pd.read_csv('../server/database/Precalculated_Data_Set_Stats/pxls_20.csv', index_col=[0])
 
     # the whole data set ("Dataset Whole"); remember the / after the folder name!
-    place = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/database/Thesis Dataset Whole/' 
+    place = '../server/database/Thesis_Dataset_Whole/' #make sure to have / at the end
 
 
     #Uploaded image 
-    location = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/uploads/upload.png' # image to be analyzed
+    location = '../server/uploads/upload.png' # image to be analyzed 
 
     #array of the images
     found_images = []

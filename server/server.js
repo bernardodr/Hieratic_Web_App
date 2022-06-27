@@ -4,6 +4,9 @@ const express = require('express');
 const { rmSync } = require('fs');
 const multer = require('multer'); // file upload middleware 
 const uuid = require('uuid').v4; //unique image naming
+//root of computer is needed for res.sendfile()
+const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+
 
 
 // multer acts as middleware and stores in the client uploads in uploads directory
@@ -82,7 +85,7 @@ app.post('/upload', upload.single('hieraticSign') ,(req, res) =>{
             };
             
             //res.sendFile(imageJSON.image1)
-            console.log(imageNames);
+            console.log(imageJSON.image1);
         })
     
         // handel errors
@@ -108,25 +111,41 @@ app.post('/upload', upload.single('hieraticSign') ,(req, res) =>{
 //// Get, send image file/s to client ////
 //////////////////////////////////////////
 
-
 app.get('/results1', (req, res) => {
-    res.sendFile(imageJSON.image1);
+    //get the file name from relative path
+    let filename1 = imageJSON.image1.split('/');
+    filename1 = filename1[4]
+    
+    res.sendFile(root+filename1);
 });
 
 app.get('/results2', (req, res) => {
-    res.sendFile(imageJSON.image2);
+    
+    let filename2 = imageJSON.image2.split('/');
+    filename2 = filename2[4]
+    
+    res.sendFile(root+filename2);
 });
 
 app.get('/results3', (req, res) => {
-    res.sendFile(imageJSON.image3);
+    let filename3 = imageJSON.image3.split('/');
+    filename3 = filename3[4]
+    
+    res.sendFile(root+filename3);
 });
 
 app.get('/results4', (req, res) => {
-    res.sendFile(imageJSON.image4);
+    let filename4 = imageJSON.image4.split('/');
+    filename4 = filename4[4]
+    
+    res.sendFile(root+filename4);
 });
 
 app.get('/results5', (req, res) => {
-    res.sendFile(imageJSON.image5);
+    let filename5 = imageJSON.image5.split('/');
+    filename5 = filename5[4]
+    
+    res.sendFile(root+filename5);
 });
 
 
