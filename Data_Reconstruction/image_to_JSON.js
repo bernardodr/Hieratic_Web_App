@@ -16,7 +16,7 @@ let count = 0
 ////////// Get Every Image Name //////////
 //////////////////////////////////////////
 
-fs.readdirSync("/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/database/Thesis Dataset Whole/").forEach(file => {
+fs.readdirSync("/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/").forEach(file => {
     
     ////////////////////////////////////////////////
     ////////// Dynamically get Image data //////////
@@ -31,9 +31,6 @@ fs.readdirSync("/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App
     //Image name
     var Image_Name = file;
 
-    // Absolute Image Path
-    var Absolute_Image_Path = "/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/database/Thesis Dataset Whole/" + file.toString()
-    
     // Relative Image Path
     var Relative_Image_Path ="database/Thesis Dataset Whole/" + file.toString();
     
@@ -86,9 +83,9 @@ fs.readdirSync("/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App
 
     //Text
     var text = file.split('_');
-    text_png = text[4] // printed looks like 4.png
+    text_png = text[4] // printed looks like '4.png'
     text_png = text_png.split('.')
-    text_number = text_png[0] // printed looks like 4
+    text_number = text_png[0] // printed looks like '4'
 
     if(text_number == 1){
         text = 'Shipwrecked Sailor'
@@ -152,8 +149,7 @@ fs.readdirSync("/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App
 
 
     // infer Author from text
-
-
+    //no orignal authors were found
 
     // push information into Object 
     var object = 
@@ -161,7 +157,6 @@ fs.readdirSync("/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App
     {
         id: id,
         Image_Name: Image_Name,
-        Image_Path_Absolute: Absolute_Image_Path,
         Image_Path_Relative: Relative_Image_Path,
         Gardiner_Sign: Gardiner_Sign,
         Instance_In_Facsimile: Instance_In_Facsimile,
@@ -190,16 +185,7 @@ fs.readdirSync("/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App
     usersjson = JSON.stringify(users, null, 2);
     
     fs.writeFileSync("TEST.json",usersjson,"utf-8");
-
-    // var data = JSON.stringify(object, null, 2);
-
-    // fs.appendFile('Test.json', data, finished);
-    // function finished(err){
-    //     console.log('Loading')
-    // }
     
-
-   
 })
 
 
