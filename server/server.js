@@ -171,7 +171,34 @@ app.get('/results5', (req, res) => {
 ///////////////////////////////////////////
 
 app.get('/imageName1', (req, res) => {
-    res.send(imageJSON);
+    fs.readFile('../server/database/TEST.json', 'utf-8', (err,jsonString) =>{
+        if(err){
+            console.log(err)
+        }
+        else{
+        
+        try{
+            //All of JSON data
+            const data = JSON.parse(jsonString);
+
+            // Get Filename of Matched image
+            let filename1 = imageJSON.image1.split('/');
+            filename1 = filename1[4]
+            
+            //Return object with a match 
+            match = data.find(x => x.Image_Name == filename1 )
+            
+            console.log(match)
+            res.send(match)
+
+        }catch (err){
+            console.log('Error paring JSON', err)
+        }
+            
+            
+        }
+        
+    })
 });
 
 // great JSON help = https://heynode.com/tutorial/readwrite-json-files-nodejs/
@@ -194,6 +221,7 @@ app.get('/imageName2', (req, res) => {
             match = data.find(x => x.Image_Name == filename2 )
             
             console.log(match)
+            res.send(match)
 
         }catch (err){
             console.log('Error paring JSON', err)
@@ -207,15 +235,96 @@ app.get('/imageName2', (req, res) => {
 });
 
 app.get('/imageName3', (req, res) => {
-    res.send(imageJSON.image3);
+    fs.readFile('../server/database/TEST.json', 'utf-8', (err,jsonString) =>{
+        if(err){
+            console.log(err)
+        }
+        else{
+        
+        try{
+            //All of JSON data
+            const data = JSON.parse(jsonString);
+
+            // Get Filename of Matched image
+            let filename3 = imageJSON.image3.split('/');
+            filename3 = filename3[4]
+            
+            //Return object with a match 
+            match = data.find(x => x.Image_Name == filename3 )
+            
+            console.log(match)
+            res.send(match)
+
+        }catch (err){
+            console.log('Error paring JSON', err)
+        }
+            
+            
+        }
+        
+    })
 });
 
 app.get('/imageName4', (req, res) => {
-    res.send(imageJSON.image4);
+    fs.readFile('../server/database/TEST.json', 'utf-8', (err,jsonString) =>{
+        if(err){
+            console.log(err)
+        }
+        else{
+        
+        try{
+            //All of JSON data
+            const data = JSON.parse(jsonString);
+
+            // Get Filename of Matched image
+            let filename4 = imageJSON.image4.split('/');
+            filename4 = filename4[4]
+            
+            //Return object with a match 
+            match = data.find(x => x.Image_Name == filename4 )
+            
+            console.log(match)
+            res.send(match)
+
+        }catch (err){
+            console.log('Error paring JSON', err)
+        }
+            
+            
+        }
+        
+    })
 });
 
 app.get('/imageName5', (req, res) => {
-    res.send(imageJSON.image5);
+    fs.readFile('../server/database/TEST.json', 'utf-8', (err,jsonString) =>{
+        if(err){
+            console.log(err)
+        }
+        else{
+        
+        try{
+            //All of JSON data
+            const data = JSON.parse(jsonString);
+
+            // Get Filename of Matched image
+            let filename5 = imageJSON.image5.split('/');
+            filename5 = filename5[4]
+            
+            //Return object with a match 
+            match = data.find(x => x.Image_Name == filename5 )
+            
+            console.log(match)
+            res.send(match)
+
+        }catch (err){
+            console.log('Error paring JSON', err)
+        }
+            
+            
+        }
+        
+    })
 });
 
 
