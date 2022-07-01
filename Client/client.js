@@ -11,6 +11,21 @@ function previewImage() {
     }
 }
 
+/////////////////////////////////////////
+////////// GET Zip of Database //////////
+/////////////////////////////////////////
+
+const downloadDatabase = function(){
+    console.log("btn wrks")
+    
+    fetch('/download')
+        .then(response => {
+            console.log(response)
+            return response;
+        })
+    
+    
+};
 
 
 
