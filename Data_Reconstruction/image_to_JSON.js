@@ -147,6 +147,8 @@ fs.readdirSync("/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App
         Time_Period = 'Unknown'
     }
 
+    // Image hash
+    
 
     // infer Author from text
     //no orignal authors were found
@@ -157,6 +159,7 @@ fs.readdirSync("/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App
     {
         id: id,
         Image_Name: Image_Name,
+        Image_Hash: "1",
         Image_Path_Relative: Relative_Image_Path,
         Gardiner_Sign: Gardiner_Sign,
         Instance_In_Facsimile: Instance_In_Facsimile,

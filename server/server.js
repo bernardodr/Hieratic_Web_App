@@ -73,7 +73,7 @@ app.post('/upload', upload.single('hieraticSign') ,(req, res) =>{
     /////////////////////////////////////////////////////////////////
     const OCR_FFT_RUN = async function(){
         //spawn command "send"
-        const childPython = spawn('python3',['OCR_FFT_Only.py']);
+        const childPython = spawn('python3',['OCR_IDM.py']);
     
         // recieve
         childPython.stdout.on('data', (data) => {
@@ -81,7 +81,9 @@ app.post('/upload', upload.single('hieraticSign') ,(req, res) =>{
             console.log(`stdout: + ${data}`);
              
             //console.log(JSON.stringify(data))
+            //console.log(eval(`(${data})`))
             imageData = eval(`(${data})`);
+            console.log(imageData)
             
             imageJSON = {
                 "image1": imageData[0],
@@ -112,6 +114,7 @@ app.post('/upload', upload.single('hieraticSign') ,(req, res) =>{
             console.log(`process exited with code: + ${code}`);
 
             //respond with webpage of results after python script is done
+            
             res.redirect('http://localhost:3000/pages/ocr_results.html')
             
         })
@@ -125,6 +128,8 @@ app.post('/upload', upload.single('hieraticSign') ,(req, res) =>{
 //////////////////////////////////////////
 //// Get, send image file/s to client ////
 //////////////////////////////////////////
+
+//for fft only change 4 to 3
 
 app.get('/results1', (req, res) => {
     //get the file name from relative path
@@ -171,7 +176,7 @@ app.get('/results5', (req, res) => {
 ///////////////////////////////////////////
 
 app.get('/imageName1', (req, res) => {
-    fs.readFile('../server/database/TEST.json', 'utf-8', (err,jsonString) =>{
+    fs.readFile('../server/database/database.json', 'utf-8', (err,jsonString) =>{
         if(err){
             console.log(err)
         }
@@ -203,7 +208,7 @@ app.get('/imageName1', (req, res) => {
 
 // great JSON help = https://heynode.com/tutorial/readwrite-json-files-nodejs/
 app.get('/imageName2', (req, res) => {
-    fs.readFile('../server/database/TEST.json', 'utf-8', (err,jsonString) =>{
+    fs.readFile('../server/database/database.json', 'utf-8', (err,jsonString) =>{
         if(err){
             console.log(err)
         }
@@ -235,7 +240,7 @@ app.get('/imageName2', (req, res) => {
 });
 
 app.get('/imageName3', (req, res) => {
-    fs.readFile('../server/database/TEST.json', 'utf-8', (err,jsonString) =>{
+    fs.readFile('../server/database/database.json', 'utf-8', (err,jsonString) =>{
         if(err){
             console.log(err)
         }
@@ -266,7 +271,7 @@ app.get('/imageName3', (req, res) => {
 });
 
 app.get('/imageName4', (req, res) => {
-    fs.readFile('../server/database/TEST.json', 'utf-8', (err,jsonString) =>{
+    fs.readFile('../server/database/database.json', 'utf-8', (err,jsonString) =>{
         if(err){
             console.log(err)
         }
@@ -297,7 +302,7 @@ app.get('/imageName4', (req, res) => {
 });
 
 app.get('/imageName5', (req, res) => {
-    fs.readFile('../server/database/TEST.json', 'utf-8', (err,jsonString) =>{
+    fs.readFile('../server/database/database.json', 'utf-8', (err,jsonString) =>{
         if(err){
             console.log(err)
         }
