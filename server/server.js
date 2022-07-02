@@ -28,7 +28,7 @@ const upload = multer({ storage: storage});
 const app = express();
 const API_PORT = 3000;
 
-app.use(express.json());
+app.use(express.json({limit: '5000mb'}));
 app.use(express.static('../Client'));
 
 
@@ -53,12 +53,7 @@ app.listen(API_PORT, () => {
 
 var imageData = ""
 var imageJSON = null
-var imageName = ''
-var filename1 = ''
-var filename2 = ''
-var filename3 = ''
-var filename4 = ''
-var filename5 = ''
+
 
 
 //////////////////////////////////////////////////////////
@@ -193,7 +188,7 @@ app.get('/imageName1', (req, res) => {
             //Return object with a match 
             match = data.find(x => x.Image_Name == filename1 )
             
-            console.log(match)
+            //console.log(match)
             res.send(match)
 
         }catch (err){
@@ -225,7 +220,7 @@ app.get('/imageName2', (req, res) => {
             //Return object with a match 
             match = data.find(x => x.Image_Name == filename2 )
             
-            console.log(match)
+            //console.log(match)
             res.send(match)
 
         }catch (err){
@@ -257,7 +252,7 @@ app.get('/imageName3', (req, res) => {
             //Return object with a match 
             match = data.find(x => x.Image_Name == filename3 )
             
-            console.log(match)
+            //console.log(match)
             res.send(match)
 
         }catch (err){
@@ -288,7 +283,7 @@ app.get('/imageName4', (req, res) => {
             //Return object with a match 
             match = data.find(x => x.Image_Name == filename4 )
             
-            console.log(match)
+            //console.log(match)
             res.send(match)
 
         }catch (err){
@@ -319,7 +314,7 @@ app.get('/imageName5', (req, res) => {
             //Return object with a match 
             match = data.find(x => x.Image_Name == filename5 )
             
-            console.log(match)
+            //console.log(match)
             res.send(match)
 
         }catch (err){

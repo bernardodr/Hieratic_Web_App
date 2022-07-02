@@ -63,10 +63,14 @@
                   </div>
                 <p>
                   <input id="image_input" type="file" accept="image/*.png" name="hieraticSign" onchange="previewImage()">
-                  <button>Submit</button>
+                  <button onchange="spinner()" onclick="spinner()">Submit</button>
                 </p>
                 
               </form>
+                <div class="loader">
+                  <div class="loading">
+                  </div>
+                </div>
               
 
             </p>
