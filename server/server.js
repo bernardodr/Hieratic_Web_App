@@ -341,7 +341,7 @@ app.get('/download', function (req, res) {
     var zip = new AdmZip();
     
     //add image (folder) and json (file) to zip folder 
-    zip.addLocalFile('../server/database/TEST.json', 'TEST.json');
+    zip.addLocalFile('../server/database/database.json', 'database.json');
     zip.addLocalFolder('../server/database/Thesis_Dataset_Whole', 'Thesis_Dataset_Whole')
 
     
@@ -406,7 +406,7 @@ app.post('/json_upload', (req, res) => {
         ]
     };
     //read in (test.json) file 
-    let jsondata = fs.readFileSync("../server/database/TEST.json", "utf-8");
+    let jsondata = fs.readFileSync("../server/database/database.json", "utf-8");
     //parse actual json from string 
     let json = JSON.parse(jsondata);
 
@@ -416,7 +416,7 @@ app.post('/json_upload', (req, res) => {
     //convert json data to string 
     jsondata = JSON.stringify(json, null, 2);
     //write json to correct file 
-    fs.writeFileSync("../server/database/TEST.json", jsondata, "utf-8");
+    fs.writeFileSync("../server/database/database.json", jsondata, "utf-8");
     res.status(200).send(`${upload_name} has been uploaded to JSON database`)
 })
 
