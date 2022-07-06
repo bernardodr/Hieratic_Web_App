@@ -9,6 +9,7 @@ libraries used so far:
 5. sys (python )
 6. child-process (module node js for communicating with python)
 7. cropperjs
+8. adm-zip
 
 Set up instructions: 
 

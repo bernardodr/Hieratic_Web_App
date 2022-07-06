@@ -15,22 +15,17 @@ function previewImage() {
 ////////// GET Zip of Database //////////
 /////////////////////////////////////////
 
-const downloadDatabase = function(){
-    console.log("btn wrks")
-    
-    fetch('/download')
-        .then(response => {
-            console.log(response)
-            return response;
-        })
-    
-    
-};
+
+function downloadZIP() {
+    fetch('/download') 
+        //converts buffer object sent from server to blob object (imutable data)
+        .then((res) => { return res.blob() })
+        //creates url string of object
+        .then(blob =>window.URL.createObjectURL(blob))
+        //donwloads on client side
+        .then(url=>window.location.assign(url))
+       
+}
 
 
-
-
-/////////////////////////////
-///// POST Image Upload /////
-/////////////////////////////
 

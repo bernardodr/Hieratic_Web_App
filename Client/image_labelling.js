@@ -3,6 +3,8 @@ document.getElementById("submit").style.visibility = "hidden"
 canvas = document.getElementById('canvas');
 context = canvas.getContext('2d');
 var drawing_
+var image;
+
 //function to display uploaded image (for database) and to perform cropping functionality 
 function previewImageCrop() {
     var file = document.getElementById("image_input1").files;
@@ -45,8 +47,9 @@ function imageCrop() {
         }
 
 
-        //document.getElementById("cropped_image_display").appendChild(cropped_image_div);
+        
     })
+    drawing();
 }
 
 //function to turn image into black and white after cropping. Function called in imageCrop()
@@ -137,7 +140,7 @@ function drawing() {
         context.closePath();
     };
 }
-drawing();
+
 
 function clearDrawing() {
 
@@ -178,8 +181,55 @@ function autoCropToContainBlackPixels() {
     canvas.width = width;
     canvas.height = height;
     context.putImageData(updated_cropped_canvas, 0, 0);
-
-    var image = canvas.toDataURL();
+   
     document.getElementById('clear').disabled=true;
+    document.getElementById('autocrop').disabled=true;
+
+    
 }
 
+function imageUpload(){
+ 
+    data={
+    gardiner:document.getElementById('Gardiner').value,
+    facsimile:document.getElementById('Facsimile').value,
+    text:document.getElementById('Text').value,
+    instance:document.getElementById('Instance').value,
+    provenance:document.getElementById('Provenance').value,
+    period:document.getElementById('Period').value,
+    author:document.getElementById('Author').value,
+    image:canvas.toDataURL().split(',')[1]
+}
+
+
+options={method: 'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify(data)}
+
+    fetch('/image_upload', options)  
+    .then(res=>res.text())
+    .then(text=>console.log(text))
+
+}
+
+function jsonUpload(){
+
+    data={
+        gardiner:document.getElementById('Gardiner').value,
+        facsimile:document.getElementById('Facsimile').value,
+        text:document.getElementById('Text').value,
+        instance:document.getElementById('Instance').value,
+        provenance:document.getElementById('Provenance').value,
+        period:document.getElementById('Period').value,
+        author:document.getElementById('Author').value,
+        image:canvas.toDataURL().split(',')[1]
+    }
+    options={method: 'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(data)}
+
+    fetch('/json_upload', options)  
+    .then(res=>res.text())
+    .then(text=>console.log(text))
+
+}
