@@ -32,8 +32,7 @@ const upload = multer({ storage: storage });
 const app = express();
 const API_PORT = 3000;
 
-
-app.use(express.json());
+app.use(express.json({limit: '5000mb'}));
 app.use(express.static('../Client'));
 
 
@@ -58,12 +57,7 @@ app.listen(API_PORT, () => {
 
 var imageData = ""
 var imageJSON = null
-var imageName = ''
-var filename1 = ''
-var filename2 = ''
-var filename3 = ''
-var filename4 = ''
-var filename5 = ''
+
 
 
 //////////////////////////////////////////////////////////
@@ -78,16 +72,18 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
     /////////////////////////////////////////////////////////////////
     const OCR_FFT_RUN = async function () {
         //spawn command "send"
-        const childPython = spawn('python3', ['OCR_FFT_Only.py']);
-
+        const childPython = spawn('python3',['OCR_IDM.py']);
+    
         // recieve
         childPython.stdout.on('data', (data) => {
 
             console.log(`stdout: + ${data}`);
 
             //console.log(JSON.stringify(data))
+            //console.log(eval(`(${data})`))
             imageData = eval(`(${data})`);
-
+            console.log(imageData)
+            
             imageJSON = {
                 "image1": imageData[0],
                 "image2": imageData[1],
@@ -117,6 +113,7 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
             console.log(`process exited with code: + ${code}`);
 
             //respond with webpage of results after python script is done
+            
             res.redirect('http://localhost:3000/pages/ocr_results.html')
 
         })
@@ -130,6 +127,8 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
 //////////////////////////////////////////
 //// Get, send image file/s to client ////
 //////////////////////////////////////////
+
+//for fft only change 4 to 3
 
 app.get('/results1', (req, res) => {
     //get the file name from relative path
