@@ -21,6 +21,15 @@ a:hover {
     
 }
 
+input[type=text], select {
+  width: 100%;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 2px;padding: 5px 10px;
+  margin: 5px 0;
+  box-sizing: border-box;
+}
+
 #canvas{
   
   
@@ -43,6 +52,19 @@ a:hover {
   padding: 10px;
   
 }
+
+#final_submit_button{
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.523);
+  margin: 8px 0;
+  padding: 5px 5px;
+}
+
+
+
+
 
 /* results cards */
 

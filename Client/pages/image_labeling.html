@@ -55,10 +55,11 @@
 
         <div class="inner cover">
           <h1 class="cover-heading">Image Upload to Database</h1>
-          <p class="lead"> Step 1 - please crop the desired character(s)</p>
+          
           <p class="lead"> </p>
-
-
+          
+          <p> Step 1 - please crop the desired character(s)</p>
+          
           <!-- Image upload function for single character OCR as well as image display -->
           <form action="/upload" method="POST" enctype="multipart/form-data">
             <p>
@@ -99,24 +100,35 @@
           <input type="radio" name="colourP" id="white" value="white" />
           <label for="white">White</label>
         </div>
-        <button id ='clear' onclick="clearDrawing()">Clear</button> <button onclick="autoCropToContainBlackPixels()">Finished</button>
+        <button id ='clear' onclick="clearDrawing()">Clear</button> <button id='autocrop' onclick="autoCropToContainBlackPixels()">Finished</button>
         <div id="cropped_image_display"></div>
         
         <div>
         <p></p>
         <p> Step 3 - Please label the glyph</p>
 
-        <form>
-          <label for="fname">First name:</label>
-          <input type="text" id="fname" name="fname">
-          <label for="lname">Last name:</label>
-          <input type="text" id="lname" name="lname">
-          <label for="lname">Last name:</label>
-          <input type="text" id="lname" name="lname">
-          <label for="lname">Last name:</label>
-          <input type="text" id="lname" name="lname">
-        </form> 
+        
+          <label for="Gardiner">Gardiner Sign of glyph:</label>
+          <input type="text" id="Gardiner" name="Gardiner">
+          <label for="Facsimile">Facsimile Maker:</label>
+          <input type="text" id="Facsimile" name="Facsimile">
+          <label for="Text">Text:</label>
+          <input type="text" id="Text" name="Text">
+          <label for="Instance ">Instance of glyph in facsimile:</label>
+          <input type="text" id="Instance" name="Instance">
+          <label for="lname">Provenance:</label>
+          <input type="text" id="Provenance" name="Provenance">
+          <label for="Period">Time Period:</label>
+          <select name="Period" id="Period">
+            <option value="">Please select</option>
+            <option value="Old Kingdom">Old Kingdom</option>
+            <option value="Middle Kingdom">Middle Kingdom</option>
+            <option value="New Kingdom">New Kingdom</option>
 
+          </select>
+          <label for="Author">Original Author (if known):</label>
+          <input type="text" id="Author" name="Author">
+          <button id ='final_submit_button' onclick="imageUpload(); jsonUpload()">Submit glyph to database </button>
         </div>
           
         
