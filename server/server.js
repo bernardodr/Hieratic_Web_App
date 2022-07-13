@@ -5,8 +5,8 @@ const { rmSync, fstat } = require('fs');
 const multer = require('multer'); // file upload middleware 
 const uuid = require('uuid').v4; //unique image naming
 //root of computer is needed for res.sendfile()
-//const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
-const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+//const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
 const fs = require('fs');
 const AdmZip=require('adm-zip');
 
@@ -175,7 +175,7 @@ app.get('/results5', (req, res) => {
 ///////////////////////////////////////////
 
 app.get('/imageName1', (req, res) => {
-    fs.readFile('../server/database/TEST.json', 'utf-8', (err, jsonString) => {
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
             console.log(err)
         }
@@ -207,7 +207,7 @@ app.get('/imageName1', (req, res) => {
 
 // great JSON help = https://heynode.com/tutorial/readwrite-json-files-nodejs/
 app.get('/imageName2', (req, res) => {
-    fs.readFile('../server/database/TEST.json', 'utf-8', (err, jsonString) => {
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
             console.log(err)
         }
@@ -239,7 +239,7 @@ app.get('/imageName2', (req, res) => {
 });
 
 app.get('/imageName3', (req, res) => {
-    fs.readFile('../server/database/TEST.json', 'utf-8', (err, jsonString) => {
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
             console.log(err)
         }
@@ -270,7 +270,7 @@ app.get('/imageName3', (req, res) => {
 });
 
 app.get('/imageName4', (req, res) => {
-    fs.readFile('../server/database/TEST.json', 'utf-8', (err, jsonString) => {
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
             console.log(err)
         }
@@ -301,7 +301,7 @@ app.get('/imageName4', (req, res) => {
 });
 
 app.get('/imageName5', (req, res) => {
-    fs.readFile('../server/database/TEST.json', 'utf-8', (err, jsonString) => {
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
             console.log(err)
         }

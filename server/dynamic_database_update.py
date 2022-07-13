@@ -28,7 +28,7 @@ with open('server/database/Precalculated_Data_Set_Stats/datasetstats.csv', 'a', 
     f_object.close()
 
 #############################################
-###### Dynamically Update Datasetstats ######
+###### Dynamically Update pxls-20 ######
 #############################################
 
 #399 pixel values 
