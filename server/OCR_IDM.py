@@ -17,8 +17,8 @@ def main():
     ###################################################
 
     # load in aspect ratio list and pixel values for the data set
-    datalist = pd.read_csv('../server/database/Precalculated_Data_Set_Stats/datasetstats.csv', index_col=[0])
-    pxls = pd.read_csv('../server/database/Precalculated_Data_Set_Stats/pxls_20.csv', index_col=[0])
+    datalist = pd.read_csv('../Users/danielbernardo/Desktop/PaPYrus-main fresh/Data Set and Metrics/Precalculated Data Set Stats/datasetstats.csv', index_col=[0])
+    pxls = pd.read_csv('../Users/danielbernardo/Desktop/PaPYrus-main fresh/Data Set and Metrics/Precalculated Data Set Stats/pxls_20.csv', index_col=[0])
     # the whole data set ("Dataset Whole"); remember the / after the folder name!
     place = '../server/database/Thesis_Dataset_Whole/'
     # image to be analyzed
@@ -101,9 +101,6 @@ def main():
             return g 
         else:
             return D + (C-x) + (C-y)
-
-
-            
 
     ######################################################################################################
     ######################################################################################################

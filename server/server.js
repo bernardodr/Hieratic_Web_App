@@ -16,13 +16,13 @@ const AdmZip=require('adm-zip');
 // multer acts as middleware and stores in the client uploads in uploads directory
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/')
+        cb(null, 'database/Thesis_Dataset_Whole/')
     },
     filename: (req, file, cb) => {
         const { originalname } = file;
         // or 
         // uuid, or fieldname see 9.00 in for unique naming system (https://youtu.be/ysS4sL6lLDU?t=544)
-        cb(null, 'upload.png')
+        cb(null, 'TIMG_0000.png')
         //OCR_FFT_RUN();
 
     }
@@ -72,7 +72,7 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
     /////////////////////////////////////////////////////////////////
     const OCR_FFT_RUN = async function () {
         //spawn command "send"
-        const childPython = spawn('python3',['OCR_IDM.py']);
+        const childPython = spawn('python3',['.py']);
     
         // recieve
         childPython.stdout.on('data', (data) => {
