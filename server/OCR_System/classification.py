@@ -21,7 +21,7 @@ def weighted_squared_distance(ar1, ar2, weights, nonzeros):
 # FFT
 
 # trained weights
-with open('server/OCR_System/fft_weights.pickle', 'rb') as handle:
+with open('../server/OCR_System/fft_weights.pickle', 'rb') as handle:
 	fft_weights = pickle.load(handle)
 
 fft_nonzero_indices = [i for i in range(fft_weights.size) if fft_weights[i] > 0]

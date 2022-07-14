@@ -72,7 +72,7 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
     /////////////////////////////////////////////////////////////////
     const OCR_FFT_RUN = async function () {
         //spawn command "send"
-        const childPython = spawn('python3',['.py']);
+        const childPython = spawn('python3',['OCR_System/testing.py']);
     
         // recieve
         childPython.stdout.on('data', (data) => {
@@ -93,11 +93,11 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
             };
 
             imageNames = {
-                "image1": imageData[0].toString(),
-                "image2": imageData[1].toString(),
-                "image3": imageData[2].toString(),
-                "image4": imageData[3].toString(),
-                "image5": imageData[4].toString()
+                "image1": imageData[0],
+                "image2": imageData[1],
+                "image3": imageData[2],
+                "image4": imageData[3],
+                "image5": imageData[4]
             };
 
             //res.sendFile(imageJSON.image1)
@@ -132,41 +132,30 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
 
 app.get('/results1', (req, res) => {
     //get the file name from relative path
-    let filename1 = imageJSON.image1.split('/');
-    filename1 = filename1[4]
-
-    res.sendFile(root + filename1);
+    let filename1 = imageJSON.image1
+    res.sendFile(root + filename1 + '.png');
 });
 
 app.get('/results2', (req, res) => {
 
-
-    let filename2 = imageJSON.image2.split('/');
-    filename2 = filename2[4]
-
-    res.sendFile(root + filename2);
+    let filename2 = imageJSON.image2
+    res.sendFile(root + filename2 + '.png');
 
 });
 
 app.get('/results3', (req, res) => {
-    let filename3 = imageJSON.image3.split('/');
-    filename3 = filename3[4]
-
-    res.sendFile(root + filename3);
+    let filename3 = imageJSON.image3
+    res.sendFile(root + filename3 + '.png');
 });
 
 app.get('/results4', (req, res) => {
-    let filename4 = imageJSON.image4.split('/');
-    filename4 = filename4[4]
-
-    res.sendFile(root + filename4);
+    let filename4 = imageJSON.image4
+    res.sendFile(root + filename4 + '.png');
 });
 
 app.get('/results5', (req, res) => {
-    let filename5 = imageJSON.image5.split('/');
-    filename5 = filename5[4]
-
-    res.sendFile(root + filename5);
+    let filename5 = imageJSON.image5
+    res.sendFile(root + filename5 + '.png');
 });
 
 
@@ -186,8 +175,7 @@ app.get('/imageName1', (req, res) => {
                 const data = JSON.parse(jsonString);
 
                 // Get Filename of Matched image
-                let filename1 = imageJSON.image1.split('/');
-                filename1 = filename1[4]
+                let filename1 = imageJSON.image1 + '.png'
 
                 //Return object with a match 
                 match = data.find(x => x.Image_Name == filename1)
@@ -218,8 +206,7 @@ app.get('/imageName2', (req, res) => {
                 const data = JSON.parse(jsonString);
 
                 // Get Filename of Matched image
-                let filename2 = imageJSON.image2.split('/');
-                filename2 = filename2[4]
+                let filename2 = imageJSON.image2+ '.png'
 
                 //Return object with a match 
                 match = data.find(x => x.Image_Name == filename2)
@@ -250,8 +237,7 @@ app.get('/imageName3', (req, res) => {
                 const data = JSON.parse(jsonString);
 
                 // Get Filename of Matched image
-                let filename3 = imageJSON.image3.split('/');
-                filename3 = filename3[4]
+                let filename3 = imageJSON.image3+ '.png'
 
                 //Return object with a match 
                 match = data.find(x => x.Image_Name == filename3)
@@ -281,8 +267,7 @@ app.get('/imageName4', (req, res) => {
                 const data = JSON.parse(jsonString);
 
                 // Get Filename of Matched image
-                let filename4 = imageJSON.image4.split('/');
-                filename4 = filename4[4]
+                let filename4 = imageJSON.image4+ '.png'
 
                 //Return object with a match 
                 match = data.find(x => x.Image_Name == filename4)
@@ -312,8 +297,7 @@ app.get('/imageName5', (req, res) => {
                 const data = JSON.parse(jsonString);
 
                 // Get Filename of Matched image
-                let filename5 = imageJSON.image5.split('/');
-                filename5 = filename5[4]
+                let filename5 = imageJSON.image5+ '.png'
 
                 //Return object with a match 
                 match = data.find(x => x.Image_Name == filename5)

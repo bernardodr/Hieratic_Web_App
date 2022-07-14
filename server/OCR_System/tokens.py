@@ -3,7 +3,7 @@ from PIL import Image
 from collections import defaultdict
 import numpy as np
 
-sourcedir = 'server/database/Thesis_Dataset_Whole'
+sourcedir = '../server/database/Thesis_Dataset_Whole'
 
 grid_size = 16
 fft_size = 16
