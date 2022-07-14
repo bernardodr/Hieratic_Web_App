@@ -128,8 +128,15 @@ def main():
 		##other_ids = filter_ids(id, other_ids, fft_abs_measure, 100)
 		other_ids = filter_distance(id, other_ids, distortion_measure, 1)
 		#print(other_ids)
+		del top5_array[0]
+
+		# insert top result from IDM @ index 0
+		top5_array.insert(0, other_ids[0])
+		
 		#print("/////////////////////////////////////////////// 6")
+
 	print(top5_array)
 	sys.stdout.flush()
+
 if __name__ == '__main__':
     main()

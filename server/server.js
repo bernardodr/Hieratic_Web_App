@@ -130,6 +130,7 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
 
 //for fft only change 4 to 3
 
+// Top match from IDM
 app.get('/results1', (req, res) => {
     //get the file name from relative path
     let filename1 = imageJSON.image1
@@ -163,6 +164,7 @@ app.get('/results5', (req, res) => {
 ///// Get, send image names to client /////
 ///////////////////////////////////////////
 
+// Top match from IDM
 app.get('/imageName1', (req, res) => {
     fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
@@ -314,6 +316,14 @@ app.get('/imageName5', (req, res) => {
 
     })
 });
+
+/////////////////////////////////////////////////////////////////////// 
+/////////////////// Dynamically update OCR system  //////////////////// 
+/////////////////////////////////////////////////////////////////////// 
+
+//
+
+
 
 
 ///////////////////////////////////////////////////////////////
