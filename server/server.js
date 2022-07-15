@@ -13,6 +13,8 @@ const AdmZip=require('adm-zip');
 
 
 
+
+
 // multer acts as middleware and stores in the client uploads in uploads directory
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -85,14 +87,6 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
             console.log(imageData)
             
             imageJSON = {
-                "image1": imageData[0],
-                "image2": imageData[1],
-                "image3": imageData[2],
-                "image4": imageData[3],
-                "image5": imageData[4]
-            };
-
-            imageNames = {
                 "image1": imageData[0],
                 "image2": imageData[1],
                 "image3": imageData[2],
@@ -321,7 +315,79 @@ app.get('/imageName5', (req, res) => {
 /////////////////// Dynamically update OCR system  //////////////////// 
 /////////////////////////////////////////////////////////////////////// 
 
-//
+// this process takes on .avg 2min 30s
+
+const updateDataset = function(){
+    
+    //run training
+    const pythonTraining = spawn('python3',['OCR_System/training.py']);
+
+    // recieve
+    pythonTraining.stdout.on('data', (data) => {
+        //output = eval(`(${data})`);
+        console.log(data)
+    })
+
+    // handel errors
+    pythonTraining.stderr.on('data', (data) => {
+        console.log(`stderr: + ${data}`);
+    })
+
+    // when script finishes 
+    pythonTraining.on('close', (code) => {
+        console.log(`process exited with code: + ${code}`);
+        console.log('Training was successful')
+        tokens()
+    })
+
+    const tokens = function(){
+        //run tokens.py  
+        const pythonTokens = spawn('python3',['OCR_System/tokens.py']);
+
+        // recieve
+        pythonTokens.stdout.on('data', (data) => {
+
+        });
+
+        // handel errors
+        pythonTokens.stderr.on('data', (data) => {
+        console.log(`stderr: + ${data}`);
+        });
+
+        // when script finishes 
+        pythonTokens.on('close', (code) => {
+            console.log(`process exited with code: + ${code}`);
+            console.log('Tokens was successful')
+            classification()
+        });
+    };
+
+    const classification = function(){
+         //run tokens.py  
+         const pythonClassification = spawn('python3',['OCR_System/classification.py']);
+
+         // recieve
+         pythonClassification.stdout.on('data', (data) => {
+            
+         });
+ 
+         // handel errors
+         pythonClassification.stderr.on('data', (data) => {
+         console.log(`stderr: + ${data}`);
+         });
+ 
+         // when script finishes 
+         pythonClassification.on('close', (code) => {
+             console.log(`process exited with code: + ${code}`);
+             console.log('Classification was successful')
+         });
+    };
+
+    //Validate the data has been succefully added 
+    
+
+};
+updateDataset()
 
 
 

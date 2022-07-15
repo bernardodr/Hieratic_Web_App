@@ -1,3 +1,4 @@
+import sys
 import sklearn
 from sklearn.linear_model import LogisticRegression
 import random
@@ -9,6 +10,8 @@ from matplotlib.pyplot import figure
 
 from tokens import ids, id_to_name, name_to_ids, id_to_fft
 from classification import *
+
+
 
 all_ids = ids()
 for i in range(20):
@@ -67,3 +70,7 @@ if False:
 		print(cov(feature, training_responses))
 		# plt.scatter(feature, training_responses)
 		# plt.show()
+
+sys.stdout.flush()
+
+

@@ -1,4 +1,5 @@
 import os
+import sys
 from PIL import Image
 from collections import defaultdict
 import numpy as np
@@ -84,3 +85,5 @@ def store_images():
 	read_images(em)
 
 store_images()
+
+sys.stdout.flush()
