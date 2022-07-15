@@ -61,7 +61,7 @@ if False:
 	plt.plot(x, y)
 	plt.xticks(np.array(values))
 	plt.show()
-with open('fft_weights.pickle', 'wb') as handle:
+with open('../server/fft_weights.pickle', 'wb') as handle:
 	pickle.dump(fft_weights, handle)
 
 if False:
