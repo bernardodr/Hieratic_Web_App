@@ -81,29 +81,43 @@ fetch('/results5')
 fetch('/imageName1')
     .then(response => response.json())
     .then(data => {
-        console.log(data)
+        console.log(data.Gardiner_Sign)
         return data
 })
 .then(data => {
     
     //Gardiner sign
     var Gardiner1 = data.Gardiner_Sign
-    document.getElementById('imageName1').innerHTML = "Gardiner Sign: "+Gardiner1;
-    //Facsimile Maker
-    var Facsimile_Maker_1 = data.Facsimile_Maker
-    document.getElementById('Facsimile_Maker_1').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_1;
-    //Provenance
-    var Provenance_1 = data.Provenance
-    document.getElementById('Provenance_1').innerHTML = "Provenance: "+Provenance_1;
-    //Text
-    var Text_1 = data.Text[0].Text_Name
-    document.getElementById('Text_1').innerHTML = "Text: "+Text_1;
-    //Time Period
-    var Time_Period_1 = data.Text[0].Time_Period
-    document.getElementById('Time_Period_1').innerHTML = "Time Period: "+Time_Period_1;
-    // get Author
-    var Orignal_Author_1 = data.Text[0].Orignal_Author
-    document.getElementById('Orignal_Author_1').innerHTML = "Author: "+ Orignal_Author_1;
+    document.getElementById('Gardiner1').innerHTML = "Gardiner Sign: "+Gardiner1;
+
+    // image id 
+    var id1 = data.id
+    document.getElementById('id1').innerHTML = "Image ID: "+id1;
+
+    //instance in Facsimile 
+    var instance1 = data.Instance_In_Facsimile
+    document.getElementById('intance1').innerHTML = "Instance: "+instance1;
+
+    //XY Coordinates
+    var coordinates1 = data.xy_coordinates
+    document.getElementById('coordinates1').innerHTML = " XY Coordinates: "+coordinates1;
+
+
+    // //Facsimile Maker
+    // var Facsimile_Maker_1 = data.Facsimile_Maker
+    // document.getElementById('Facsimile_Maker_1').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_1;
+    // //Provenance
+    // var Provenance_1 = data.Provenance
+    // document.getElementById('Provenance_1').innerHTML = "Provenance: "+Provenance_1;
+    // //Text
+    // var Text_1 = data.Text[0].Text_Name
+    // document.getElementById('Text_1').innerHTML = "Text: "+Text_1;
+    // //Time Period
+    // var Time_Period_1 = data.Text[0].Time_Period
+    // document.getElementById('Time_Period_1').innerHTML = "Time Period: "+Time_Period_1;
+    // // get Author
+    // var Orignal_Author_1 = data.Text[0].Orignal_Author
+    // document.getElementById('Orignal_Author_1').innerHTML = "Author: "+ Orignal_Author_1;
 
     
 })

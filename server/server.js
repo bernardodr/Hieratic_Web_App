@@ -8,7 +8,7 @@ const uuid = require('uuid').v4; //unique image naming
 const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
 //const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
 const fs = require('fs');
-const AdmZip=require('adm-zip');
+const AdmZip = require('adm-zip');
 
 
 
@@ -34,7 +34,7 @@ const upload = multer({ storage: storage });
 const app = express();
 const API_PORT = 3000;
 
-app.use(express.json({limit: '5000mb'}));
+app.use(express.json({ limit: '5000mb' }));
 app.use(express.static('../Client'));
 
 
@@ -74,8 +74,8 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
     /////////////////////////////////////////////////////////////////
     const OCR_FFT_RUN = async function () {
         //spawn command "send"
-        const childPython = spawn('python3',['OCR_System/testing.py']);
-    
+        const childPython = spawn('python3', ['OCR_System/testing.py']);
+
         // recieve
         childPython.stdout.on('data', (data) => {
 
@@ -85,7 +85,7 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
             //console.log(eval(`(${data})`))
             imageData = eval(`(${data})`);
             console.log(imageData)
-            
+
             imageJSON = {
                 "image1": imageData[0],
                 "image2": imageData[1],
@@ -107,7 +107,7 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
             console.log(`process exited with code: + ${code}`);
 
             //respond with webpage of results after python script is done
-            
+
             res.redirect('http://localhost:3000/pages/ocr_results.html')
 
         })
@@ -160,7 +160,7 @@ app.get('/results5', (req, res) => {
 
 // Top match from IDM
 app.get('/imageName1', (req, res) => {
-    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+    fs.readFile('../server/database/newJSON.json', 'utf-8', (err, jsonString) => {
         if (err) {
             console.log(err)
         }
@@ -173,11 +173,21 @@ app.get('/imageName1', (req, res) => {
                 // Get Filename of Matched image
                 let filename1 = imageJSON.image1 + '.png'
 
-                //Return object with a match 
-                match = data.find(x => x.Image_Name == filename1)
+                // MATCH MATCH WORKING
+                for (var i = 0; i < data.length; i++) {
+                    //var signs = data[0].Signs[0].Image_Name
+                    // console.log(signs)
+                    match = data[i].Signs.find(x => x.Image_Name === filename1)
+                    if (match === undefined) {
 
-                console.log(match)
-                res.send(match)
+                    } else {
+                        console.log(match)
+                        match = JSON.stringify(match)
+                        res.send(match)
+                    }
+
+                }
+                
 
             } catch (err) {
                 console.log('Error paring JSON', err)
@@ -202,12 +212,12 @@ app.get('/imageName2', (req, res) => {
                 const data = JSON.parse(jsonString);
 
                 // Get Filename of Matched image
-                let filename2 = imageJSON.image2+ '.png'
+                let filename2 = imageJSON.image2 + '.png'
 
                 //Return object with a match 
                 match = data.find(x => x.Image_Name == filename2)
 
-                console.log(match)
+                //console.log(match)
                 res.send(match)
 
             } catch (err) {
@@ -233,12 +243,12 @@ app.get('/imageName3', (req, res) => {
                 const data = JSON.parse(jsonString);
 
                 // Get Filename of Matched image
-                let filename3 = imageJSON.image3+ '.png'
+                let filename3 = imageJSON.image3 + '.png'
 
                 //Return object with a match 
                 match = data.find(x => x.Image_Name == filename3)
 
-                console.log(match)
+                //console.log(match)
                 res.send(match)
 
             } catch (err) {
@@ -263,12 +273,12 @@ app.get('/imageName4', (req, res) => {
                 const data = JSON.parse(jsonString);
 
                 // Get Filename of Matched image
-                let filename4 = imageJSON.image4+ '.png'
+                let filename4 = imageJSON.image4 + '.png'
 
                 //Return object with a match 
                 match = data.find(x => x.Image_Name == filename4)
 
-                console.log(match)
+                //console.log(match)
                 res.send(match)
 
             } catch (err) {
@@ -293,12 +303,12 @@ app.get('/imageName5', (req, res) => {
                 const data = JSON.parse(jsonString);
 
                 // Get Filename of Matched image
-                let filename5 = imageJSON.image5+ '.png'
+                let filename5 = imageJSON.image5 + '.png'
 
                 //Return object with a match 
                 match = data.find(x => x.Image_Name == filename5)
 
-                console.log(match)
+                //console.log(match)
                 res.send(match)
 
             } catch (err) {
@@ -317,10 +327,10 @@ app.get('/imageName5', (req, res) => {
 
 // this process takes on .avg 2min 30s
 
-const updateDataset = function(){
-    
+const updateDataset = function () {
+
     //run training
-    const pythonTraining = spawn('python3',['OCR_System/training.py']);
+    const pythonTraining = spawn('python3', ['OCR_System/training.py']);
 
     // recieve
     pythonTraining.stdout.on('data', (data) => {
@@ -340,9 +350,9 @@ const updateDataset = function(){
         tokens()
     })
 
-    const tokens = function(){
+    const tokens = function () {
         //run tokens.py  
-        const pythonTokens = spawn('python3',['OCR_System/tokens.py']);
+        const pythonTokens = spawn('python3', ['OCR_System/tokens.py']);
 
         // recieve
         pythonTokens.stdout.on('data', (data) => {
@@ -351,7 +361,7 @@ const updateDataset = function(){
 
         // handel errors
         pythonTokens.stderr.on('data', (data) => {
-        console.log(`stderr: + ${data}`);
+            console.log(`stderr: + ${data}`);
         });
 
         // when script finishes 
@@ -362,32 +372,33 @@ const updateDataset = function(){
         });
     };
 
-    const classification = function(){
-         //run tokens.py  
-         const pythonClassification = spawn('python3',['OCR_System/classification.py']);
+    const classification = function () {
+        //run tokens.py  
+        const pythonClassification = spawn('python3', ['OCR_System/classification.py']);
 
-         // recieve
-         pythonClassification.stdout.on('data', (data) => {
-            
-         });
- 
-         // handel errors
-         pythonClassification.stderr.on('data', (data) => {
-         console.log(`stderr: + ${data}`);
-         });
- 
-         // when script finishes 
-         pythonClassification.on('close', (code) => {
-             console.log(`process exited with code: + ${code}`);
-             console.log('Classification was successful')
-         });
+        // recieve
+        pythonClassification.stdout.on('data', (data) => {
+
+        });
+
+        // handel errors
+        pythonClassification.stderr.on('data', (data) => {
+            console.log(`stderr: + ${data}`);
+        });
+
+        // when script finishes 
+        pythonClassification.on('close', (code) => {
+            console.log(`process exited with code: + ${code}`);
+            console.log('Classification was successful')
+        });
     };
 
     //Validate the data has been succefully added 
-    
+
 
 };
-updateDataset()
+//Uncomment to update database
+//updateDataset()
 
 
 
@@ -399,12 +410,12 @@ updateDataset()
 app.get('/download', function (req, res) {
 
     var zip = new AdmZip();
-    
+
     //add image (folder) and json (file) to zip folder 
     zip.addLocalFile('../server/database/database.json', 'database.json');
     zip.addLocalFolder('../server/database/Thesis_Dataset_Whole', 'Thesis_Dataset_Whole')
 
-    
+
     var zipFileContents = zip.toBuffer();
     const fileName = 'uploads.zip';
     const fileType = 'application/zip';
@@ -480,7 +491,13 @@ app.post('/json_upload', (req, res) => {
     res.status(200).send(`${upload_name} has been uploaded to JSON database`)
 })
 
+/////////////////////////////////////////////////////////
+/////////////////// Database Editing //////////////////// 
+/////////////////////////////////////////////////////////
 
 
-  
+
+
+
+
 
