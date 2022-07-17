@@ -17,7 +17,7 @@ let count = 0
 ////////// Get Every Image Name //////////
 //////////////////////////////////////////
 
-fs.readdirSync("/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/").forEach(file => {
+fs.readdirSync("/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/").forEach(file => {
 
     ////////////////////////////////////////////////
     ////////// Dynamically get Image data //////////
@@ -35,7 +35,7 @@ fs.readdirSync("/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hi
 
 
     // Relative Image Path
-    var Relative_Image_Path = "database/Thesis Dataset Whole/" + file.toString();
+    var Relative_Image_Path = "server/database/Thesis_Dataset_Whole/" + file.toString();
 
     //Gardiner Sign
     var split1 = file.split('_0')
