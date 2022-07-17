@@ -62,9 +62,12 @@ input[type=text], select {
   padding: 5px 5px;
 }
 
+li{
+  position:relative;
+  right: -125px;
 
 
-
+}
 
 /* results cards */
 
