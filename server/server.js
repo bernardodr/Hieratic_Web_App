@@ -190,7 +190,7 @@ app.get('/imageName1', (req, res) => {
                 
 
             } catch (err) {
-                console.log('Error paring JSON', err)
+                console.log('Error pairing JSON', err)
             }
 
 
@@ -424,6 +424,7 @@ app.get('/download', function (req, res) {
         'Content-Disposition': `attachment; filename="${fileName}"`,
         'Content-Type': fileType,
     })
+    console.log('download is in progress')
     //sends zipped folder as response to client 
     return res.end(zipFileContents);
 
@@ -436,7 +437,7 @@ app.post('/image_upload', (req, res) => {
     //get base64 image data from post request
     var base64Data = req.body.image
     //give image new title - gardiner sign, instance in facsimile and date in yyyy-mm-dd format. Toisostring converts date to appropriate format
-    upload_name = `${req.body.gardiner}_${req.body.text}_instance(${req.body.instance})_${new Date().toISOString().slice(0, 10)}.png`
+    upload_name = `${req.body.gardiner}_${req.body.text}_${req.body.facsimile}_instance(${req.body.instance}).png`
     //writes file to image database. Buffer.from converts base64 data into image
     fs.writeFile(`../server/database/Thesis_Dataset_Whole/${upload_name}`, Buffer.from(base64Data, 'base64'), function (err) {
         if (err) throw err;
@@ -451,53 +452,70 @@ app.post('/image_upload', (req, res) => {
 //post function to add json data of uploaded image to (test.json)
 app.post('/json_upload', (req, res) => {
 
+
     //access request values from user inputted data
     var object =
 
     {
+        Facsimile_Maker: req.body.facsimile,
+        Text_Name: req.body.text,
+        Text_Info: {
+            Orignal_Author: req.body.author,
+            Time_Period: req.body.period,
+            Provenance: req.body.provenance,
+            Signs: [{
+                
+                Gardiner_Sign: req.body.gardiner,
+                Instance_In_Facsimile: req.body.instance,
+                Image_Name: upload_name,
+                Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`
+            }]
 
-        Image_Name: upload_name,
-        Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`,
+        }
+    }
+
+    sign_info = [{
+    
         Gardiner_Sign: req.body.gardiner,
         Instance_In_Facsimile: req.body.instance,
-        Facsimile_Maker: req.body.facsimile,
-        Provenance: req.body.provenance,
-        Text: [
-            {
-                Text_Name: req.body.text,
-                Orignal_Author: req.body.author,
-                Time_Period: req.body.period
-            }
-        ],
-        User_Details: [
-            {
+        Image_Name: upload_name,
+        Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`
+    }]
 
-                "Upload_Date_Time": new Date().toISOString().slice(0, 10)
-            }
-        ]
-    };
     //read in (test.json) file 
-    let jsondata = fs.readFileSync("../server/database/database.json", "utf-8");
+    let jsondata = fs.readFileSync("../server/database/newJSON.json", "utf-8");
     //parse actual json from string 
     let json = JSON.parse(jsondata);
 
-    //add new json data to current parsed json data (modification)
-    json.push(object);
+    counter = 0
+        for (i = 0; i < json.length; i++) {
+
+            if (json[i].Facsimile_Maker == req.body.facsimile && json[i].Text_Name == req.body.text) {
+                signs = json[i].Text_Info.Signs
+                signs.push(sign_info)
+                counter++
+            }
+        }
+        //if text and fac maker not found in database, add new object to jsondata
+        if (counter == 0) {
+            json.push(object)
+
+        }
 
     //convert json data to string 
     jsondata = JSON.stringify(json, null, 2);
     //write json to correct file 
-    fs.writeFileSync("../server/database/database.json", jsondata, "utf-8");
+    fs.writeFileSync("../server/database/newJSON.json", jsondata, "utf-8");
     res.status(200).send(`${upload_name} has been uploaded to JSON database`)
 })
 
-/////////////////////////////////////////////////////////
-/////////////////// Database Editing //////////////////// 
-/////////////////////////////////////////////////////////
+/*
+app.post('/aspectRatio', (req, res) => {
+
+aspect_ratio=req.body.aspect_Ratio;
+console.log(aspect_ratio);
 
 
-
-
-
-
+})
+*/  
 

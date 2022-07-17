@@ -4,6 +4,9 @@ canvas = document.getElementById('canvas');
 context = canvas.getContext('2d');
 var drawing_
 var image;
+var width;
+var height;
+var pixel_values;
 
 //function to display uploaded image (for database) and to perform cropping functionality 
 function previewImageCrop() {
@@ -174,8 +177,8 @@ function autoCropToContainBlackPixels() {
     var last_element_in_array = pixel.x.length - 1;
 
     //calculate the width and height of new canvas by subtracting the two furthest black pixel (horizontally/vertically) from each other
-    width = pixel.x[last_element_in_array] - pixel.x[0];
-    height = pixel.y[last_element_in_array] - pixel.y[0];
+    width = pixel.x[last_element_in_array] - pixel.x[0] +1;
+    height = pixel.y[last_element_in_array] - pixel.y[0] + 1;
     var updated_cropped_canvas = context.getImageData(pixel.x[0], pixel.y[0], width, height);
 
     canvas.width = width;
@@ -184,6 +187,9 @@ function autoCropToContainBlackPixels() {
    
     document.getElementById('clear').disabled=true;
     document.getElementById('autocrop').disabled=true;
+    
+    
+   // return width, height;
 
     
 }
@@ -233,3 +239,24 @@ function jsonUpload(){
     .then(text=>console.log(text))
 
 }
+/*
+function aspectRatioUpdate() {
+
+
+    aspect_ratio = height / width;
+    console.log(aspect_ratio);
+    body={
+        aspect_Ratio:aspect_ratio
+    }
+
+    options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    }
+
+    fetch('/aspectRatio', options)  
+
+
+}
+*/
