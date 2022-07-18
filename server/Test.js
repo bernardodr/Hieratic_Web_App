@@ -111,7 +111,6 @@ let count = 0
 
 
 
-
 // // WOrking version that returns only the signs object 
 // // MATCH MATCH WORKING
 // for (var i = 0; i < data.length; i++) {
@@ -249,9 +248,41 @@ let count = 0
 
 // })
 
-///////////////////////////////////////////////////////////
-////////////////// Working Search Engine //////////////////
-///////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////
+// ////////////////// Working Search Engine //////////////////
+// ///////////////////////////////////////////////////////////
+
+// fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+//     if (err) {
+//         console.log(err)
+//     }
+//     else {
+
+//         try {
+//             //All of JSON data
+//             const data = JSON.parse(jsonString);
+
+//             results_round_1 = data.filter(data =>
+//                 data.Facsimile_Maker === 'Poe' &&
+//                 data.Text_Name === 'Shipwrecked Sailor');
+
+//             console.log(results_round_1[0].Signs.length)
+
+//             results_round_2 = results_round_1[0].Signs.filter(x => x.Gardiner_Sign === 'A1')
+//             console.log(results_round_2)
+
+//         } catch (err) {
+//             console.log('Error pairing JSON', err)
+//         }
+
+
+//     }
+
+// })
+
+//////////////////////////////////////////////////////////////
+/////////// Data Editing Logic for Signs objects /////////////
+/////////////////////////////////////////////////////////////
 
 fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
     if (err) {
@@ -263,23 +294,39 @@ fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
             //All of JSON data
             const data = JSON.parse(jsonString);
 
-            results_round_1 = data.filter(data =>
-                data.Facsimile_Maker === 'Poe' &&
-                data.Text_Name === 'Shipwrecked Sailor');
-
-            console.log(results_round_1[0].Signs.length)
-
-            results_round_2 = results_round_1[0].Signs.filter(x => x.Gardiner_Sign === 'A1')
-            console.log(results_round_2)
-
+            // ///WORKING FOR LOOP DO NOT DELETE
+            for (var i = 0; i < data.length; i++) {
+                for (var n = 0; n < data[i].Signs.length; n++) {
+                    var signs = data[i].Signs[n]
+                    //console.log(signs)
+                    count++
+                    var item = data[i].Signs.find(x => x.id === 13110);
+                    if (item) {
+                        item.xy_coordinates = ""
+                        json = JSON.stringify(data, null, 2); //convert it back to json
+                        fs.writeFile('../server/database/database.json', json, 'utf8', callback);
+                        function callback(err){
+                            //console.log(err)
+                        }
+                    }
+                }
+                 
+            }
+            console.log("Data has been updated") 
+            console.log(count)
         } catch (err) {
             console.log('Error pairing JSON', err)
         }
 
-
     }
 
 })
+
+
+
+
+
+
 
 
 
