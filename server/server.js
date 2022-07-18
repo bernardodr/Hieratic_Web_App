@@ -671,43 +671,43 @@ function findID() {
 
 
 
-
+   
 
 }
 findID();
 
+ ///////////////////////////////////////////////////////////
+ ////////////////// Working Search Engine //////////////////
 ///////////////////////////////////////////////////////////
-////////////////// Working Search Engine //////////////////
-///////////////////////////////////////////////////////////
 
 
-app.post('/search', (req, res) => {
-    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
-        if (err) {
-            console.log(err)
-        }
-        else {
+    app.post('/search', (req, res) => {
+        fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+            if (err) {
+                console.log(err)
+            }
+            else {
 
-            try {
-                //All of JSON data
-                const data = JSON.parse(jsonString);
+                try {
+                    //All of JSON data
+                    const data = JSON.parse(jsonString);
 
-                results_round_1 = data.filter(data =>
-                    data.Facsimile_Maker === 'Poe' &&
-                    data.Text_Name === 'Shipwrecked Sailor');
+                    results_round_1 = data.filter(data =>
+                        data.Facsimile_Maker === 'Poe' &&
+                        data.Text_Name === 'Shipwrecked Sailor');
 
-                console.log(results_round_1[0].Signs.length)
+                    console.log(results_round_1[0].Signs.length)
 
-                results_round_2 = results_round_1[0].Signs.filter(x => x.Gardiner_Sign === 'A1')
-                console.log(results_round_2)
+                    results_round_2 = results_round_1[0].Signs.filter(x => x.Gardiner_Sign === 'A1')
+                    console.log(results_round_2)
 
-            } catch (err) {
-                console.log('Error pairing JSON', err)
+                } catch (err) {
+                    console.log('Error pairing JSON', err)
+                }
+
+
             }
 
-
-        }
+        })
 
     })
-
-})
