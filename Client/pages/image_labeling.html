@@ -77,9 +77,28 @@
           </form>
 
           </p>
+
+          
         
         </div>
-        
+        <p> Step 1 - please crop the desired character(s)</p>
+          
+        <!-- Image upload function for single character OCR as well as image display -->
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+          <p>
+            <input id="image_input1" type="file" accept="image/*.png" name="hieraticSign"
+              onchange="previewImageCrop()">
+          </p>
+          <!--required to put type="button" in because otherwise form is submitted. Default type of <button> in html is submit -->
+          <button type="button" id="crop_button">Crop</button>
+          <button id="submit">Submit</button>
+          <div>
+            <img id="crop1">
+          </div>
+          
+        </form>
+
+        </p>
         <p>Step 2 - please edit the image where appropriate by drawing on it</p>
         <canvas id="canvas" width="500" height="200"></canvas>
         
