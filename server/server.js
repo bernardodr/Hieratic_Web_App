@@ -5,8 +5,8 @@ const { rmSync, fstat } = require('fs');
 const multer = require('multer'); // file upload middleware 
 const uuid = require('uuid').v4; //unique image naming
 //root of computer is needed for res.sendfile()
-const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
-//const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+//const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
 const fs = require('fs');
 const AdmZip = require('adm-zip');
 
@@ -467,7 +467,7 @@ const updateDataset = function () {
 
 
 };
-//Uncomment to update database
+//Uncomment to update database - training 
 //updateDataset()
 
 
@@ -530,19 +530,18 @@ app.post('/json_upload', (req, res) => {
     {
         Facsimile_Maker: req.body.facsimile,
         Text_Name: req.body.text,
-        Text_Info: {
-            Orignal_Author: req.body.author,
-            Time_Period: req.body.period,
-            Provenance: req.body.provenance,
-            Signs: [{
-                
-                Gardiner_Sign: req.body.gardiner,
-                Instance_In_Facsimile: req.body.instance,
-                Image_Name: upload_name,
-                Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`
-            }]
+        Time_Period: req.body.period,
+        Provenance: req.body.provenance,
+        Signs: [{
 
-        }
+            Gardiner_Sign: req.body.gardiner,
+            Instance_In_Facsimile: req.body.instance,
+            Image_Name: upload_name,
+            Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`,
+            xy_coordinate: `${req.body.x},${req.body.y}`
+        }]
+
+
     }
 
     sign_info = [{
@@ -550,11 +549,13 @@ app.post('/json_upload', (req, res) => {
         Gardiner_Sign: req.body.gardiner,
         Instance_In_Facsimile: req.body.instance,
         Image_Name: upload_name,
-        Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`
+        Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`,
+        X_coordinate: req.body.x,
+        Y_coordinate: req.body.y
     }]
 
     //read in (test.json) file 
-    let jsondata = fs.readFileSync("../server/database/newJSON.json", "utf-8");
+    let jsondata = fs.readFileSync("../server/database/database.json", "utf-8");
     //parse actual json from string 
     let json = JSON.parse(jsondata);
 
@@ -576,7 +577,7 @@ app.post('/json_upload', (req, res) => {
     //convert json data to string 
     jsondata = JSON.stringify(json, null, 2);
     //write json to correct file 
-    fs.writeFileSync("../server/database/newJSON.json", jsondata, "utf-8");
+    fs.writeFileSync("../server/database/database.json", jsondata, "utf-8");
     res.status(200).send(`${upload_name} has been uploaded to JSON database`)
 })
 
