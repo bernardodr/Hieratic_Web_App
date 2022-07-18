@@ -5,11 +5,13 @@ const { rmSync, fstat } = require('fs');
 const multer = require('multer'); // file upload middleware 
 const uuid = require('uuid').v4; //unique image naming
 //root of computer is needed for res.sendfile()
-const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
-//const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+//const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
 const fs = require('fs');
 const AdmZip = require('adm-zip');
 
+var id='';
+var upload_name='';
 
 
 
@@ -499,30 +501,14 @@ app.get('/download', function (req, res) {
 })
 
 
-//post function to upload labelled imaged to thesis_dataset_whole
-app.post('/image_upload', (req, res) => {
 
-    //get base64 image data from post request
-    var base64Data = req.body.image
-    //give image new title - gardiner sign, instance in facsimile and date in yyyy-mm-dd format. Toisostring converts date to appropriate format
-    //upload_name = `${req.body.gardiner}_${req.body.text}_${req.body.facsimile}_instance(${req.body.instance}).png`
-    upload_name = `${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_${req.body.period}.png`
-    //writes file to image database. Buffer.from converts base64 data into image
-    fs.writeFile(`../server/database/Thesis_Dataset_Whole/${upload_name}`, Buffer.from(base64Data, 'base64'), function (err) {
-        if (err) throw err;
-        console.log('Image Saved');
-
-    });
-    res.status(200).send(`${upload_name} has been uploaded to Thesis_Dataset_Whole`)
-
-})
 
 
 //post function to add json data of uploaded image to (test.json)
 
 app.post('/json_upload', (req, res) => {
 
-    var id = ''
+    
 
     ///////////////////////////////////////////////////
     ////////// create unique ids off a count //////////
@@ -554,7 +540,7 @@ app.post('/json_upload', (req, res) => {
                 //console.log(Math.max.apply(Math, array) + 'max value')
                 id = Math.max.apply(Math, array) + 1;
                 
-
+                upload_name=`${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_id:${id}.png`
                 //access request values from user inputted data
                 var object =
 
@@ -568,8 +554,8 @@ app.post('/json_upload', (req, res) => {
                         id: id,
                         Gardiner_Sign: req.body.gardiner,
                         Instance_In_Facsimile: req.body.instance,
-                        Image_Name: upload_name,
-                        Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`,
+                        Image_Name: `${upload_name}.png`,
+                        Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}.png`,
                         xy_coordinate: `${req.body.x},${req.body.y}`
                     }]
 
@@ -581,8 +567,8 @@ app.post('/json_upload', (req, res) => {
                     id: id,
                     Gardiner_Sign: req.body.gardiner,
                     Instance_In_Facsimile: req.body.instance,
-                    Image_Name: upload_name,
-                    Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`,
+                    Image_Name: `${upload_name}.png`,
+                    Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}.png`,
                     xy_coordinate: `${req.body.x},${req.body.y}`
                 }
 
@@ -610,6 +596,7 @@ app.post('/json_upload', (req, res) => {
                 jsondata = JSON.stringify(json, null, 2);
                 //write json to correct file 
                 fs.writeFileSync("../server/database/database.json", jsondata, "utf-8");
+                upload_name=`${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_id:${id}.png`
                 res.status(200).send(`${upload_name} has been uploaded to JSON database`)
 
             } catch (err) {
@@ -621,54 +608,27 @@ app.post('/json_upload', (req, res) => {
 
     })
 
-
+    
 })
 
 
+//post function to upload labelled imaged to thesis_dataset_whole
+app.post('/image_upload', (req, res) => {
 
+    //get base64 image data from post request
+    var base64Data = req.body.image
+    //give image new title - gardiner sign, instance in facsimile and date in yyyy-mm-dd format. Toisostring converts date to appropriate format
+    
+    //upload_name = `${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_id:${id}.png`
+    //writes file to image database. Buffer.from converts base64 data into image
+    fs.writeFile(`../server/database/Thesis_Dataset_Whole/${upload_name}`, Buffer.from(base64Data, 'base64'), function (err) {
+        if (err) throw err;
+        console.log('Image Saved');
 
+    });
+    res.status(200).send(`${upload_name} has been uploaded to Thesis_Dataset_Whole`)
 
-
-function findID(){
-array = []
-var id;
-fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
-    if (err) {
-        console.log(err)
-    }
-    else {
-
-        try {
-            //All of JSON data
-            const data = JSON.parse(jsonString);
-
-            ///WORKING FOR LOOP DO NOT DELETE
-            for (var i = 0; i < data.length; i++) {
-                for (var n = 0; n < data[i].Signs.length; n++) {
-                    var signs = data[i].Signs[n].id
-                    //console.log(signs);
-                    array.push(signs)
-                    
-                }
-            }
-           
-            
-            //max= Math.max.apply(Math, array)
-            id=(Math.max.apply(Math, array))
-            
-
-
-
-        } catch (err) {
-            console.log('Error pairing JSON', err)
-        }
-
-
-    }
-console.log(id, 'in function')
-return id
 })
-*/
 
 
 ///////////////////////////////////////////////////////////
@@ -707,5 +667,4 @@ app.post('/search', (req, res) => {
 
 })
 
-}
-findID();
+

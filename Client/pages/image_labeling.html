@@ -81,24 +81,7 @@
           
         
         </div>
-        <p> Step 1 - please crop the desired character(s)</p>
-          
-        <!-- Image upload function for single character OCR as well as image display -->
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-          <p>
-            <input id="image_input1" type="file" accept="image/*.png" name="hieraticSign"
-              onchange="previewImageCrop()">
-          </p>
-          <!--required to put type="button" in because otherwise form is submitted. Default type of <button> in html is submit -->
-          <button type="button" id="crop_button">Crop</button>
-          <button id="submit">Submit</button>
-          <div>
-            <img id="crop1">
-          </div>
-          
-        </form>
-
-        </p>
+      
         <p>Step 2 - please edit the image where appropriate by drawing on it</p>
         <canvas id="canvas" width="500" height="200"></canvas>
         
@@ -150,7 +133,7 @@
           <input type="text" id="x" name="x">
           <label for="Author">Y Coordinate:</label>
           <input type="text" id="y" name="y">
-          <button id ='final_submit_button' onclick="imageUpload(); jsonUpload()">Submit glyph to database </button>
+          <button id ='final_submit_button' onclick="jsonUpload();setTimeout(imageUpload, 5000)">Submit glyph to database </button>
         </div>
           
         
