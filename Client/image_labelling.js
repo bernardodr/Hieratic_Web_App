@@ -241,24 +241,3 @@ function jsonUpload(){
     .then(text=>console.log(text))
 
 }
-/*
-function aspectRatioUpdate() {
-
-
-    aspect_ratio = height / width;
-    console.log(aspect_ratio);
-    body={
-        aspect_Ratio:aspect_ratio
-    }
-
-    options = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-    }
-
-    fetch('/aspectRatio', options)  
-
-
-}
-*/
