@@ -632,10 +632,7 @@ app.post('/image_upload', (req, res) => {
 
 app.post('/data_search', (req, res) => {
 
-gardiner_sign=req.body.gardiner;
-fac_maker=req.body.facsimile;
-text=req.body.text;
-console.log(gardiner_sign, fac_maker, text)
+
 })
 
 ///////////////////////////////////////////////////////////
@@ -644,6 +641,13 @@ console.log(gardiner_sign, fac_maker, text)
 
 
 app.post('/search', (req, res) => {
+
+    //inputs from client
+    gardiner_sign = req.body.gardiner;
+    fac_maker = req.body.facsimile;
+    text = req.body.text;
+    console.log(gardiner_sign, fac_maker, text)
+
     fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
             console.log(err)
@@ -654,14 +658,17 @@ app.post('/search', (req, res) => {
                 //All of JSON data
                 const data = JSON.parse(jsonString);
 
+                // round 1 search to narrow down Facsimile Maker & Text
                 results_round_1 = data.filter(data =>
-                    data.Facsimile_Maker === 'Poe' &&
-                    data.Text_Name === 'Shipwrecked Sailor');
+                    data.Facsimile_Maker === fac_maker &&
+                    data.Text_Name === text);
 
                 console.log(results_round_1[0].Signs.length)
 
-                results_round_2 = results_round_1[0].Signs.filter(x => x.Gardiner_Sign === 'A1')
+                // round 2 search to narrow down Gardiner 
+                results_round_2 = results_round_1[0].Signs.filter(x => x.Gardiner_Sign === gardiner_sign)
                 console.log(results_round_2)
+                res.json(results_round_2)
 
             } catch (err) {
                 console.log('Error pairing JSON', err)
@@ -672,6 +679,54 @@ app.post('/search', (req, res) => {
 
     })
 
+    
+
 })
 
+
+//////////////////////////////////////////////////////////////
+/////////// Data Editing Logic for Signs objects /////////////
+/////////////////////////////////////////////////////////////
+
+// Put in a function so not to run when server restarts 
+const Edit_Sign_Data = function () {
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+
+            try {
+                //All of JSON data
+                const data = JSON.parse(jsonString);
+
+                // ///WORKING FOR LOOP DO NOT DELETE
+                for (var i = 0; i < data.length; i++) {
+                    for (var n = 0; n < data[i].Signs.length; n++) {
+                        var signs = data[i].Signs[n]
+                        //console.log(signs)
+                        count++
+                        var item = data[i].Signs.find(x => x.id === 13110);
+                        if (item) {
+                            // add more items to be edited here
+                            item.xy_coordinates = ""
+                            json = JSON.stringify(data, null, 2); //convert it back to json
+                            fs.writeFile('../server/database/database.json', json, 'utf8', callback);
+                            function callback(err) {
+                                //console.log(err)
+                            }
+                        }
+                    }
+
+                }
+                console.log("Data has been updated")
+                console.log(count)
+            } catch (err) {
+                console.log('Error pairing JSON', err)
+            }
+
+        }
+
+    })
+}
 
