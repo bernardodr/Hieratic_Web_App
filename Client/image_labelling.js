@@ -203,8 +203,9 @@ function imageUpload(){
     instance:document.getElementById('Instance').value,
     provenance:document.getElementById('Provenance').value,
     period:document.getElementById('Period').value,
-    author:document.getElementById('Author').value,
-    image:canvas.toDataURL().split(',')[1]
+    image:canvas.toDataURL().split(',')[1],
+    x:document.getElementById('x').value,
+    y:document.getElementById('y').value
 }
 
 
@@ -227,8 +228,9 @@ function jsonUpload(){
         instance:document.getElementById('Instance').value,
         provenance:document.getElementById('Provenance').value,
         period:document.getElementById('Period').value,
-        author:document.getElementById('Author').value,
-        image:canvas.toDataURL().split(',')[1]
+        image:canvas.toDataURL().split(',')[1],
+        x:document.getElementById('x').value,
+        y:document.getElementById('y').value
     }
     options={method: 'POST',
     headers:{'Content-Type':'application/json'},
