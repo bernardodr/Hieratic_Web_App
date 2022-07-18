@@ -81,7 +81,7 @@ fetch('/results5')
 fetch('/imageName1')
     .then(response => response.json())
     .then(data => {
-        console.log(data.Gardiner_Sign)
+        console.log(data)
         return data
 })
 .then(data => {
@@ -103,21 +103,15 @@ fetch('/imageName1')
     document.getElementById('coordinates1').innerHTML = " XY Coordinates: "+coordinates1;
 
 
-    // //Facsimile Maker
-    // var Facsimile_Maker_1 = data.Facsimile_Maker
-    // document.getElementById('Facsimile_Maker_1').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_1;
-    // //Provenance
-    // var Provenance_1 = data.Provenance
-    // document.getElementById('Provenance_1').innerHTML = "Provenance: "+Provenance_1;
-    // //Text
-    // var Text_1 = data.Text[0].Text_Name
-    // document.getElementById('Text_1').innerHTML = "Text: "+Text_1;
-    // //Time Period
-    // var Time_Period_1 = data.Text[0].Time_Period
-    // document.getElementById('Time_Period_1').innerHTML = "Time Period: "+Time_Period_1;
-    // // get Author
-    // var Orignal_Author_1 = data.Text[0].Orignal_Author
-    // document.getElementById('Orignal_Author_1').innerHTML = "Author: "+ Orignal_Author_1;
+    //Facsimile Maker
+    var Facsimile_Maker_1 = data.Facsimile_Maker
+    document.getElementById('facsimile_maker1').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_1;
+    //Text
+    var Text_1 = data.Text_Name
+     document.getElementById('text1').innerHTML = "Text: "+Text_1;
+    //Time Period
+    var Time_Period_1 = data.Time_Period
+    document.getElementById('time_period1').innerHTML = "Time Period: "+Time_Period_1;
 
     
 })
@@ -146,6 +140,16 @@ fetch('/imageName2')
     var coordinates2 = data.xy_coordinates
     document.getElementById('coordinates2').innerHTML = " XY Coordinates: "+coordinates2;
 
+    //Facsimile Maker
+    var Facsimile_Maker_2 = data.Facsimile_Maker
+    document.getElementById('facsimile_maker2').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_2;
+    //Text
+    var Text_2 = data.Text_Name
+     document.getElementById('text2').innerHTML = "Text: "+Text_2;
+    //Time Period
+    var Time_Period_2 = data.Time_Period
+    document.getElementById('time_period2').innerHTML = "Time Period: "+Time_Period_2;
+
     
 });
 
@@ -172,6 +176,16 @@ fetch('/imageName3')
     //XY Coordinates
     var coordinates3 = data.xy_coordinates
     document.getElementById('coordinates3').innerHTML = " XY Coordinates: "+coordinates3;
+
+    //Facsimile Maker
+    var Facsimile_Maker_3 = data.Facsimile_Maker
+    document.getElementById('facsimile_maker3').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_3;
+    //Text
+    var Text_3 = data.Text_Name
+     document.getElementById('text3').innerHTML = "Text: "+Text_3;
+    //Time Period
+    var Time_Period_3 = data.Time_Period
+    document.getElementById('time_period3').innerHTML = "Time Period: "+Time_Period_3;
 
     
 });
@@ -201,6 +215,16 @@ fetch('/imageName4')
     var coordinates4 = data.xy_coordinates
     document.getElementById('coordinates4').innerHTML = " XY Coordinates: "+coordinates4;
 
+    //Facsimile Maker
+    var Facsimile_Maker_4 = data.Facsimile_Maker
+    document.getElementById('facsimile_maker4').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_4;
+    //Text
+    var Text_4 = data.Text_Name
+     document.getElementById('text4').innerHTML = "Text: "+Text_4;
+    //Time Period
+    var Time_Period_4 = data.Time_Period
+    document.getElementById('time_period4').innerHTML = "Time Period: "+Time_Period_4;
+
     
 });
 
@@ -228,6 +252,15 @@ fetch('/imageName5')
     var coordinates5 = data.xy_coordinates
     document.getElementById('coordinates5').innerHTML = " XY Coordinates: "+coordinates5;
 
+    //Facsimile Maker
+    var Facsimile_Maker_5 = data.Facsimile_Maker
+    document.getElementById('facsimile_maker5').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_5;
+    //Text
+    var Text_5 = data.Text_Name
+     document.getElementById('text5').innerHTML = "Text: "+Text_5;
+    //Time Period
+    var Time_Period_5 = data.Time_Period
+    document.getElementById('time_period5').innerHTML = "Time Period: "+Time_Period_5;
     
 });
 

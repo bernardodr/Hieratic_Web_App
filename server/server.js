@@ -5,8 +5,8 @@ const { rmSync, fstat } = require('fs');
 const multer = require('multer'); // file upload middleware 
 const uuid = require('uuid').v4; //unique image naming
 //root of computer is needed for res.sendfile()
-//const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
-const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+//const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
 const fs = require('fs');
 const AdmZip = require('adm-zip');
 
@@ -182,7 +182,13 @@ app.get('/imageName1', (req, res) => {
 
                     } else {
                         console.log(match)
-
+                        text_Info = {
+                            Facsimile_Maker: data[i].Facsimile_Maker,
+                            Text_Name: data[i].Text_Name,
+                            Time_Period: data[i].Time_Period
+                        }
+                        match = Object.assign(text_Info,match);
+                        console.log(match)
                         match = JSON.stringify(match)
                         res.send(match)
                     }
@@ -217,18 +223,25 @@ app.get('/imageName2', (req, res) => {
 
                // MATCH MATCH WORKING
                for (var i = 0; i < data.length; i++) {
-                   //var signs = data[0].Signs[0].Image_Name
-                   // console.log(signs)
-                   match = data[i].Signs.find(x => x.Image_Name === filename2)
-                   if (match === undefined) {
+                //var signs = data[0].Signs[0].Image_Name
+                // console.log(signs)
+                match = data[i].Signs.find(x => x.Image_Name === filename2)
+                if (match === undefined) {
 
-                   } else {
-                       console.log(match)
-                       match = JSON.stringify(match)
-                       res.send(match)
-                   }
+                } else {
+                    console.log(match)
+                    text_Info = {
+                        Facsimile_Maker: data[i].Facsimile_Maker,
+                        Text_Name: data[i].Text_Name,
+                        Time_Period: data[i].Time_Period
+                    }
+                    match = Object.assign(text_Info,match);
+                    console.log(match)
+                    match = JSON.stringify(match)
+                    res.send(match)
+                }
 
-               }
+            }
 
             } catch (err) {
                 console.log('Error paring JSON', err)
@@ -261,13 +274,20 @@ app.get('/imageName3', (req, res) => {
                     // console.log(signs)
                     match = data[i].Signs.find(x => x.Image_Name === filename3)
                     if (match === undefined) {
- 
+
                     } else {
+                        console.log(match)
+                        text_Info = {
+                            Facsimile_Maker: data[i].Facsimile_Maker,
+                            Text_Name: data[i].Text_Name,
+                            Time_Period: data[i].Time_Period
+                        }
+                        match = Object.assign(text_Info,match);
                         console.log(match)
                         match = JSON.stringify(match)
                         res.send(match)
                     }
- 
+
                 }
  
              } catch (err) {
@@ -299,13 +319,20 @@ app.get('/imageName4', (req, res) => {
                     // console.log(signs)
                     match = data[i].Signs.find(x => x.Image_Name === filename4)
                     if (match === undefined) {
- 
+
                     } else {
+                        console.log(match)
+                        text_Info = {
+                            Facsimile_Maker: data[i].Facsimile_Maker,
+                            Text_Name: data[i].Text_Name,
+                            Time_Period: data[i].Time_Period
+                        }
+                        match = Object.assign(text_Info,match);
                         console.log(match)
                         match = JSON.stringify(match)
                         res.send(match)
                     }
- 
+
                 }
  
              } catch (err) {
@@ -338,13 +365,20 @@ app.get('/imageName5', (req, res) => {
                     // console.log(signs)
                     match = data[i].Signs.find(x => x.Image_Name === filename5)
                     if (match === undefined) {
- 
+
                     } else {
+                        console.log(match)
+                        text_Info = {
+                            Facsimile_Maker: data[i].Facsimile_Maker,
+                            Text_Name: data[i].Text_Name,
+                            Time_Period: data[i].Time_Period
+                        }
+                        match = Object.assign(text_Info,match);
                         console.log(match)
                         match = JSON.stringify(match)
                         res.send(match)
                     }
- 
+
                 }
  
              } catch (err) {

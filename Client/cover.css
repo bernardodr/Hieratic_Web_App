@@ -43,7 +43,7 @@ input[type=text], select {
 }
 
 #preview{
-  width:300px;
+  width:200px;
   height:auto;
   
   background-position:inherit;
@@ -230,6 +230,7 @@ body {
     display: flex;
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
+    margin-top: 150px;
     margin-right: -15px;
     margin-left: -210px;
     width: 1100px;
