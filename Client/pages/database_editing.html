@@ -54,13 +54,36 @@
           <div class="inner cover">
             <h3 class="cover-heading">Database Editing Tool</h3>
             <p class="lead">Our system allows you to directly edit the existing data in the database.</p>
-            <p class="lead">
-              <label for="Gardiner">Gardiner Sign:</label>
-              <input type="text" id="Gardiner_search" name="Gardiner">
-              <label for="Facsimile">Facsimile Maker:</label>
-              <input type="text" id="Facsimile_search" name="Facsimile">
-              <label for="Text">Text:</label>
-              <input type="text" id="Text_search" name="Text">
+            <label for="Gardiner">Gardiner Sign:</label>
+            <input type="text" id="Gardiner_search" name="Gardiner">
+  
+            </select>
+            <label for="Facsimile_search">Facsimile Maker:</label>
+            <select name="Facsimile_search" id="Facsimile_search">
+              <option value="">Please select</option>
+              <option value="Möller">Möller</option>
+              <option value="Poe">Poe</option>
+              <option value="Tabin">Tabin</option>
+  
+            </select>
+            <label for="text">Text:</label>
+            <select name="text" id="Text_search">
+              <option value="">Please select</option>
+              <option value="Shipwrecked Sailor">Shipwrecked Sailor</option>
+              <option value="Eloquent Peasant B1">Eloquent Peasant B1</option>
+              <option value="Eloquent Peasant R">Eloquent Peasant R</option>
+              <option value="Sinuhe B">Sinuhe B</option>
+              <option value="Sinuhe R">Sinuhe R</option>
+              <option value="Papyrus Prisse">Papyrus Prisse</option>
+              <option value="Hymn to Senwosret III">Hymn to Senwosret III</option>
+              <option value="Lahun Temple Files">Lahun Temple Files</option>
+              <option value="Will of Wah">Will of Wah</option>
+              <option value="Texte aus Hatnub">Texte aus Hatnub</option>
+              <option value="Papyrus Ebers">Papyrus Ebers</option>
+              <option value="Rhind Papyrus">Rhind Papyrus</option>
+              <option value="Papyrus Westcar">Papyrus Westcar</option>
+
+            </select>
               <button id ='search' onclick="searchGlyphs()">Search for Glyphs </button>
               
               
