@@ -105182,27 +105182,5 @@
         "xy_coordinates": ""
       }
     ]
-  },
-  {
-    "Facsimile_Maker": "x",
-    "Text_Name": "x",
-    "Time_Period": "",
-    "Provenance": "x",
-    "Signs": [
-      {
-        "Gardiner_Sign": "x",
-        "Instance_In_Facsimile": "x",
-        "Image_Name": "x_x_x_x_.png",
-        "Image_Path_Relative": "server/database/Thesis_Dataset_Whole/x_x_x_x_.png",
-        "xy_coordinate": "x,y"
-      },
-      {
-        "Gardiner_Sign": "b2",
-        "Instance_In_Facsimile": "x",
-        "Image_Name": "b2_x_x_x_.png",
-        "Image_Path_Relative": "server/database/Thesis_Dataset_Whole/b2_x_x_x_.png",
-        "xy_coordinate": "35,60"
-      }
-    ]
   }
 ]
