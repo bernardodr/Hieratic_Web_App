@@ -553,7 +553,7 @@ app.post('/json_upload', (req, res) => {
 
                 //console.log(Math.max.apply(Math, array) + 'max value')
                 id = Math.max.apply(Math, array) + 1;
-                
+
 
                 //access request values from user inputted data
                 var object =
@@ -629,47 +629,52 @@ app.post('/json_upload', (req, res) => {
 
 
 
-function findID(){
-array = []
-var id;
-fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
-    if (err) {
-        console.log(err)
-    }
-    else {
-
-        try {
-            //All of JSON data
-            const data = JSON.parse(jsonString);
-
-            ///WORKING FOR LOOP DO NOT DELETE
-            for (var i = 0; i < data.length; i++) {
-                for (var n = 0; n < data[i].Signs.length; n++) {
-                    var signs = data[i].Signs[n].id
-                    //console.log(signs);
-                    array.push(signs)
-                    
-                }
-            }
-           
-            
-            //max= Math.max.apply(Math, array)
-            id=(Math.max.apply(Math, array))
-            
-
-
-
-        } catch (err) {
-            console.log('Error pairing JSON', err)
+function findID() {
+    array = []
+    var id;
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+        if (err) {
+            console.log(err)
         }
+        else {
+
+            try {
+                //All of JSON data
+                const data = JSON.parse(jsonString);
+
+                ///WORKING FOR LOOP DO NOT DELETE
+                for (var i = 0; i < data.length; i++) {
+                    for (var n = 0; n < data[i].Signs.length; n++) {
+                        var signs = data[i].Signs[n].id
+                        //console.log(signs);
+                        array.push(signs)
+
+                    }
+                }
 
 
-    }
-console.log(id, 'in function')
-return id
-})
-*/
+                //max= Math.max.apply(Math, array)
+                id = (Math.max.apply(Math, array))
 
+
+
+
+            } catch (err) {
+                console.log('Error pairing JSON', err)
+            }
+
+
+        }
+        console.log(id, 'in function')
+        return id
+    })
+
+
+
+
+
+}
+findID();
 
 ///////////////////////////////////////////////////////////
 ////////////////// Working Search Engine //////////////////
@@ -706,6 +711,3 @@ app.post('/search', (req, res) => {
     })
 
 })
-
-}
-findID();
