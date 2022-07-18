@@ -41,7 +41,7 @@ function imageCrop() {
 
             imageSmoothingEnabled: false,
             imageSmoothingQuality: 'high',
-        }).toDataURL(('image/jpeg', 1));
+        }).toDataURL(('image/png', 1));
         cropped_image_div = new Image();
         cropped_image_div.setAttribute("id", "cropped_image");
         cropped_image_div.src = cropped_image_url

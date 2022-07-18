@@ -13,8 +13,6 @@ const AdmZip = require('adm-zip');
 
 
 
-
-
 // multer acts as middleware and stores in the client uploads in uploads directory
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -521,8 +519,11 @@ app.post('/image_upload', (req, res) => {
 
 
 //post function to add json data of uploaded image to (test.json)
+
 app.post('/json_upload', (req, res) => {
 
+    
+   
 
     //access request values from user inputted data
     var object =
@@ -533,7 +534,7 @@ app.post('/json_upload', (req, res) => {
         Time_Period: req.body.period,
         Provenance: req.body.provenance,
         Signs: [{
-
+            id:id,
             Gardiner_Sign: req.body.gardiner,
             Instance_In_Facsimile: req.body.instance,
             Image_Name: upload_name,
@@ -545,7 +546,7 @@ app.post('/json_upload', (req, res) => {
     }
 
     sign_info = {
-    
+        id:id,
         Gardiner_Sign: req.body.gardiner,
         Instance_In_Facsimile: req.body.instance,
         Image_Name: upload_name,
@@ -580,13 +581,50 @@ app.post('/json_upload', (req, res) => {
     res.status(200).send(`${upload_name} has been uploaded to JSON database`)
 })
 
-/*
-app.post('/aspectRatio', (req, res) => {
-
-aspect_ratio=req.body.aspect_Ratio;
-console.log(aspect_ratio);
 
 
+
+
+
+function findID(){
+array = []
+var id;
+fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+    if (err) {
+        console.log(err)
+    }
+    else {
+
+        try {
+            //All of JSON data
+            const data = JSON.parse(jsonString);
+
+            ///WORKING FOR LOOP DO NOT DELETE
+            for (var i = 0; i < data.length; i++) {
+                for (var n = 0; n < data[i].Signs.length; n++) {
+                    var signs = data[i].Signs[n].id
+                    //console.log(signs);
+                    array.push(signs)
+                    
+                }
+            }
+           
+            
+            //max= Math.max.apply(Math, array)
+            id=(Math.max.apply(Math, array))
+            
+
+
+
+        } catch (err) {
+            console.log('Error pairing JSON', err)
+        }
+
+
+    }
+console.log(id, 'in function')
+return id
 })
-*/  
 
+}
+findID();
