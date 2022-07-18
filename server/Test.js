@@ -174,7 +174,84 @@ let count = 0
 //     }
 
 // })
-array = []
+
+
+
+// ////////////////////////////////////////////////////////////
+// // create unique ids off a count
+// ////////////////////////////////////////////////////////////
+// array = []
+
+// fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+//     if (err) {
+//         console.log(err)
+//     }
+//     else {
+
+//         try {
+//             //All of JSON data
+//             const data = JSON.parse(jsonString);
+
+//             ///WORKING FOR LOOP DO NOT DELETE
+//             for (var i = 0; i < data.length; i++) {
+//                 for (var n = 0; n < data[i].Signs.length; n++) {
+//                     var signs = data[i].Signs[n].id
+//                     console.log(signs)
+//                     array.push(signs)
+//                     count++
+//                 }
+//             }
+//             console.log(count)
+
+//             console.log(Math.max.apply(Math, array) + 'max value')
+//             max = Math.max.apply(Math, array) + 'max value'
+//             console.log(max)
+
+
+
+
+
+//         } catch (err) {
+//             console.log('Error pairing JSON', err)
+//         }
+
+
+//     }
+
+// })
+
+
+// fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+//     if (err) {
+//         console.log(err)
+//     }
+//     else {
+
+//         try {
+//             //All of JSON data
+//             const data = JSON.parse(jsonString);
+
+//             results = data.filter(data => 
+//                 data.Facsimile_Maker === 'Möller' && 
+//                 data.Text_Name === 'Sinuhe B' && 
+//                 data.Time_Period === 'New Kingdom');
+
+//             console.log(results)
+
+
+
+//         } catch (err) {
+//             console.log('Error pairing JSON', err)
+//         }
+
+
+//     }
+
+// })
+
+///////////////////////////////////////////////////////////
+////////////////// Working Search Engine //////////////////
+///////////////////////////////////////////////////////////
 
 fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
     if (err) {
@@ -186,22 +263,14 @@ fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
             //All of JSON data
             const data = JSON.parse(jsonString);
 
-            ///WORKING FOR LOOP DO NOT DELETE
-            for (var i = 0; i < data.length; i++) {
-                for (var n = 0; n < data[i].Signs.length; n++) {
-                    var signs = data[i].Signs[n].id
-                    console.log(signs)
-                    array.push(signs)
-                    count++
-                }
-            }
-            console.log(count)
-            
-            console.log(Math.max.apply(Math, array))
+            results_round_1 = data.filter(data =>
+                data.Facsimile_Maker === 'Poe' &&
+                data.Text_Name === 'Shipwrecked Sailor');
 
-            
+            console.log(results_round_1[0].Signs.length)
 
-
+            results_round_2 = results_round_1[0].Signs.filter(x => x.Gardiner_Sign === 'A1')
+            console.log(results_round_2)
 
         } catch (err) {
             console.log('Error pairing JSON', err)
@@ -211,4 +280,6 @@ fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
     }
 
 })
+
+
 

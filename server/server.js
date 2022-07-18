@@ -185,14 +185,14 @@ app.get('/imageName1', (req, res) => {
                             Text_Name: data[i].Text_Name,
                             Time_Period: data[i].Time_Period
                         }
-                        match = Object.assign(text_Info,match);
+                        match = Object.assign(text_Info, match);
                         console.log(match)
                         match = JSON.stringify(match)
                         res.send(match)
                     }
 
                 }
-                
+
 
             } catch (err) {
                 console.log('Error pairing JSON', err)
@@ -213,33 +213,33 @@ app.get('/imageName2', (req, res) => {
         else {
 
             try {
-               //All of JSON data
-               const data = JSON.parse(jsonString);
+                //All of JSON data
+                const data = JSON.parse(jsonString);
 
-               // Get Filename of Matched image
-               let filename2 = imageJSON.image2 + '.png'
+                // Get Filename of Matched image
+                let filename2 = imageJSON.image2 + '.png'
 
-               // MATCH MATCH WORKING
-               for (var i = 0; i < data.length; i++) {
-                //var signs = data[0].Signs[0].Image_Name
-                // console.log(signs)
-                match = data[i].Signs.find(x => x.Image_Name === filename2)
-                if (match === undefined) {
+                // MATCH MATCH WORKING
+                for (var i = 0; i < data.length; i++) {
+                    //var signs = data[0].Signs[0].Image_Name
+                    // console.log(signs)
+                    match = data[i].Signs.find(x => x.Image_Name === filename2)
+                    if (match === undefined) {
 
-                } else {
-                    console.log(match)
-                    text_Info = {
-                        Facsimile_Maker: data[i].Facsimile_Maker,
-                        Text_Name: data[i].Text_Name,
-                        Time_Period: data[i].Time_Period
+                    } else {
+                        console.log(match)
+                        text_Info = {
+                            Facsimile_Maker: data[i].Facsimile_Maker,
+                            Text_Name: data[i].Text_Name,
+                            Time_Period: data[i].Time_Period
+                        }
+                        match = Object.assign(text_Info, match);
+                        console.log(match)
+                        match = JSON.stringify(match)
+                        res.send(match)
                     }
-                    match = Object.assign(text_Info,match);
-                    console.log(match)
-                    match = JSON.stringify(match)
-                    res.send(match)
-                }
 
-            }
+                }
 
             } catch (err) {
                 console.log('Error paring JSON', err)
@@ -262,10 +262,10 @@ app.get('/imageName3', (req, res) => {
             try {
                 //All of JSON data
                 const data = JSON.parse(jsonString);
- 
+
                 // Get Filename of Matched image
                 let filename3 = imageJSON.image3 + '.png'
- 
+
                 // MATCH MATCH WORKING
                 for (var i = 0; i < data.length; i++) {
                     //var signs = data[0].Signs[0].Image_Name
@@ -280,17 +280,17 @@ app.get('/imageName3', (req, res) => {
                             Text_Name: data[i].Text_Name,
                             Time_Period: data[i].Time_Period
                         }
-                        match = Object.assign(text_Info,match);
+                        match = Object.assign(text_Info, match);
                         console.log(match)
                         match = JSON.stringify(match)
                         res.send(match)
                     }
 
                 }
- 
-             } catch (err) {
-                 console.log('Error paring JSON', err)
-             }
+
+            } catch (err) {
+                console.log('Error paring JSON', err)
+            }
 
         }
 
@@ -307,10 +307,10 @@ app.get('/imageName4', (req, res) => {
             try {
                 //All of JSON data
                 const data = JSON.parse(jsonString);
- 
+
                 // Get Filename of Matched image
                 let filename4 = imageJSON.image4 + '.png'
- 
+
                 // MATCH MATCH WORKING
                 for (var i = 0; i < data.length; i++) {
                     //var signs = data[0].Signs[0].Image_Name
@@ -325,17 +325,17 @@ app.get('/imageName4', (req, res) => {
                             Text_Name: data[i].Text_Name,
                             Time_Period: data[i].Time_Period
                         }
-                        match = Object.assign(text_Info,match);
+                        match = Object.assign(text_Info, match);
                         console.log(match)
                         match = JSON.stringify(match)
                         res.send(match)
                     }
 
                 }
- 
-             } catch (err) {
-                 console.log('Error paring JSON', err)
-             }
+
+            } catch (err) {
+                console.log('Error paring JSON', err)
+            }
 
 
         }
@@ -353,10 +353,10 @@ app.get('/imageName5', (req, res) => {
             try {
                 //All of JSON data
                 const data = JSON.parse(jsonString);
- 
+
                 // Get Filename of Matched image
                 let filename5 = imageJSON.image5 + '.png'
- 
+
                 // MATCH MATCH WORKING
                 for (var i = 0; i < data.length; i++) {
                     //var signs = data[0].Signs[0].Image_Name
@@ -371,17 +371,17 @@ app.get('/imageName5', (req, res) => {
                             Text_Name: data[i].Text_Name,
                             Time_Period: data[i].Time_Period
                         }
-                        match = Object.assign(text_Info,match);
+                        match = Object.assign(text_Info, match);
                         console.log(match)
                         match = JSON.stringify(match)
                         res.send(match)
                     }
 
                 }
- 
-             } catch (err) {
-                 console.log('Error paring JSON', err)
-             }
+
+            } catch (err) {
+                console.log('Error paring JSON', err)
+            }
 
 
         }
@@ -506,7 +506,7 @@ app.post('/image_upload', (req, res) => {
     var base64Data = req.body.image
     //give image new title - gardiner sign, instance in facsimile and date in yyyy-mm-dd format. Toisostring converts date to appropriate format
     //upload_name = `${req.body.gardiner}_${req.body.text}_${req.body.facsimile}_instance(${req.body.instance}).png`
-    upload_name =`${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_${req.body.period}.png`
+    upload_name = `${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_${req.body.period}.png`
     //writes file to image database. Buffer.from converts base64 data into image
     fs.writeFile(`../server/database/Thesis_Dataset_Whole/${upload_name}`, Buffer.from(base64Data, 'base64'), function (err) {
         if (err) throw err;
@@ -522,63 +522,106 @@ app.post('/image_upload', (req, res) => {
 
 app.post('/json_upload', (req, res) => {
 
-    
-   
+    var id = ''
 
-    //access request values from user inputted data
-    var object =
+    ///////////////////////////////////////////////////
+    ////////// create unique ids off a count //////////
+    ///////////////////////////////////////////////////
 
-    {
-        Facsimile_Maker: req.body.facsimile,
-        Text_Name: req.body.text,
-        Time_Period: req.body.period,
-        Provenance: req.body.provenance,
-        Signs: [{
-            id:id,
-            Gardiner_Sign: req.body.gardiner,
-            Instance_In_Facsimile: req.body.instance,
-            Image_Name: upload_name,
-            Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`,
-            xy_coordinate: `${req.body.x},${req.body.y}`
-        }]
+    array = []
+
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+
+            try {
+                //All of JSON data
+                const data = JSON.parse(jsonString);
+
+                ///WORKING FOR LOOP DO NOT DELETE
+                for (var i = 0; i < data.length; i++) {
+                    for (var n = 0; n < data[i].Signs.length; n++) {
+                        var signs = data[i].Signs[n].id
+                        //console.log(signs)
+                        array.push(signs)
+                        //count++
+                    }
+                }
+                //console.log(count)
+
+                //console.log(Math.max.apply(Math, array) + 'max value')
+                id = Math.max.apply(Math, array) + 1;
+                
+
+                //access request values from user inputted data
+                var object =
+
+                {
+                    Facsimile_Maker: req.body.facsimile,
+                    Text_Name: req.body.text,
+                    Time_Period: req.body.period,
+                    Provenance: req.body.provenance,
+                    Signs: [{
+
+                        id: id,
+                        Gardiner_Sign: req.body.gardiner,
+                        Instance_In_Facsimile: req.body.instance,
+                        Image_Name: upload_name,
+                        Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`,
+                        xy_coordinate: `${req.body.x},${req.body.y}`
+                    }]
 
 
-    }
+                }
 
-    sign_info = {
-        id:id,
-        Gardiner_Sign: req.body.gardiner,
-        Instance_In_Facsimile: req.body.instance,
-        Image_Name: upload_name,
-        Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`,
-        xy_coordinate: `${req.body.x},${req.body.y}`
-    }
+                sign_info = {
 
-    //read in (test.json) file 
-    let jsondata = fs.readFileSync("../server/database/database.json", "utf-8");
-    //parse actual json from string 
-    let json = JSON.parse(jsondata);
+                    id: id,
+                    Gardiner_Sign: req.body.gardiner,
+                    Instance_In_Facsimile: req.body.instance,
+                    Image_Name: upload_name,
+                    Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`,
+                    xy_coordinate: `${req.body.x},${req.body.y}`
+                }
 
-    counter = 0
-        for (i = 0; i < json.length; i++) {
+                //read in (test.json) file 
+                let jsondata = fs.readFileSync("../server/database/database.json", "utf-8");
+                //parse actual json from string 
+                let json = JSON.parse(jsondata);
 
-            if (json[i].Facsimile_Maker == req.body.facsimile && json[i].Text_Name == req.body.text) {
-                signs = json[i].Signs
-                signs.push(sign_info)
-                counter++
+                counter = 0
+                for (i = 0; i < json.length; i++) {
+
+                    if (json[i].Facsimile_Maker == req.body.facsimile && json[i].Text_Name == req.body.text) {
+                        signs = json[i].Signs
+                        signs.push(sign_info)
+                        counter++
+                    }
+                }
+                //if text and fac maker not found in database, add new object to jsondata
+                if (counter == 0) {
+                    json.push(object)
+
+                }
+
+                //convert json data to string 
+                jsondata = JSON.stringify(json, null, 2);
+                //write json to correct file 
+                fs.writeFileSync("../server/database/database.json", jsondata, "utf-8");
+                res.status(200).send(`${upload_name} has been uploaded to JSON database`)
+
+            } catch (err) {
+                console.log('Error pairing JSON', err)
             }
-        }
-        //if text and fac maker not found in database, add new object to jsondata
-        if (counter == 0) {
-            json.push(object)
+
 
         }
 
-    //convert json data to string 
-    jsondata = JSON.stringify(json, null, 2);
-    //write json to correct file 
-    fs.writeFileSync("../server/database/database.json", jsondata, "utf-8");
-    res.status(200).send(`${upload_name} has been uploaded to JSON database`)
+    })
+
+
 })
 
 
@@ -624,6 +667,44 @@ fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
     }
 console.log(id, 'in function')
 return id
+})
+*/
+
+
+///////////////////////////////////////////////////////////
+////////////////// Working Search Engine //////////////////
+///////////////////////////////////////////////////////////
+
+
+app.post('/search', (req, res) => {
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+
+            try {
+                //All of JSON data
+                const data = JSON.parse(jsonString);
+
+                results_round_1 = data.filter(data =>
+                    data.Facsimile_Maker === 'Poe' &&
+                    data.Text_Name === 'Shipwrecked Sailor');
+
+                console.log(results_round_1[0].Signs.length)
+
+                results_round_2 = results_round_1[0].Signs.filter(x => x.Gardiner_Sign === 'A1')
+                console.log(results_round_2)
+
+            } catch (err) {
+                console.log('Error pairing JSON', err)
+            }
+
+
+        }
+
+    })
+
 })
 
 }
