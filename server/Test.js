@@ -1,10 +1,13 @@
+//const { match } = require('assert');
 const fs = require('fs');
+// let count = 0
+// let filename1 = "A12_0001_1_1_4.png"
 
-fs.readFile('../server/database/newJSON.json', 'utf-8', (err, jsonString) => {
+// fs.readFile('../server/database/newJSON.json', 'utf-8', (err, jsonString) => {
 
-    const data = JSON.parse(jsonString);
-    let count = 0
-    let filename1 = "A12_0001_1_1_4.png"
+    // const data = JSON.parse(jsonString);
+    // let count = 0
+    // let filename1 = "A12_0001_1_1_4.png"
 
     //length of high level JSON objects i.e. facsimilie makers and texts
     //console.log(data.length)
@@ -101,7 +104,7 @@ fs.readFile('../server/database/newJSON.json', 'utf-8', (err, jsonString) => {
 
 
 
-})
+
 
 
 
@@ -121,3 +124,50 @@ fs.readFile('../server/database/newJSON.json', 'utf-8', (err, jsonString) => {
     //     }
         
     // }
+ 
+    let filename1 = "A12_0001_1_1_4.png"
+
+
+
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+
+            try {
+                //All of JSON data
+                const data = JSON.parse(jsonString);
+
+                // Get Filename of Matched image
+                
+
+                // MATCH MATCH WORKING
+                for (var i = 0; i < data.length; i++) {
+                    //var signs = data[0].Signs[0].Image_Name
+                    // console.log(signs)
+                    match = data[i].Signs.find(x => x.Image_Name === filename1)
+                    if (match === undefined) {
+
+                    } else {
+                        console.log(match)
+                        text_Info = {
+                            Facsimile_Maker: "",
+                            Text_Name: "",
+                        }
+
+                        match = JSON.stringify(match)
+                        //res.send(match)
+                    }
+
+                }
+                
+
+            } catch (err) {
+                console.log('Error pairing JSON', err)
+            }
+
+
+        }
+
+    })

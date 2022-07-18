@@ -160,7 +160,7 @@ app.get('/results5', (req, res) => {
 
 // Top match from IDM
 app.get('/imageName1', (req, res) => {
-    fs.readFile('../server/database/newJSON.json', 'utf-8', (err, jsonString) => {
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
             console.log(err)
         }
@@ -182,6 +182,7 @@ app.get('/imageName1', (req, res) => {
 
                     } else {
                         console.log(match)
+
                         match = JSON.stringify(match)
                         res.send(match)
                     }
@@ -201,7 +202,7 @@ app.get('/imageName1', (req, res) => {
 
 // great JSON help = https://heynode.com/tutorial/readwrite-json-files-nodejs/
 app.get('/imageName2', (req, res) => {
-    fs.readFile('../server/database/newJSON.json', 'utf-8', (err, jsonString) => {
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
             console.log(err)
         }
@@ -241,7 +242,7 @@ app.get('/imageName2', (req, res) => {
 });
 
 app.get('/imageName3', (req, res) => {
-    fs.readFile('../server/database/newJSON.json', 'utf-8', (err, jsonString) => {
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
             console.log(err)
         }
@@ -279,7 +280,7 @@ app.get('/imageName3', (req, res) => {
 });
 
 app.get('/imageName4', (req, res) => {
-    fs.readFile('../server/database/newJSON.json', 'utf-8', (err, jsonString) => {
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
             console.log(err)
         }
@@ -318,7 +319,7 @@ app.get('/imageName4', (req, res) => {
 });
 
 app.get('/imageName5', (req, res) => {
-    fs.readFile('../server/database/newJSON.json', 'utf-8', (err, jsonString) => {
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
             console.log(err)
         }
@@ -433,7 +434,7 @@ const updateDataset = function () {
 
 };
 //Uncomment to update database
-updateDataset()
+//updateDataset()
 
 
 
