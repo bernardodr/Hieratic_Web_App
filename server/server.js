@@ -433,7 +433,7 @@ const updateDataset = function () {
 
 };
 //Uncomment to update database
-//updateDataset()
+updateDataset()
 
 
 
@@ -472,7 +472,8 @@ app.post('/image_upload', (req, res) => {
     //get base64 image data from post request
     var base64Data = req.body.image
     //give image new title - gardiner sign, instance in facsimile and date in yyyy-mm-dd format. Toisostring converts date to appropriate format
-    upload_name = `${req.body.gardiner}_${req.body.text}_${req.body.facsimile}_instance(${req.body.instance}).png`
+    //upload_name = `${req.body.gardiner}_${req.body.text}_${req.body.facsimile}_instance(${req.body.instance}).png`
+    upload_name =`${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_${req.body.period}.png`
     //writes file to image database. Buffer.from converts base64 data into image
     fs.writeFile(`../server/database/Thesis_Dataset_Whole/${upload_name}`, Buffer.from(base64Data, 'base64'), function (err) {
         if (err) throw err;

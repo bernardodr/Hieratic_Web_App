@@ -105182,5 +105182,22 @@
         "xy_coordinates": ""
       }
     ]
+  },
+  {
+    "Facsimile_Maker": "DMoller",
+    "Text_Name": "DText",
+    "Text_Info": {
+      "Orignal_Author": "DAuthor",
+      "Time_Period": "Middle Kingdom",
+      "Provenance": "Dprovenance",
+      "Signs": [
+        {
+          "Gardiner_Sign": "D1",
+          "Instance_In_Facsimile": "01",
+          "Image_Name": "D1_01_DMoller_DText_Middle Kingdom.png",
+          "Image_Path_Relative": "server/database/Thesis_Dataset_Whole/D1_01_DMoller_DText_Middle Kingdom.png"
+        }
+      ]
+    }
   }
 ]
