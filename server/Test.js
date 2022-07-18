@@ -1,4 +1,5 @@
 //const { match } = require('assert');
+//const { match } = require('assert');
 const fs = require('fs');
 // let count = 0
 // let filename1 = "A12_0001_1_1_4.png"
@@ -125,7 +126,7 @@ const fs = require('fs');
         
     // }
  
-    let filename1 = "A12_0001_1_1_4.png"
+    let filename1 = "A12_0001_2_4_1.png"
 
 
 
@@ -140,7 +141,7 @@ const fs = require('fs');
                 const data = JSON.parse(jsonString);
 
                 // Get Filename of Matched image
-                
+                let filename1 = imageJSON.image1 + '.png'
 
                 // MATCH MATCH WORKING
                 for (var i = 0; i < data.length; i++) {
@@ -152,12 +153,14 @@ const fs = require('fs');
                     } else {
                         console.log(match)
                         text_Info = {
-                            Facsimile_Maker: "",
-                            Text_Name: "",
+                            Facsimile_Maker: data[i].Facsimile_Maker,
+                            Text_Name: data[i].Text_Name,
+                            Time_Period: data[i].Time_Period
                         }
-
+                        match = Object.assign(text_Info,match);
+                        console.log(match)
                         match = JSON.stringify(match)
-                        //res.send(match)
+                        res.send(match)
                     }
 
                 }
