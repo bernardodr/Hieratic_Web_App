@@ -182,6 +182,7 @@ app.get('/imageName1', (req, res) => {
 
                     } else {
                         console.log(match)
+
                         match = JSON.stringify(match)
                         res.send(match)
                     }
