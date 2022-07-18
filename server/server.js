@@ -10,8 +10,8 @@ const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hier
 const fs = require('fs');
 const AdmZip = require('adm-zip');
 
-var id='';
-var upload_name='';
+var id = '';
+var upload_name = '';
 
 
 
@@ -508,7 +508,7 @@ app.get('/download', function (req, res) {
 
 app.post('/json_upload', (req, res) => {
 
-    
+
 
     ///////////////////////////////////////////////////
     ////////// create unique ids off a count //////////
@@ -539,8 +539,8 @@ app.post('/json_upload', (req, res) => {
 
                 //console.log(Math.max.apply(Math, array) + 'max value')
                 id = Math.max.apply(Math, array) + 1;
-                
-                upload_name=`${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_id:${id}.png`
+
+                upload_name = `${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_id:${id}.png`
                 //access request values from user inputted data
                 var object =
 
@@ -596,7 +596,7 @@ app.post('/json_upload', (req, res) => {
                 jsondata = JSON.stringify(json, null, 2);
                 //write json to correct file 
                 fs.writeFileSync("../server/database/database.json", jsondata, "utf-8");
-                upload_name=`${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_id:${id}.png`
+                upload_name = `${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_id:${id}.png`
                 res.status(200).send(`${upload_name} has been uploaded to JSON database`)
 
             } catch (err) {
@@ -608,7 +608,7 @@ app.post('/json_upload', (req, res) => {
 
     })
 
-    
+
 })
 
 
@@ -618,7 +618,7 @@ app.post('/image_upload', (req, res) => {
     //get base64 image data from post request
     var base64Data = req.body.image
     //give image new title - gardiner sign, instance in facsimile and date in yyyy-mm-dd format. Toisostring converts date to appropriate format
-    
+
     //upload_name = `${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_id:${id}.png`
     //writes file to image database. Buffer.from converts base64 data into image
     fs.writeFile(`../server/database/Thesis_Dataset_Whole/${upload_name}`, Buffer.from(base64Data, 'base64'), function (err) {
@@ -631,39 +631,39 @@ app.post('/image_upload', (req, res) => {
 })
 
 
- ///////////////////////////////////////////////////////////
- ////////////////// Working Search Engine //////////////////
+///////////////////////////////////////////////////////////
+////////////////// Working Search Engine //////////////////
 ///////////////////////////////////////////////////////////
 
 
-    app.post('/search', (req, res) => {
-        fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
-            if (err) {
-                console.log(err)
-            }
-            else {
+app.post('/search', (req, res) => {
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
 
-                try {
-                    //All of JSON data
-                    const data = JSON.parse(jsonString);
+            try {
+                //All of JSON data
+                const data = JSON.parse(jsonString);
 
-                    results_round_1 = data.filter(data =>
-                        data.Facsimile_Maker === 'Poe' &&
-                        data.Text_Name === 'Shipwrecked Sailor');
+                results_round_1 = data.filter(data =>
+                    data.Facsimile_Maker === 'Poe' &&
+                    data.Text_Name === 'Shipwrecked Sailor');
 
-                    console.log(results_round_1[0].Signs.length)
+                console.log(results_round_1[0].Signs.length)
 
-                    results_round_2 = results_round_1[0].Signs.filter(x => x.Gardiner_Sign === 'A1')
-                    console.log(results_round_2)
+                results_round_2 = results_round_1[0].Signs.filter(x => x.Gardiner_Sign === 'A1')
+                console.log(results_round_2)
 
-                } catch (err) {
-                    console.log('Error pairing JSON', err)
-                }
-
-
+            } catch (err) {
+                console.log('Error pairing JSON', err)
             }
 
-        })
+
+        }
+
+    })
 
 })
 
