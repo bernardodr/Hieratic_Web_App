@@ -85,5 +85,3 @@ def store_images():
 	read_images(em)
 
 store_images()
-
-sys.stdout.flush()

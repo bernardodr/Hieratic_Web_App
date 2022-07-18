@@ -81,29 +81,43 @@ fetch('/results5')
 fetch('/imageName1')
     .then(response => response.json())
     .then(data => {
-        console.log(data)
+        console.log(data.Gardiner_Sign)
         return data
 })
 .then(data => {
     
     //Gardiner sign
     var Gardiner1 = data.Gardiner_Sign
-    document.getElementById('imageName1').innerHTML = "Gardiner Sign: "+Gardiner1;
-    //Facsimile Maker
-    var Facsimile_Maker_1 = data.Facsimile_Maker
-    document.getElementById('Facsimile_Maker_1').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_1;
-    //Provenance
-    var Provenance_1 = data.Provenance
-    document.getElementById('Provenance_1').innerHTML = "Provenance: "+Provenance_1;
-    //Text
-    var Text_1 = data.Text[0].Text_Name
-    document.getElementById('Text_1').innerHTML = "Text: "+Text_1;
-    //Time Period
-    var Time_Period_1 = data.Text[0].Time_Period
-    document.getElementById('Time_Period_1').innerHTML = "Time Period: "+Time_Period_1;
-    // get Author
-    var Orignal_Author_1 = data.Text[0].Orignal_Author
-    document.getElementById('Orignal_Author_1').innerHTML = "Author: "+ Orignal_Author_1;
+    document.getElementById('Gardiner1').innerHTML = "Gardiner Sign: "+Gardiner1;
+
+    // image id 
+    var id1 = data.id
+    document.getElementById('id1').innerHTML = "Image ID: "+id1;
+
+    //instance in Facsimile 
+    var instance1 = data.Instance_In_Facsimile
+    document.getElementById('intance1').innerHTML = "Instance: "+instance1;
+
+    //XY Coordinates
+    var coordinates1 = data.xy_coordinates
+    document.getElementById('coordinates1').innerHTML = " XY Coordinates: "+coordinates1;
+
+
+    // //Facsimile Maker
+    // var Facsimile_Maker_1 = data.Facsimile_Maker
+    // document.getElementById('Facsimile_Maker_1').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_1;
+    // //Provenance
+    // var Provenance_1 = data.Provenance
+    // document.getElementById('Provenance_1').innerHTML = "Provenance: "+Provenance_1;
+    // //Text
+    // var Text_1 = data.Text[0].Text_Name
+    // document.getElementById('Text_1').innerHTML = "Text: "+Text_1;
+    // //Time Period
+    // var Time_Period_1 = data.Text[0].Time_Period
+    // document.getElementById('Time_Period_1').innerHTML = "Time Period: "+Time_Period_1;
+    // // get Author
+    // var Orignal_Author_1 = data.Text[0].Orignal_Author
+    // document.getElementById('Orignal_Author_1').innerHTML = "Author: "+ Orignal_Author_1;
 
     
 })
@@ -118,22 +132,19 @@ fetch('/imageName2')
     
     //Gardiner sign
     var Gardiner2 = data.Gardiner_Sign
-    document.getElementById('imageName2').innerHTML = "Gardiner Sign: "+Gardiner2;
-    //Facsimile Maker
-    var Facsimile_Maker_2 = data.Facsimile_Maker
-    document.getElementById('Facsimile_Maker_2').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_2;
-    //Provenance
-    var Provenance_2 = data.Provenance
-    document.getElementById('Provenance_2').innerHTML = "Provenance: "+Provenance_2;
-    //Text
-    var Text_2 = data.Text[0].Text_Name
-    document.getElementById('Text_2').innerHTML = "Text: "+Text_2;
-    //Time Period
-    var Time_Period_2 = data.Text[0].Time_Period
-    document.getElementById('Time_Period_2').innerHTML = "Time Period: "+Time_Period_2;
-    // get Author
-    var Orignal_Author_2 = data.Text[0].Orignal_Author
-    document.getElementById('Orignal_Author_2').innerHTML = "Author: "+ Orignal_Author_2;
+    document.getElementById('Gardiner2').innerHTML = "Gardiner Sign: "+Gardiner2;
+
+    // image id 
+    var id2 = data.id
+    document.getElementById('id2').innerHTML = "Image ID: "+id2;
+
+    //instance in Facsimile 
+    var instance2 = data.Instance_In_Facsimile
+    document.getElementById('intance2').innerHTML = "Instance: "+instance2;
+
+    //XY Coordinates
+    var coordinates2 = data.xy_coordinates
+    document.getElementById('coordinates2').innerHTML = " XY Coordinates: "+coordinates2;
 
     
 });
@@ -148,22 +159,19 @@ fetch('/imageName3')
     
     //Gardiner sign
     var Gardiner3 = data.Gardiner_Sign
-    document.getElementById('imageName3').innerHTML = "Gardiner Sign: "+Gardiner3;
-    //Facsimile Maker
-    var Facsimile_Maker_3 = data.Facsimile_Maker
-    document.getElementById('Facsimile_Maker_3').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_3;
-    //Provenance
-    var Provenance_3 = data.Provenance
-    document.getElementById('Provenance_3').innerHTML = "Provenance: "+Provenance_3;
-    //Text
-    var Text_3 = data.Text[0].Text_Name
-    document.getElementById('Text_3').innerHTML = "Text: "+Text_3;
-    //Time Period
-    var Time_Period_3 = data.Text[0].Time_Period
-    document.getElementById('Time_Period_3').innerHTML = "Time Period: "+Time_Period_3;
-    // get Author
-    var Orignal_Author_3 = data.Text[0].Orignal_Author
-    document.getElementById('Orignal_Author_3').innerHTML = "Author: "+ Orignal_Author_3;
+    document.getElementById('Gardiner3').innerHTML = "Gardiner Sign: "+Gardiner3;
+
+    // image id 
+    var id3 = data.id
+    document.getElementById('id3').innerHTML = "Image ID: "+id3;
+
+    //instance in Facsimile 
+    var instance3 = data.Instance_In_Facsimile
+    document.getElementById('intance3').innerHTML = "Instance: "+instance3;
+
+    //XY Coordinates
+    var coordinates3 = data.xy_coordinates
+    document.getElementById('coordinates3').innerHTML = " XY Coordinates: "+coordinates3;
 
     
 });
@@ -179,22 +187,19 @@ fetch('/imageName4')
     
     //Gardiner sign
     var Gardiner4 = data.Gardiner_Sign
-    document.getElementById('imageName4').innerHTML = "Gardiner Sign: "+Gardiner4;
-    //Facsimile Maker
-    var Facsimile_Maker_4 = data.Facsimile_Maker
-    document.getElementById('Facsimile_Maker_4').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_4;
-    //Provenance
-    var Provenance_4 = data.Provenance
-    document.getElementById('Provenance_4').innerHTML = "Provenance: "+Provenance_4;
-    //Text
-    var Text_4 = data.Text[0].Text_Name
-    document.getElementById('Text_4').innerHTML = "Text: "+Text_4;
-    //Time Period
-    var Time_Period_4 = data.Text[0].Time_Period
-    document.getElementById('Time_Period_4').innerHTML = "Time Period: "+Time_Period_4;
-    // get Author
-    var Orignal_Author_4 = data.Text[0].Orignal_Author
-    document.getElementById('Orignal_Author_4').innerHTML = "Author: "+ Orignal_Author_4;
+    document.getElementById('Gardiner4').innerHTML = "Gardiner Sign: "+Gardiner4;
+
+    // image id 
+    var id4 = data.id
+    document.getElementById('id4').innerHTML = "Image ID: "+id4;
+
+    //instance in Facsimile 
+    var instance4 = data.Instance_In_Facsimile
+    document.getElementById('intance4').innerHTML = "Instance: "+instance4;
+
+    //XY Coordinates
+    var coordinates4 = data.xy_coordinates
+    document.getElementById('coordinates4').innerHTML = " XY Coordinates: "+coordinates4;
 
     
 });
@@ -209,22 +214,19 @@ fetch('/imageName5')
     
     //Gardiner sign
     var Gardiner5 = data.Gardiner_Sign
-    document.getElementById('imageName5').innerHTML = "Gardiner Sign: "+Gardiner5;
-    //Facsimile Maker
-    var Facsimile_Maker_5 = data.Facsimile_Maker
-    document.getElementById('Facsimile_Maker_5').innerHTML ="Facsimile Maker: "+ Facsimile_Maker_5;
-    //Provenance
-    var Provenance_5 = data.Provenance
-    document.getElementById('Provenance_5').innerHTML = "Provenance: "+Provenance_5;
-    //Text
-    var Text_5 = data.Text[0].Text_Name
-    document.getElementById('Text_5').innerHTML = "Text: "+Text_5;
-    //Time Period
-    var Time_Period_5 = data.Text[0].Time_Period
-    document.getElementById('Time_Period_5').innerHTML = "Time Period: "+Time_Period_5;
-    // get Author
-    var Orignal_Author_5 = data.Text[0].Orignal_Author
-    document.getElementById('Orignal_Author_5').innerHTML = "Author: "+ Orignal_Author_5;
+    document.getElementById('Gardiner5').innerHTML = "Gardiner Sign: "+Gardiner5;
+
+    // image id 
+    var id5 = data.id
+    document.getElementById('id5').innerHTML = "Image ID: "+id5;
+
+    //instance in Facsimile 
+    var instance5 = data.Instance_In_Facsimile
+    document.getElementById('intance5').innerHTML = "Instance: "+instance5;
+
+    //XY Coordinates
+    var coordinates5 = data.xy_coordinates
+    document.getElementById('coordinates5').innerHTML = " XY Coordinates: "+coordinates5;
 
     
 });
