@@ -510,15 +510,14 @@ app.post('/json_upload', (req, res) => {
 
     }
 
-    sign_info = [{
+    sign_info = {
     
         Gardiner_Sign: req.body.gardiner,
         Instance_In_Facsimile: req.body.instance,
         Image_Name: upload_name,
         Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`,
-        X_coordinate: req.body.x,
-        Y_coordinate: req.body.y
-    }]
+        xy_coordinate: `${req.body.x},${req.body.y}`
+    }
 
     //read in (test.json) file 
     let jsondata = fs.readFileSync("../server/database/database.json", "utf-8");
@@ -529,7 +528,7 @@ app.post('/json_upload', (req, res) => {
         for (i = 0; i < json.length; i++) {
 
             if (json[i].Facsimile_Maker == req.body.facsimile && json[i].Text_Name == req.body.text) {
-                signs = json[i].Text_Info.Signs
+                signs = json[i].Signs
                 signs.push(sign_info)
                 counter++
             }
