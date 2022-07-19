@@ -15,7 +15,14 @@ async function searchGlyphs() {
 
     const res = await fetch('/search', options)
     const jsonData = await res.json()
-    console.log(jsonData)
+    
+    for (x=0; x <jsonData.length;x++) {
+    jsonData[x].Image_Path_Relative=`<img width="200" height="200" src="data:image/png;base64, ${jsonData[x].Image_Path_Relative}" />`
+    
+    //b=document.getElementById('image')
+
+    //b.innerHTML=img;
+    }
     tableFromJson(jsonData)
 
 
