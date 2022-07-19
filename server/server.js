@@ -5,8 +5,8 @@ const { rmSync, fstat } = require('fs');
 const multer = require('multer'); // file upload middleware 
 const uuid = require('uuid').v4; //unique image naming
 //root of computer is needed for res.sendfile()
-//const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
-const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+//const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
 const fs = require('fs');
 const AdmZip = require('adm-zip');
 
@@ -660,11 +660,7 @@ app.post('/search', (req, res) => {
                 const data = JSON.parse(jsonString);
 
 
-                fs.readFile(`../${data[0].Signs[0].Image_Path_Relative}`, function (err, data) {
-                    base64 = Buffer.from(data).toString('base64')
-                    console.log(base64);
 
-                })
                 // round 1 search to narrow down Facsimile Maker & Text
                 results_round_1 = data.filter(data =>
                     data.Facsimile_Maker === fac_maker &&
@@ -674,8 +670,31 @@ app.post('/search', (req, res) => {
 
                 // round 2 search to narrow down Gardiner 
                 results_round_2 = results_round_1[0].Signs.filter(x => x.Gardiner_Sign === gardiner_sign)
+
+                base64 = ''
+                // Update object with Base64 for image 
+                for (var i = 0; i < results_round_2.length; i++) {
+                    
+                    function Read(){
+                        
+                        return fs.readFileSync(`../${results_round_2[i].Image_Path_Relative}`).toString('base64');
+                    }
+
+                    // fs.readFileSync(`../${results_round_2[i].Image_Path_Relative}`, function (err, data) {
+                    //     buffer = 'hello'
+                    //     //base64 = Buffer.from(data).toString('base64')
+                    //     //console.log(base64);
+                        
+                    //     //console.log(results_round_2[0].Image_Path_Relative)
+                    //     return buffer
+                    // })
+                    
+                    results_round_2[i].Image_Path_Relative = Read()
+                    
+                    
+                }
                 
-                console.log(results_round_2)
+                //console.log(root + results_round_2[0].Image_Path_Relative)
                 res.json(results_round_2)
 
             } catch (err) {
