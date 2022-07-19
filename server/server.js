@@ -836,3 +836,9 @@ const Edit_Sign_Data = function () {
 
     })
 }
+
+app.post('/delete_sign_object', (req, res) => {
+
+    id_to_delete=req.body.id;
+
+})
