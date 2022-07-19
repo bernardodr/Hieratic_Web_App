@@ -1,7 +1,7 @@
 async function searchGlyphs() {
 
     data = {
-        gardiner: document.getElementById('Gardiner_search').value,
+        gardiner: document.getElementById('Gardiner_search').value.toUpperCase(),
         facsimile: document.getElementById('Facsimile_search').value,
         text: document.getElementById('Text_search').value,
     }

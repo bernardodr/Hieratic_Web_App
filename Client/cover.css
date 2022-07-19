@@ -211,8 +211,9 @@ body {
  * Cover
  */
 
-.cover {
+ .cover {
   padding: 0 20px;
+  margin-top: 148px;
 }
 .cover .btn-lg {
   padding: 10px 20px;
@@ -291,7 +292,9 @@ body {
   .mastfoot,
   .cover-container {
     width: 700px;
+    padding-top: 10px;
   }
+
 }
 
 /* 
