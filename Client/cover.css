@@ -42,6 +42,8 @@ input[type=text], select {
 
 }
 
+
+
 #preview{
   width:auto;
   height:auto;
@@ -327,4 +329,17 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* 
+ * HTML TABLE
+ */
+
+table, th, td {
+  border: solid 1px #ddd;
+  border-collapse: collapse;
+  padding: 8px 8px;
+  text-align: center;
+  margin-top: 5px;
+  margin-left: 180px
 }
