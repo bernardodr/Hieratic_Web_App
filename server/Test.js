@@ -283,7 +283,7 @@ let count = 0
 //////////////////////////////////////////////////////////////
 /////////// Data Editing Logic for Signs objects /////////////
 /////////////////////////////////////////////////////////////
-
+/*
 fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
     if (err) {
         console.log(err)
@@ -323,8 +323,34 @@ fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
 })
 
 
+*/
+fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+    if (err) {
+        console.log(err)
+    }
+    else {
 
+        try {
+            //All of JSON data
+            const data = JSON.parse(jsonString);
+            fs.readFile(`../${data[0].Signs[0].Image_Path_Relative}`, function(err, data) {
+            base64= Buffer.from(data).toString('base64')
+            console.log(base64); 
+            
+            })
+            //console.log(data[0].Signs[0].Image_Path_Relative)
+            //base64= Buffer.from(data[0].Signs[0].Image_Path_Relative,'base64')
+            //console.log(base64);
+            // ///WORKING FOR LOOP DO NOT DELETE
+            
+            
+        } catch (err) {
+            console.log('Error pairing JSON', err)
+        }
 
+    }
+
+})
 
 
 

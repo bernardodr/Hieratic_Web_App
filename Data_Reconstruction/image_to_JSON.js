@@ -17,7 +17,7 @@ let count = 0
 ////////// Get Every Image Name //////////
 //////////////////////////////////////////
 
-fs.readdirSync("/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/").forEach(file => {
+fs.readdirSync("/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/").forEach(file => {
 
     ////////////////////////////////////////////////
     ////////// Dynamically get Image data //////////
