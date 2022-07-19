@@ -708,6 +708,87 @@ app.post('/search', (req, res) => {
 })
 
 
+//////////////////////////////////////////////////////////
+/////////// Given ID delete entire sign Object ///////////
+//////////////////////////////////////////////////////////
+const delete_Sign_Object = function(){
+    let input_ID = ''
+
+// Delete JSON data
+fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+    if (err) {
+        console.log(err)
+    }
+    else {
+
+        try {
+            //All of JSON data
+            const data = JSON.parse(jsonString);
+
+            // ///WORKING FOR LOOP DO NOT DELETE
+            for (var i = 0; i < data.length; i++) {
+                for (var n = 0; n < data[i].Signs.length; n++) {
+                    var signs = data[i].Signs[n].id
+                    //console.log(signs)
+                    if (signs === input_ID) {
+                        //console.log(i, n)
+                        //console.log(data[i].Signs[n].Image_Path_Relative)
+
+                        //Get Relative image path to delete image
+                        var delete_on_image_path = '../'+data[i].Signs[n].Image_Path_Relative
+                        data[i].Signs.splice(n, 1);
+                        json = JSON.stringify(data, null, 2); //convert it back to json
+                        fs.writeFile('../server/database/database.json', json, 'utf8', callback);
+                        function callback(err) {
+                            console.log(err)
+                        }
+                        //Delete Image in Thesis_Dataset_Whole
+                        try {
+                            fs.unlinkSync(delete_on_image_path)
+                            console.log("Successfully deleted the file.")
+                        } catch (err) {
+                            throw err
+                        }
+
+
+
+                        //validate deletion 
+                        if (data[i].Signs[n] == undefined) {
+
+                            console.log('data has been succesfully removed @ ' + 'index ' + i + ' , ' + n)
+
+
+                        } else {
+                            console.log('There was an issue deleting data')
+                        }
+
+                    }
+                    count++
+                    // var item = data[i].Signs.find(x => x.id === 13110);
+                    // if (item) {
+                    //     item.xy_coordinates = "x"
+                    //     console.log(i)
+                    //     json = JSON.stringify(data, null, 2); //convert it back to json
+                    //     fs.writeFile('../server/database/database.json', json, 'utf8', callback);
+                    //     function callback(err){
+                    //         //console.log(err)
+                    //     }
+                    // }
+                }
+
+
+            }
+            console.log("Data has been updated")
+            console.log(count)
+        } catch (err) {
+            console.log('Error pairing JSON', err)
+        }
+
+    }
+
+})
+}
+
 
 
 //////////////////////////////////////////////////////////////
@@ -716,6 +797,7 @@ app.post('/search', (req, res) => {
 
 // Put in a function so not to run when server restarts 
 const Edit_Sign_Data = function () {
+
     fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
             console.log(err)

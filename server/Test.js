@@ -341,14 +341,14 @@ fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
 //             fs.readFile(`../${data[0].Signs[0].Image_Path_Relative}`, function(err, data) {
 //             base64= Buffer.from(data).toString('base64')
 //             console.log(base64); 
-            
+
 //             })
 //             //console.log(data[0].Signs[0].Image_Path_Relative)
 //             //base64= Buffer.from(data[0].Signs[0].Image_Path_Relative,'base64')
 //             //console.log(base64);
 //             // ///WORKING FOR LOOP DO NOT DELETE
-            
-            
+
+
 //         } catch (err) {
 //             console.log('Error pairing JSON', err)
 //         }
@@ -357,12 +357,14 @@ fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
 
 // })
 
+
 //////////////////////////////////////////////////////////
 /////////// Given ID delete entire sign Object ///////////
 //////////////////////////////////////////////////////////
 
-let input_ID = 13135
+let input_ID = ''
 
+// Delete JSON data
 fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
     if (err) {
         console.log(err)
@@ -377,27 +379,39 @@ fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
             for (var i = 0; i < data.length; i++) {
                 for (var n = 0; n < data[i].Signs.length; n++) {
                     var signs = data[i].Signs[n].id
-                    console.log(signs)
-                    if(signs === 13135){
-                        console.log(i,n)
-                        console.log(data[i].Signs[n])
+                    //console.log(signs)
+                    if (signs === input_ID) {
+                        //console.log(i, n)
+                        //console.log(data[i].Signs[n].Image_Path_Relative)
+
+                        //Get Relative image path to delete image
+                        var delete_on_image_path = '../'+data[i].Signs[n].Image_Path_Relative
                         data[i].Signs.splice(n, 1);
                         json = JSON.stringify(data, null, 2); //convert it back to json
                         fs.writeFile('../server/database/database.json', json, 'utf8', callback);
-                        function callback(err){
+                        function callback(err) {
                             console.log(err)
                         }
+                        //Delete Image in Thesis_Dataset_Whole
+                        try {
+                            fs.unlinkSync(delete_on_image_path)
+                            console.log("Successfully deleted the file.")
+                        } catch (err) {
+                            throw err
+                        }
+
+
 
                         //validate deletion 
-                        if(data[i].Signs[n] == undefined){
-                            
-                            console.log('data has been succesfully removed @ '+ 'index '+ i + ' , ' + n)
+                        if (data[i].Signs[n] == undefined) {
 
-                            
-                        }else{
+                            console.log('data has been succesfully removed @ ' + 'index ' + i + ' , ' + n)
+
+
+                        } else {
                             console.log('There was an issue deleting data')
                         }
-                        
+
                     }
                     count++
                     // var item = data[i].Signs.find(x => x.id === 13110);
@@ -412,9 +426,9 @@ fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
                     // }
                 }
 
-                 
+
             }
-            console.log("Data has been updated") 
+            console.log("Data has been updated")
             console.log(count)
         } catch (err) {
             console.log('Error pairing JSON', err)
@@ -423,4 +437,8 @@ fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
     }
 
 })
+
+
+
+
 
