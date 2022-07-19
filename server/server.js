@@ -554,9 +554,9 @@ app.post('/json_upload', (req, res) => {
                         id: id,
                         Gardiner_Sign: req.body.gardiner,
                         Instance_In_Facsimile: req.body.instance,
-                        Image_Name: `${upload_name}.png`,
-                        Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}.png`,
-                        xy_coordinate: `${req.body.x},${req.body.y}`
+                        Image_Name: `${upload_name}`,
+                        Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`,
+                        xy_coordinates: `${req.body.x},${req.body.y}`
                     }]
 
 
@@ -567,9 +567,9 @@ app.post('/json_upload', (req, res) => {
                     id: id,
                     Gardiner_Sign: req.body.gardiner,
                     Instance_In_Facsimile: req.body.instance,
-                    Image_Name: `${upload_name}.png`,
-                    Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}.png`,
-                    xy_coordinate: `${req.body.x},${req.body.y}`
+                    Image_Name: `${upload_name}`,
+                    Image_Path_Relative: `server/database/Thesis_Dataset_Whole/${upload_name}`,
+                    xy_coordinates: `${req.body.x},${req.body.y}`
                 }
 
                 //read in (test.json) file 
