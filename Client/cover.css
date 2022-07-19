@@ -48,7 +48,7 @@ input[type=text], select {
 }
 
 #preview{
-  width:auto;
+  width:200px;
   height:auto;
   
   background-position:inherit;

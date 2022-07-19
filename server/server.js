@@ -417,58 +417,15 @@ const updateDataset = function () {
     pythonTraining.on('close', (code) => {
         console.log(`process exited with code: + ${code}`);
         console.log('Training was successful')
-        tokens()
+        //tokens()
     })
-
-    const tokens = function () {
-        //run tokens.py  
-        const pythonTokens = spawn('python3', ['OCR_System/tokens.py']);
-
-        // recieve
-        pythonTokens.stdout.on('data', (data) => {
-
-        });
-
-        // handel errors
-        pythonTokens.stderr.on('data', (data) => {
-            console.log(`stderr: + ${data}`);
-        });
-
-        // when script finishes 
-        pythonTokens.on('close', (code) => {
-            console.log(`process exited with code: + ${code}`);
-            console.log('Tokens was successful')
-            classification()
-        });
-    };
-
-    const classification = function () {
-        //run tokens.py  
-        const pythonClassification = spawn('python3', ['OCR_System/classification.py']);
-
-        // recieve
-        pythonClassification.stdout.on('data', (data) => {
-
-        });
-
-        // handel errors
-        pythonClassification.stderr.on('data', (data) => {
-            console.log(`stderr: + ${data}`);
-        });
-
-        // when script finishes 
-        pythonClassification.on('close', (code) => {
-            console.log(`process exited with code: + ${code}`);
-            console.log('Classification was successful')
-        });
-    };
 
     //Validate the data has been succefully added 
 
 
 };
 //Uncomment to update database - training 
-//updateDataset()
+
 
 
 
@@ -624,7 +581,8 @@ app.post('/image_upload', (req, res) => {
     fs.writeFile(`../server/database/Thesis_Dataset_Whole/${upload_name}`, Buffer.from(base64Data, 'base64'), function (err) {
         if (err) throw err;
         console.log('Image Saved');
-
+        // Update weights with new image (works synchronously)
+        updateDataset()
     });
     res.status(200).send(`${upload_name} has been uploaded to Thesis_Dataset_Whole`)
 
