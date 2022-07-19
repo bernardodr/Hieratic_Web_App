@@ -42,7 +42,10 @@ input[type=text], select {
 
 }
 
-
+#inner-cover{
+  position:sticky;
+  height: 50px;
+}
 
 #preview{
   width:auto;
