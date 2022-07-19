@@ -105179,15 +105179,7 @@
         "Instance_In_Facsimile": "002",
         "Image_Name": "Z9_0002_1_4_12.png",
         "Image_Path_Relative": "server/database/Thesis_Dataset_Whole/Z9_0002_1_4_12.png",
-        "xy_coordinates": "x"
-      },
-      {
-        "id": 13135,
-        "Gardiner_Sign": "Z9",
-        "Instance_In_Facsimile": "002",
-        "Image_Name": "Z9_0002_1_4_12.png",
-        "Image_Path_Relative": "server/database/Thesis_Dataset_Whole/Z9_0002_1_4_12.png",
-        "xy_coordinates": "remove me"
+        "xy_coordinates": ""
       }
     ]
   }
