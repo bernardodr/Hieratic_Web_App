@@ -1,3 +1,12 @@
+/////////////////////
+////// WARNING //////
+/////////////////////
+
+// Please delete .DS store before running if you are on a mac, command for this can be seen below
+// Open a terminal in the folder where Thesis_Dataset_Whole is stored and input the command below
+// find . -name '.DS_Store' -type f -delete
+
+
 const fs = require("fs");
 const { exit } = require("process");
 const { finished } = require("stream");
