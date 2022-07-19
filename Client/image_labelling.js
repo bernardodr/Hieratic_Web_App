@@ -195,7 +195,7 @@ function autoCropToContainBlackPixels() {
 }
 
 function imageUpload(){
- 
+    console.log(canvas.toDataURL())
     data={
     gardiner:document.getElementById('Gardiner').value,
     facsimile:document.getElementById('Facsimile').value,
