@@ -630,10 +630,6 @@ app.post('/image_upload', (req, res) => {
 
 })
 
-app.post('/data_search', (req, res) => {
-
-
-})
 
 ///////////////////////////////////////////////////////////
 ////////////////// Working Search Engine //////////////////
