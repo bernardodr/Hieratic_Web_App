@@ -630,10 +630,7 @@ app.post('/image_upload', (req, res) => {
 
 })
 
-app.post('/data_search', (req, res) => {
 
-
-})
 
 ///////////////////////////////////////////////////////////
 ////////////////// Working Search Engine //////////////////
@@ -711,6 +708,8 @@ app.post('/search', (req, res) => {
 })
 
 
+
+
 //////////////////////////////////////////////////////////////
 /////////// Data Editing Logic for Signs objects /////////////
 /////////////////////////////////////////////////////////////
@@ -757,3 +756,8 @@ const Edit_Sign_Data = function () {
     })
 }
 
+app.post('/delete_sign_object', (req, res) => {
+
+    id_to_delete=req.body.id;
+
+})

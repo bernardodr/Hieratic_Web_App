@@ -28,6 +28,24 @@ async function searchGlyphs() {
 
 }
 
+function deleteGlyph(){
+
+    data={
+        id:document.getElementById('id_to_delete').value
+    }
+    console.log(data)
+    options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    }
+
+    fetch('/delete_sign_object', options)
+
+
+}
+
+
 function tableFromJson(jsonData) {
     // the json data. (you can change the values for output.)
     
