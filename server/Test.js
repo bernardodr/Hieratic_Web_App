@@ -378,7 +378,7 @@ fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
                 for (var n = 0; n < data[i].Signs.length; n++) {
                     var signs = data[i].Signs[n].id
                     console.log(signs)
-                    if(signs === 13135){
+                    if(signs === input_ID){
                         console.log(i,n)
                         console.log(data[i].Signs[n])
                         data[i].Signs.splice(n, 1);

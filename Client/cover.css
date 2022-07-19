@@ -296,6 +296,7 @@ body {
   .cover-container {
     width: 700px;
     padding-top: 10px;
+    position: sticky;
   }
 
 }
@@ -347,5 +348,5 @@ table, th, td {
   padding: 8px 8px;
   text-align: center;
   margin-top: 5px;
-  margin-left: 180px
+  margin-left: 267px
 }
