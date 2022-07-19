@@ -362,7 +362,7 @@ fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
 /////////// Given ID delete entire sign Object ///////////
 //////////////////////////////////////////////////////////
 
-let input_ID = ''
+let input_ID = 13134
 
 // Delete JSON data
 fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
