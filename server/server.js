@@ -22,10 +22,10 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const { originalname } = file;
-        // or 
-        // uuid, or fieldname see 9.00 in for unique naming system (https://youtu.be/ysS4sL6lLDU?t=544)
+        
+        // name of image to be compaired, gets add to Thesis_Whole_Dataset
         cb(null, 'TIMG_0000.png')
-        //OCR_FFT_RUN();
+        
 
     }
 });
@@ -60,8 +60,6 @@ app.listen(API_PORT, () => {
 var imageData = ""
 var imageJSON = null
 
-
-
 //////////////////////////////////////////////////////////
 /////////////////// POST image upload //////////////////// 
 //////////////////////////////////////////////////////////
@@ -76,7 +74,7 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
         //spawn command "send"
         const childPython = spawn('python3', ['OCR_System/testing.py']);
 
-        // recieve
+        // recieve data from python file
         childPython.stdout.on('data', (data) => {
 
             console.log(`stdout: + ${data}`);
@@ -102,7 +100,7 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
         childPython.stderr.on('data', (data) => {
             console.log(`stderr: + ${data}`);
         })
-
+        // When Python file finshes 
         childPython.on('close', (code) => {
             console.log(`process exited with code: + ${code}`);
 
@@ -420,14 +418,10 @@ const updateDataset = function () {
         //tokens()
     })
 
-    //Validate the data has been succefully added 
+    
 
 
 };
-//Uncomment to update database - training 
-
-
-
 
 
 ///////////////////////////////////////////////////////////////
@@ -600,7 +594,7 @@ app.post('/search', (req, res) => {
     gardiner_sign = req.body.gardiner;
     fac_maker = req.body.facsimile;
     text = req.body.text;
-    console.log(gardiner_sign, fac_maker, text)
+    //console.log(gardiner_sign, fac_maker, text)
 
     fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
@@ -673,7 +667,7 @@ app.post('/delete_sign_object', (req, res) => {
     count = 0
     let input_ID = req.body.id;
     input_ID = parseInt(input_ID)
-    console.log(input_ID)
+    //console.log(input_ID)
     
     
     // Delete JSON data
