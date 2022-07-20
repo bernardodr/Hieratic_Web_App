@@ -1,3 +1,16 @@
+window.onload = function() {
+    var reloading = sessionStorage.getItem("reloading");
+    if (reloading) {
+        sessionStorage.removeItem("reloading");
+        searchGlyphs();
+    }
+}
+
+function reloadP() {
+    sessionStorage.setItem("reloading", "true");
+    document.location.reload();
+}
+
 async function searchGlyphs() {
 
     data = {
@@ -39,7 +52,7 @@ function deleteGlyph(){
 
     fetch('/delete_sign_object', options)
 
-
+    searchGlyphs()
 }
 
 
@@ -89,6 +102,10 @@ function tableFromJson(jsonData) {
     var divShowData = document.getElementById('showData');
     divShowData.innerHTML = "";
     divShowData.appendChild(table);
+
+    
+    
     
    
 }
+
