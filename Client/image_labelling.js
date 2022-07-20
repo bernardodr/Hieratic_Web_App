@@ -20,6 +20,7 @@ function previewImageCrop() {
         //waits 1000 milliseconds before calling imageCrop function. Lets image load in html so as not to return null error
         setTimeout(imageCrop, 1000);
     }
+    
 
 }
 
@@ -55,6 +56,7 @@ function imageCrop() {
 
     })
     drawing();
+    
 }
 ////////////////////////////////////////////////
 /////function to turn image black and white/////
@@ -85,6 +87,7 @@ function binarizeCroppedImage(image) {
     }
     //draws binarized image to canvas
     context.putImageData(img_data, 0, 0, 0, 0, canvas.width, canvas.height);
+    
 }
 
 ////////////////////////////////////////////////
@@ -222,9 +225,9 @@ function imageUpload() {
         image: canvas.toDataURL().split(',')[1],
     }
     //logic to makes sure user inputs gardiner sign and instance. Both required for python system to run
-    if (data.gardiner === '' || data.instance === '') {
-
-        return
+    if (document.getElementById('Gardiner').value=== '' || document.getElementById('Instance').value === '') {
+        return;
+        
     } else {
 
         options = {
@@ -244,7 +247,8 @@ function imageUpload() {
 ////////////////////////////////////////////////
 
 function jsonUpload() {
-
+    document.getElementById("final_submit_button").disabled = true;
+    
     data = {
         gardiner: document.getElementById('Gardiner').value.toUpperCase(),
         facsimile: document.getElementById('Facsimile').value,
@@ -256,6 +260,8 @@ function jsonUpload() {
         x: document.getElementById('x').value,
         y: document.getElementById('y').value
     }
+   
+    
     //logic to makes sure user inputs gardiner sign and instance. Both required for python system to run
     if (data.gardiner === '' || data.instance === '') {
         alert('You must enter a Gardiner Sign and Instance')
@@ -269,7 +275,13 @@ function jsonUpload() {
         fetch('/json_upload', options)
             .then(res => res.text())
             .then(text => alert(text + ' and Thesis_Dataset_Whole'))
-
-        
+            
+            
+            
         }
+}
+
+function enableSubmit(){
+
+    document.getElementById("final_submit_button").disabled = false;
 }
