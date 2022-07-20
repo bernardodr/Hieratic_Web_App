@@ -420,14 +420,10 @@ const updateDataset = function () {
         //tokens()
     })
 
-    //Validate the data has been succefully added 
+    
 
 
 };
-//Uncomment to update database - training 
-
-
-
 
 
 ///////////////////////////////////////////////////////////////
@@ -600,7 +596,7 @@ app.post('/search', (req, res) => {
     gardiner_sign = req.body.gardiner;
     fac_maker = req.body.facsimile;
     text = req.body.text;
-    console.log(gardiner_sign, fac_maker, text)
+    //console.log(gardiner_sign, fac_maker, text)
 
     fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
         if (err) {
@@ -673,7 +669,7 @@ app.post('/delete_sign_object', (req, res) => {
     count = 0
     let input_ID = req.body.id;
     input_ID = parseInt(input_ID)
-    console.log(input_ID)
+    //console.log(input_ID)
     
     
     // Delete JSON data
