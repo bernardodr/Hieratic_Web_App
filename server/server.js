@@ -10,11 +10,6 @@ const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hier
 const fs = require('fs');
 const AdmZip = require('adm-zip');
 
-var id = '';
-var upload_name = '';
-
-
-
 // multer acts as middleware and stores in the client uploads in uploads directory
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -37,21 +32,10 @@ const API_PORT = 3000;
 app.use(express.json({ limit: '5000mb' }));
 app.use(express.static('../Client'));
 
-
 // tell the server to listen on the given port and log a message to the console (so we can see our server is doing something!)
 app.listen(API_PORT, () => {
     console.log(`Listening on localhost:${API_PORT}`)
 });
-
-
-
-
-///////////////////////////////////////////////////////////////
-/////////////////// Read in JSON Database  //////////////////// 
-///////////////////////////////////////////////////////////////
-
-
-
 
 //////////////////////////////////////////////////////////
 /////////////////// Global Variables  //////////////////// 
@@ -59,6 +43,8 @@ app.listen(API_PORT, () => {
 
 var imageData = ""
 var imageJSON = null
+var id = '';
+var upload_name = '';
 
 //////////////////////////////////////////////////////////
 /////////////////// POST image upload //////////////////// 
@@ -107,13 +93,9 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
             //respond with webpage of results after python script is done
 
             res.redirect('http://localhost:3000/pages/ocr_results.html')
-
         })
-
-
     };
     OCR_FFT_RUN()
-
 });
 
 //////////////////////////////////////////
@@ -190,17 +172,11 @@ app.get('/imageName1', (req, res) => {
                         match = JSON.stringify(match)
                         res.send(match)
                     }
-
                 }
-
-
             } catch (err) {
                 console.log('Error pairing JSON', err)
             }
-
-
         }
-
     })
 });
 
@@ -244,10 +220,7 @@ app.get('/imageName2', (req, res) => {
             } catch (err) {
                 console.log('Error paring JSON', err)
             }
-
-
         }
-
     })
     //res.send(match);
 });
@@ -285,15 +258,11 @@ app.get('/imageName3', (req, res) => {
                         match = JSON.stringify(match)
                         res.send(match)
                     }
-
                 }
-
             } catch (err) {
                 console.log('Error paring JSON', err)
             }
-
         }
-
     })
 });
 
@@ -330,16 +299,11 @@ app.get('/imageName4', (req, res) => {
                         match = JSON.stringify(match)
                         res.send(match)
                     }
-
                 }
-
             } catch (err) {
                 console.log('Error paring JSON', err)
             }
-
-
         }
-
     })
 });
 
@@ -382,10 +346,7 @@ app.get('/imageName5', (req, res) => {
             } catch (err) {
                 console.log('Error paring JSON', err)
             }
-
-
         }
-
     })
 });
 
@@ -393,7 +354,7 @@ app.get('/imageName5', (req, res) => {
 /////////////////// Dynamically update OCR system  //////////////////// 
 /////////////////////////////////////////////////////////////////////// 
 
-// this process takes on .avg 2min 30s
+// this process takes on .avg 2min 30s but runs in backround 
 
 const updateDataset = function () {
 
@@ -417,10 +378,6 @@ const updateDataset = function () {
         console.log('Training was successful')
         //tokens()
     })
-
-
-
-
 };
 
 
@@ -451,15 +408,9 @@ app.get('/download', function (req, res) {
 
 })
 
-
-
-
-
 //post function to add json data of uploaded image to (test.json)
 
 app.post('/json_upload', (req, res) => {
-
-
 
     ///////////////////////////////////////////////////
     ////////// create unique ids off a count //////////
@@ -486,7 +437,6 @@ app.post('/json_upload', (req, res) => {
                         //count++
                     }
                 }
-
 
                 //retrieves highest ID found in array and increases by 1 to make unique
                 id = Math.max.apply(Math, array) + 1;
@@ -553,13 +503,8 @@ app.post('/json_upload', (req, res) => {
             } catch (err) {
                 console.log('Error pairing JSON', err)
             }
-
-
         }
-
     })
-
-
 })
 
 
@@ -601,13 +546,9 @@ app.post('/search', (req, res) => {
             console.log(err)
         }
         else {
-
             try {
-
                 //All of JSON data
                 const data = JSON.parse(jsonString);
-
-
 
                 // round 1 search to narrow down Facsimile Maker & Text
                 results_round_1 = data.filter(data =>
@@ -628,20 +569,8 @@ app.post('/search', (req, res) => {
                         return fs.readFileSync(`../${results_round_2[i].Image_Path_Relative}`).toString('base64');
                     }
 
-                    // fs.readFileSync(`../${results_round_2[i].Image_Path_Relative}`, function (err, data) {
-                    //     buffer = 'hello'
-                    //     //base64 = Buffer.from(data).toString('base64')
-                    //     //console.log(base64);
-
-                    //     //console.log(results_round_2[0].Image_Path_Relative)
-                    //     return buffer
-                    // })
-
                     results_round_2[i].Image_Path_Relative = Read()
-
-
                 }
-
                 //console.log(root + results_round_2[0].Image_Path_Relative)
                 res.json(results_round_2)
 
@@ -720,19 +649,7 @@ app.post('/delete_sign_object', (req, res) => {
 
                         }
                         count++
-                        // var item = data[i].Signs.find(x => x.id === 13110);
-                        // if (item) {
-                        //     item.xy_coordinates = "x"
-                        //     console.log(i)
-                        //     json = JSON.stringify(data, null, 2); //convert it back to json
-                        //     fs.writeFile('../server/database/database.json', json, 'utf8', callback);
-                        //     function callback(err){
-                        //         //console.log(err)
-                        //     }
-                        // }
                     }
-
-
                 }
                 console.log("Data has been updated")
                 //console.log(count)
@@ -747,9 +664,9 @@ app.post('/delete_sign_object', (req, res) => {
 })
 
 /*
-//////////////////////////////////////////////////////////////
-/////////// Data Editing Logic for Signs objects /////////////
-/////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+/////////// Data Editing Logic for Signs objects given an id /////////////
+//////////////////////////////////////////////////////////////////////////
 
 // Put in a function so not to run when server restarts 
 const Edit_Sign_Data = function () {

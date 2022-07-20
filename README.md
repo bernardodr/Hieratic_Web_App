@@ -41,3 +41,4 @@ __________________________________
 4. If sklearn has not installed please use the following pip command to reinstall it. 'pip3 install -U scikit-learn scipy'
 
 5. To get the local host running. First open the HIERATIC_WEB_APP folder in a terminal.Then run the following command 'cd server'. Then paste and run the following command 'node server.js'.
+
