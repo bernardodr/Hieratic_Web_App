@@ -52,7 +52,10 @@
 
           <div class="inner cover">
             <h1 class="cover-heading">Welcome</h1>
-            <p class="lead"> Our application aims to...</p>
+            <label for="Gardiner">Gardiner Sign to visualise:</label>
+            <input type="text" id="Gardiner" name="Gardiner">
+            <button id='sendGardiner' onclick="jsonUpload();setTimeout(imageUpload, 3000)">Submit glyph to database
+            </button>
 
           </div>
           <p></p>

@@ -28,4 +28,19 @@ function downloadZIP() {
 }
 
 
+function sendGlyphtoVisualise(){
 
+    data = {
+        glyph:document.getElementById('Gardiner')
+    }
+   
+    options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    }
+
+    fetch ('/visualisation', options)
+
+
+}
