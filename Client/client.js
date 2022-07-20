@@ -31,7 +31,7 @@ function downloadZIP() {
 function sendGlyphtoVisualise(){
 
     data = {
-        glyph:document.getElementById('Gardiner')
+        glyph:document.getElementById('Gardiner').value
     }
    
     options = {
@@ -40,7 +40,19 @@ function sendGlyphtoVisualise(){
         body: JSON.stringify(data)
     }
 
-    fetch ('/visualisation', options)
+    fetch ('/visualisation', options).then(response => {
+        console.log(response)
+        return response;
+    })
+    .then(response => {
+        //console.log(response)
+        return response.toURL();
+    })
+    .then(response => {
+        console.log(response)
+        window.open(response);
+        //document.getElementById('results1').src = URL.createObjectURL(blob);
+    });
 
 
 }

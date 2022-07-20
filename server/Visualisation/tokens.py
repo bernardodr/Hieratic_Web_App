@@ -13,7 +13,7 @@ from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
 from pylab import imshow, show
 
-sourcedir = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+sourcedir = '../server/database/Thesis_Dataset_Whole/'
 
 grid_size = 16
 fft_size = 16

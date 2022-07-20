@@ -7,14 +7,16 @@ import plotly.express as px
 import numpy as np
 from sklearn.manifold import TSNE, Isomap, SpectralEmbedding, LocallyLinearEmbedding, MDS
 from sklearn.decomposition import PCA
-import mpld3
-from mpld3 import plugins
+import sys
 
 
 def flatten(xss):
 	return [x for xs in xss for x in xs]
 
 name = 'D21'
+print(sys.argv[1])
+name = sys.argv[1]
+print(name)
 
 toks = [id for id in ids() if id_to_name(id) == name]
 grids = [flatten(id_to_grid[id]) for id in toks]
@@ -65,7 +67,7 @@ if d == 3:
 		labels={'0': '', '1': '', '2': ''},
 		# labels={'color': 'makers'}
 	)
-fig.write_html("/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/Visualisation/visualisation.html")
+fig.write_html("../server/Visualisation/visualisation.html")
 #fig.show()
 
 

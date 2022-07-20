@@ -719,15 +719,16 @@ const Edit_Sign_Data = function () {
 
 app.post('/visualisation', (req, res) => {
     //get sign from client 
-    sign = req.body.glyph 
+    sign = req.body.glyph
+    console.log(sign) 
 
     //run training
-    const python_analysis = spawn('python3', ['OCR_System/training.py']);
+    const python_analysis = spawn('python3', ['Visualisation/analysis.py',sign] );
 
     // recieve
     python_analysis.stdout.on('data', (data) => {
-        //output = eval(`(${data})`);
-        console.log(data)
+        //data = eval(`(${data})`);
+        //console.log(data)
     })
 
     // handel errors
@@ -738,8 +739,7 @@ app.post('/visualisation', (req, res) => {
     // when script finishes 
     python_analysis.on('close', (code) => {
         console.log(`process exited with code: + ${code}`);
-        console.log('Training was successful')
-        res.sendFile(root+'server/Visualisation/visualisation.html')
+        res.sendFile('/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/Visualisation/visualisation.html')
         //tokens()
     })
 })
