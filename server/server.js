@@ -483,7 +483,7 @@ app.post('/json_upload', (req, res) => {
                 //All of JSON data
                 const data = JSON.parse(jsonString);
 
-                ///WORKING FOR LOOP DO NOT DELETE
+                //pushes all glyph IDs into an array
                 for (var i = 0; i < data.length; i++) {
                     for (var n = 0; n < data[i].Signs.length; n++) {
                         var signs = data[i].Signs[n].id
@@ -492,9 +492,9 @@ app.post('/json_upload', (req, res) => {
                         //count++
                     }
                 }
-                //console.log(count)
+                
 
-                //console.log(Math.max.apply(Math, array) + 'max value')
+                //retrieves highest ID found in array and increases by 1 to make unique
                 id = Math.max.apply(Math, array) + 1;
 
                 upload_name = `${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_id:${id}.png`
@@ -536,7 +536,7 @@ app.post('/json_upload', (req, res) => {
 
                 counter = 0
                 for (i = 0; i < json.length; i++) {
-
+                    //if text and fac maker found in database, push sign info into signs of same fac and text maker
                     if (json[i].Facsimile_Maker == req.body.facsimile && json[i].Text_Name == req.body.text) {
                         signs = json[i].Signs
                         signs.push(sign_info)
@@ -553,7 +553,7 @@ app.post('/json_upload', (req, res) => {
                 jsondata = JSON.stringify(json, null, 2);
                 //write json to correct file 
                 fs.writeFileSync("../server/database/database.json", jsondata, "utf-8");
-                upload_name = `${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_id:${id}.png`
+                
                 res.status(200).send(`${upload_name} has been uploaded to JSON database`)
 
             } catch (err) {
@@ -574,20 +574,20 @@ app.post('/image_upload', (req, res) => {
 
     //get base64 image data from post request
     var base64Data = req.body.image
-    //give image new title - gardiner sign, instance in facsimile and date in yyyy-mm-dd format. Toisostring converts date to appropriate format
+    
 
-    //upload_name = `${req.body.gardiner}_${req.body.instance}_${req.body.facsimile}_${req.body.text}_id:${id}.png`
     //writes file to image database. Buffer.from converts base64 data into image
     fs.writeFile(`../server/database/Thesis_Dataset_Whole/${upload_name}`, Buffer.from(base64Data, 'base64'), function (err) {
         if (err) throw err;
         console.log('Image Saved');
         // Update weights with new image (works synchronously)
-        updateDataset()
+        //updateDataset()
     });
     res.status(200).send(`${upload_name} has been uploaded to Thesis_Dataset_Whole`)
 
 })
 
+//updateDataset()
 
 ///////////////////////////////////////////////////////////
 ////////////////// Working Search Engine //////////////////

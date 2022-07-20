@@ -15,13 +15,10 @@ async function searchGlyphs() {
 
     const res = await fetch('/search', options)
     const jsonData = await res.json()
-    
+    //assigns an html image tag value to image path relative to dynamically print images in table
     for (x=0; x <jsonData.length;x++) {
     jsonData[x].Image_Path_Relative=`<img width="200" height="200" src="data:image/png;base64, ${jsonData[x].Image_Path_Relative}" />`
     
-    //b=document.getElementById('image')
-
-    //b.innerHTML=img;
     }
     tableFromJson(jsonData)
 
@@ -29,11 +26,11 @@ async function searchGlyphs() {
 }
 
 function deleteGlyph(){
-
+    //retrieves ID of glyph to be deleted
     data={
         id:document.getElementById('id_to_delete').value
     }
-    console.log(data)
+    
     options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -10,11 +10,7 @@
 const fs = require("fs");
 const { exit } = require("process");
 const { finished } = require("stream");
-//let JSON_FILE = fs.readFileSync("TEST.json","utf-8");
-//let tabinDataset = JSON.parse(JSON_FILE)
-//let usersjson = fs.readFileSync("TEST.json","utf-8");
-//let users = JSON.parse(usersjson);
-//console.log(tabinDataset)
+
 var data = []
 ///////////////////////////////////////////
 ////////// Counter Files for IDm //////////
@@ -51,7 +47,7 @@ fs.readdirSync("/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hi
     var Gardiner_Sign = split1[0]
     var split2 = split1[1]
     
-    //Instance in Facsimile
+    //Instance in Facsimile - split2 enables separation of gardiner sign from instance 
 
     var Instance_In_Facsimile = split2.split('_');
     Instance_In_Facsimile = Instance_In_Facsimile[0]
@@ -97,9 +93,9 @@ fs.readdirSync("/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hi
 
     //Text
     var text = split2.split('_');
-    text_png = text[3] // printed looks like '4.png'
+    text_png = text[3] 
     text_png = text_png.split('.')
-    text_number = text_png[0] // printed looks like '4'
+    text_number = text_png[0] 
 
     if (text_number == 1) {
         text = 'Shipwrecked Sailor'
@@ -161,13 +157,7 @@ fs.readdirSync("/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hi
         Time_Period = 'Unknown'
     }
 
-    // Image hash
 
-
-    // infer Author from text
-    //no orignal authors were found
-
-    // push information into Object 
     var object =
 
     {
@@ -195,21 +185,24 @@ fs.readdirSync("/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hi
         xy_coordinates: xy
     }
 
-
+    //if data object is empty, push entire object
     if (data.length == 0) {
         data.push(object)
     }
 
     else {
         counter = 0
+        //iterates through data to check whether fac maker and text name already exists. 
         for (i = 0; i < data.length; i++) {
 
             if (data[i].Facsimile_Maker == Facsimile_Maker && data[i].Text_Name == text) {
+               //pushes sign info in correct place
                 signs = data[i].Signs
                 signs.push(sign_info)
                 counter++
             }
         }
+        //if fac maker and text name not found in data object (counter = 0), push entire object
         if (counter == 0) {
             data.push(object)
 

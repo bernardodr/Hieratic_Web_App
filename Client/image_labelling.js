@@ -24,9 +24,11 @@ function previewImageCrop() {
 }
 
 
+////////////////////////////////////////////////
+/////function to crop image using croppperjs/////
+////////////////////////////////////////////////
 
-
-//function to crop image using cropperjs. Function called in previewImageCrop()
+//Function called in previewImageCrop()
 function imageCrop() {
     image = document.getElementById("crop1");
     const cropper = new Cropper(image, {
@@ -50,12 +52,15 @@ function imageCrop() {
         }
 
 
-        
+
     })
     drawing();
 }
+////////////////////////////////////////////////
+/////function to turn image black and white/////
+////////////////////////////////////////////////
 
-//function to turn image into black and white after cropping. Function called in imageCrop()
+// Function called in imageCrop()
 function binarizeCroppedImage(image) {
 
     // setting canvas aspects relative to image. They are enlarged by 3.5 to allow for drawing capabilities
@@ -82,8 +87,11 @@ function binarizeCroppedImage(image) {
     context.putImageData(img_data, 0, 0, 0, 0, canvas.width, canvas.height);
 }
 
+////////////////////////////////////////////////
+///// function to display uploaded image ///////
+////////////////////////////////////////////////
 
-//function to display uploaded image. Access 'image input' id tag in html form, and displays chosen image in html img tag 'preview'
+//Access 'image input' id tag in html form, and displays chosen image in html img tag 'preview'
 function previewImage() {
     var file = document.getElementById("image_input").files;
     if (file.length > 0) {
@@ -94,6 +102,10 @@ function previewImage() {
         reader.readAsDataURL(file[0]);
     }
 }
+
+////////////////////////////////////////////////
+///// function to draw on canvas ///////////////
+////////////////////////////////////////////////
 
 
 function drawing() {
@@ -144,18 +156,26 @@ function drawing() {
     };
 }
 
+////////////////////////////////////////////////
+///// function clean canvas  ///////////////////
+////////////////////////////////////////////////
 
 function clearDrawing() {
 
     context.clearRect(0, 0, canvas.width, canvas.height)
 }
 
+////////////////////////////////////////////////
+///// function to crop glyph on all sides ///////
+////////////////////////////////////////////////
+
+
 function autoCropToContainBlackPixels() {
     var canvas = context.canvas;
-        width = canvas.width;
-        height = canvas.height;
-        pixel = { x: [], y: [] };
-        image_data2 = context.getImageData(0, 0, width, height)
+    width = canvas.width;
+    height = canvas.height;
+    pixel = { x: [], y: [] };
+    image_data2 = context.getImageData(0, 0, width, height)
 
     //nested loop to access pixel position
     for (y = 0; y < height; y++) {
@@ -163,7 +183,7 @@ function autoCropToContainBlackPixels() {
             //formula to access pixel position in array returned by getImageData()
             index = (y * width + x) * 4;
             //checks if R,G,B value in array is black and pushes x, y value to pixel object 
-            if ( image_data2.data[index] == 0 &&  image_data2.data[index + 1] == 0 &&  image_data2.data[index + 2] == 0) {
+            if (image_data2.data[index] == 0 && image_data2.data[index + 1] == 0 && image_data2.data[index + 2] == 0) {
                 pixel.x.push(x);
                 pixel.y.push(y);
             }
@@ -172,72 +192,84 @@ function autoCropToContainBlackPixels() {
     //sorts x and y array in size order
     pixel.x.sort(function (a, b) { return a - b });
     pixel.y.sort(function (a, b) { return a - b });
-    
-    
+
+
     var last_element_in_array = pixel.x.length - 1;
 
     //calculate the width and height of new canvas by subtracting the two furthest black pixel (horizontally/vertically) from each other
-    width = pixel.x[last_element_in_array] - pixel.x[0] +1;
+    width = pixel.x[last_element_in_array] - pixel.x[0] + 1;
     height = pixel.y[last_element_in_array] - pixel.y[0] + 1;
     var updated_cropped_canvas = context.getImageData(pixel.x[0], pixel.y[0], width, height);
 
     canvas.width = width;
     canvas.height = height;
     context.putImageData(updated_cropped_canvas, 0, 0);
-   
-    document.getElementById('clear').disabled=true;
-    document.getElementById('autocrop').disabled=true;
-    
-    
-   // return width, height;
 
-    
-}
+    document.getElementById('clear').disabled = true;
+    document.getElementById('autocrop').disabled = true;
 
-function imageUpload(){
-    console.log(canvas.toDataURL())
-    data={
-    gardiner:document.getElementById('Gardiner').value,
-    facsimile:document.getElementById('Facsimile').value,
-    text:document.getElementById('Text').value,
-    instance:document.getElementById('Instance').value,
-    provenance:document.getElementById('Provenance').value,
-    period:document.getElementById('Period').value,
-    image:canvas.toDataURL().split(',')[1],
-    x:document.getElementById('x').value,
-    y:document.getElementById('y').value
-}
-
-
-options={method: 'POST',
-headers:{'Content-Type':'application/json'},
-body:JSON.stringify(data)}
-
-    fetch('/image_upload', options)  
-    .then(res=>res.text())
-    .then(text=>console.log(text))
 
 }
 
-function jsonUpload(){
+////////////////////////////////////////////////
+///// function to send image to server /////////
+////////////////////////////////////////////////
 
-    data={
-        gardiner:document.getElementById('Gardiner').value,
-        facsimile:document.getElementById('Facsimile').value,
-        text:document.getElementById('Text').value,
-        instance:document.getElementById('Instance').value,
-        provenance:document.getElementById('Provenance').value,
-        period:document.getElementById('Period').value,
-        image:canvas.toDataURL().split(',')[1],
-        x:document.getElementById('x').value,
-        y:document.getElementById('y').value
+function imageUpload() {
+
+    data = {
+
+        image: canvas.toDataURL().split(',')[1],
     }
-    options={method: 'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify(data)}
+    //logic to makes sure user inputs gardiner sign and instance. Both required for python system to run
+    if (data.gardiner === '' || data.instance === '') {
 
-    fetch('/json_upload', options)  
-    .then(res=>res.text())
-    .then(text=>console.log(text))
+        return
+    } else {
 
+        options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }
+
+        fetch('/image_upload', options)
+            .then(res => res.text())
+            .then(text => console.log(text))
+    }
+}
+
+////////////////////////////////////////////////
+///// function to send user input to server ////
+////////////////////////////////////////////////
+
+function jsonUpload() {
+
+    data = {
+        gardiner: document.getElementById('Gardiner').value.toUpperCase(),
+        facsimile: document.getElementById('Facsimile').value,
+        text: document.getElementById('Text').value,
+        //python file requires _0 to split
+        instance: `0${document.getElementById('Instance').value}`,
+        provenance: document.getElementById('Provenance').value,
+        period: document.getElementById('Period').value,
+        x: document.getElementById('x').value,
+        y: document.getElementById('y').value
+    }
+    //logic to makes sure user inputs gardiner sign and instance. Both required for python system to run
+    if (data.gardiner === '' || data.instance === '') {
+        alert('You must enter a Gardiner Sign and Instance')
+    } else {
+        options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }
+
+        fetch('/json_upload', options)
+            .then(res => res.text())
+            .then(text => alert(text + ' and Thesis_Dataset_Whole'))
+
+        
+        }
 }
