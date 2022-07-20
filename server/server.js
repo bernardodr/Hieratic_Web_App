@@ -5,8 +5,8 @@ const { rmSync, fstat } = require('fs');
 const multer = require('multer'); // file upload middleware 
 const uuid = require('uuid').v4; //unique image naming
 //root of computer is needed for res.sendfile()
-//const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
-const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+//const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
 const fs = require('fs');
 const AdmZip = require('adm-zip');
 
@@ -93,6 +93,7 @@ app.post('/upload', upload.single('hieraticSign'), (req, res) => {
             //respond with webpage of results after python script is done
 
             res.redirect('http://localhost:3000/pages/ocr_results.html')
+            //res.redirect('http://localhost:3000/pages/test.html')
         })
     };
     OCR_FFT_RUN()
@@ -712,3 +713,33 @@ const Edit_Sign_Data = function () {
 }
 */
 
+///////////////////////////////////////////////
+/////////// Visualisation of Data /////////////
+///////////////////////////////////////////////
+
+app.post('/visualisation', (req, res) => {
+    //get sign from client 
+    sign = req.body.glyph 
+
+    //run training
+    const python_analysis = spawn('python3', ['OCR_System/training.py']);
+
+    // recieve
+    python_analysis.stdout.on('data', (data) => {
+        //output = eval(`(${data})`);
+        console.log(data)
+    })
+
+    // handel errors
+    python_analysis.stderr.on('data', (data) => {
+        console.log(`stderr: + ${data}`);
+    })
+
+    // when script finishes 
+    python_analysis.on('close', (code) => {
+        console.log(`process exited with code: + ${code}`);
+        console.log('Training was successful')
+        res.sendFile(root+'server/Visualisation/visualisation.html')
+        //tokens()
+    })
+})

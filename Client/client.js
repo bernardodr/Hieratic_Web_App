@@ -26,6 +26,3 @@ function downloadZIP() {
         .then(url=>window.location.assign(url))
        
 }
-
-
-
