@@ -5,8 +5,8 @@ const { rmSync, fstat } = require('fs');
 const multer = require('multer'); // file upload middleware 
 const uuid = require('uuid').v4; //unique image naming
 //root of computer is needed for res.sendfile()
-//const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
-const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
+//const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
 const fs = require('fs');
 const AdmZip = require('adm-zip');
 
@@ -417,58 +417,15 @@ const updateDataset = function () {
     pythonTraining.on('close', (code) => {
         console.log(`process exited with code: + ${code}`);
         console.log('Training was successful')
-        tokens()
+        //tokens()
     })
-
-    const tokens = function () {
-        //run tokens.py  
-        const pythonTokens = spawn('python3', ['OCR_System/tokens.py']);
-
-        // recieve
-        pythonTokens.stdout.on('data', (data) => {
-
-        });
-
-        // handel errors
-        pythonTokens.stderr.on('data', (data) => {
-            console.log(`stderr: + ${data}`);
-        });
-
-        // when script finishes 
-        pythonTokens.on('close', (code) => {
-            console.log(`process exited with code: + ${code}`);
-            console.log('Tokens was successful')
-            classification()
-        });
-    };
-
-    const classification = function () {
-        //run tokens.py  
-        const pythonClassification = spawn('python3', ['OCR_System/classification.py']);
-
-        // recieve
-        pythonClassification.stdout.on('data', (data) => {
-
-        });
-
-        // handel errors
-        pythonClassification.stderr.on('data', (data) => {
-            console.log(`stderr: + ${data}`);
-        });
-
-        // when script finishes 
-        pythonClassification.on('close', (code) => {
-            console.log(`process exited with code: + ${code}`);
-            console.log('Classification was successful')
-        });
-    };
 
     //Validate the data has been succefully added 
 
 
 };
 //Uncomment to update database - training 
-//updateDataset()
+
 
 
 
@@ -624,12 +581,12 @@ app.post('/image_upload', (req, res) => {
     fs.writeFile(`../server/database/Thesis_Dataset_Whole/${upload_name}`, Buffer.from(base64Data, 'base64'), function (err) {
         if (err) throw err;
         console.log('Image Saved');
-
+        // Update weights with new image (works synchronously)
+        updateDataset()
     });
     res.status(200).send(`${upload_name} has been uploaded to Thesis_Dataset_Whole`)
 
 })
-
 
 
 ///////////////////////////////////////////////////////////
@@ -671,9 +628,9 @@ app.post('/search', (req, res) => {
                 base64 = ''
                 // Update object with Base64 for image 
                 for (var i = 0; i < results_round_2.length; i++) {
-                    
-                    function Read(){
-                        
+
+                    function Read() {
+
                         return fs.readFileSync(`../${results_round_2[i].Image_Path_Relative}`).toString('base64');
                     }
 
@@ -681,16 +638,16 @@ app.post('/search', (req, res) => {
                     //     buffer = 'hello'
                     //     //base64 = Buffer.from(data).toString('base64')
                     //     //console.log(base64);
-                        
+
                     //     //console.log(results_round_2[0].Image_Path_Relative)
                     //     return buffer
                     // })
-                    
+
                     results_round_2[i].Image_Path_Relative = Read()
-                    
-                    
+
+
                 }
-                
+
                 //console.log(root + results_round_2[0].Image_Path_Relative)
                 res.json(results_round_2)
 
@@ -711,86 +668,91 @@ app.post('/search', (req, res) => {
 //////////////////////////////////////////////////////////
 /////////// Given ID delete entire sign Object ///////////
 //////////////////////////////////////////////////////////
-const delete_Sign_Object = function(){
-    let input_ID = ''
 
-// Delete JSON data
-fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
-    if (err) {
-        console.log(err)
-    }
-    else {
-
-        try {
-            //All of JSON data
-            const data = JSON.parse(jsonString);
-
-            // ///WORKING FOR LOOP DO NOT DELETE
-            for (var i = 0; i < data.length; i++) {
-                for (var n = 0; n < data[i].Signs.length; n++) {
-                    var signs = data[i].Signs[n].id
-                    //console.log(signs)
-                    if (signs === input_ID) {
-                        //console.log(i, n)
-                        //console.log(data[i].Signs[n].Image_Path_Relative)
-
-                        //Get Relative image path to delete image
-                        var delete_on_image_path = '../'+data[i].Signs[n].Image_Path_Relative
-                        data[i].Signs.splice(n, 1);
-                        json = JSON.stringify(data, null, 2); //convert it back to json
-                        fs.writeFile('../server/database/database.json', json, 'utf8', callback);
-                        function callback(err) {
-                            console.log(err)
-                        }
-                        //Delete Image in Thesis_Dataset_Whole
-                        try {
-                            fs.unlinkSync(delete_on_image_path)
-                            console.log("Successfully deleted the file.")
-                        } catch (err) {
-                            throw err
-                        }
-
-
-
-                        //validate deletion 
-                        if (data[i].Signs[n] == undefined) {
-
-                            console.log('data has been succesfully removed @ ' + 'index ' + i + ' , ' + n)
-
-
-                        } else {
-                            console.log('There was an issue deleting data')
-                        }
-
-                    }
-                    count++
-                    // var item = data[i].Signs.find(x => x.id === 13110);
-                    // if (item) {
-                    //     item.xy_coordinates = "x"
-                    //     console.log(i)
-                    //     json = JSON.stringify(data, null, 2); //convert it back to json
-                    //     fs.writeFile('../server/database/database.json', json, 'utf8', callback);
-                    //     function callback(err){
-                    //         //console.log(err)
-                    //     }
-                    // }
-                }
-
-
-            }
-            console.log("Data has been updated")
-            console.log(count)
-        } catch (err) {
-            console.log('Error pairing JSON', err)
+app.post('/delete_sign_object', (req, res) => {
+    count = 0
+    let input_ID = req.body.id;
+    input_ID = parseInt(input_ID)
+    console.log(input_ID)
+    
+    
+    // Delete JSON data
+    fs.readFile('../server/database/database.json', 'utf-8', (err, jsonString) => {
+        if (err) {
+            console.log(err)
         }
-
-    }
-
+        else {
+    
+            try {
+                //All of JSON data
+                const data = JSON.parse(jsonString);
+    
+                // ///WORKING FOR LOOP DO NOT DELETE
+                for (var i = 0; i < data.length; i++) {
+                    for (var n = 0; n < data[i].Signs.length; n++) {
+                        var signs = data[i].Signs[n].id
+                        //console.log(signs)
+                        if (signs === input_ID) {
+                            //console.log(i, n)
+                            //console.log(data[i].Signs[n].Image_Path_Relative)
+    
+                            //Get Relative image path to delete image
+                            var delete_on_image_path = '../'+data[i].Signs[n].Image_Path_Relative
+                            data[i].Signs.splice(n, 1);
+                            json = JSON.stringify(data, null, 2); //convert it back to json
+                            fs.writeFile('../server/database/database.json', json, 'utf8', callback);
+                            function callback(err) {
+                                console.log(err)
+                            }
+                            //Delete Image in Thesis_Dataset_Whole
+                            try {
+                                fs.unlinkSync(delete_on_image_path)
+                                console.log("Successfully deleted the file.")
+                            } catch (err) {
+                                throw err
+                            }
+    
+    
+    
+                            //validate deletion 
+                            if (data[i].Signs[n] == undefined) {
+    
+                                console.log('data has been succesfully removed @ ' + 'index ' + i + ' , ' + n)
+    
+    
+                            } else {
+                                console.log('There was an issue deleting data')
+                            }
+    
+                        }
+                        count++
+                        // var item = data[i].Signs.find(x => x.id === 13110);
+                        // if (item) {
+                        //     item.xy_coordinates = "x"
+                        //     console.log(i)
+                        //     json = JSON.stringify(data, null, 2); //convert it back to json
+                        //     fs.writeFile('../server/database/database.json', json, 'utf8', callback);
+                        //     function callback(err){
+                        //         //console.log(err)
+                        //     }
+                        // }
+                    }
+    
+    
+                }
+                console.log("Data has been updated")
+                //console.log(count)
+            } catch (err) {
+                console.log('Error pairing JSON', err)
+            }
+    
+        }
+    
+    })
+    
 })
-}
 
-
-
+/*
 //////////////////////////////////////////////////////////////
 /////////// Data Editing Logic for Signs objects /////////////
 /////////////////////////////////////////////////////////////
@@ -828,7 +790,7 @@ const Edit_Sign_Data = function () {
 
                 }
                 console.log("Data has been updated")
-                console.log(count)
+                //console.log(count)
             } catch (err) {
                 console.log('Error pairing JSON', err)
             }
@@ -837,9 +799,5 @@ const Edit_Sign_Data = function () {
 
     })
 }
+*/
 
-app.post('/delete_sign_object', (req, res) => {
-
-    id_to_delete=req.body.id;
-
-})

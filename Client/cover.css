@@ -48,7 +48,7 @@ input[type=text], select {
 }
 
 #preview{
-  width:auto;
+  width:200px;
   height:auto;
   
   background-position:inherit;
@@ -358,5 +358,5 @@ table, th, td {
   padding: 8px 8px;
   text-align: center;
   margin-top: 5px;
-  margin-left: 267px
+  margin-left: 279px;
 }
