@@ -70,7 +70,7 @@
                 onchange="previewImageCrop()">
             </p>
             <!--required to put type="button" in because otherwise form is submitted. Default type of <button> in html is submit -->
-            <button type="button" id="crop_button">Crop</button>
+            <button type="button" id="crop_button" onclick="enableSubmit()">Crop</button>
             <button id="submit">Submit</button>
             <div>
               <img id="crop1">
@@ -115,7 +115,7 @@
           <input type="text" id="Text" name="Text">
           <label for="Instance ">Instance of glyph in facsimile:</label>
           <input type="text" id="Instance" name="Instance">
-          <label for="lname">Provenance:</label>
+          <label for="Provenance">Provenance:</label>
           <input type="text" id="Provenance" name="Provenance">
           <label for="Period">Time Period:</label>
           <select name="Period" id="Period">
@@ -125,11 +125,11 @@
             <option value="New Kingdom">New Kingdom</option>
 
           </select>
-          <label for="Author">X Coordinate:</label>
+          <label for="x">X Coordinate:</label>
           <input type="text" id="x" name="x">
-          <label for="Author">Y Coordinate:</label>
+          <label for="y">Y Coordinate:</label>
           <input type="text" id="y" name="y">
-          <button id='final_submit_button' onclick="jsonUpload();setTimeout(imageUpload, 5000)">Submit glyph to database
+          <button id='final_submit_button' onclick="jsonUpload();setTimeout(imageUpload, 3000)">Submit glyph to database
           </button>
         </div>
 

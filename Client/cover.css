@@ -59,9 +59,9 @@ input[type=text], select {
 }
 
 #final_submit_button{
-  color: #333;
+  
   text-shadow: none; /* Prevent inheritance from `body` */
-  background-color: #fff;
+  background-color: white;
   border: 1px solid rgba(255, 255, 255, 0.523);
   margin: 8px 0;
   padding: 5px 5px;
