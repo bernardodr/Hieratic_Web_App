@@ -9,6 +9,7 @@ const root = '/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/s
 //const root = '/Users/benjenkins/Desktop/Dissertation - Hieratic OCR website/Hieratic_Web_App/server/database/Thesis_Dataset_Whole/'
 const fs = require('fs');
 const AdmZip = require('adm-zip');
+const { response } = require('express');
 
 // multer acts as middleware and stores in the client uploads in uploads directory
 const storage = multer.diskStorage({
@@ -735,11 +736,18 @@ app.post('/visualisation', (req, res) => {
     python_analysis.stderr.on('data', (data) => {
         console.log(`stderr: + ${data}`);
     })
-
+   
     // when script finishes 
     python_analysis.on('close', (code) => {
         console.log(`process exited with code: + ${code}`);
-        res.sendFile('/Users/danielbernardo/Desktop/Dissteration Code/Hieratic_Web_App/server/Visualisation/visualisation.html')
-        //tokens()
-    })
+        res.sendFile(`${__dirname}/Visualisation/visualisation.html`, (err) => {
+            if (err) {
+              console.log(err);
+              res.end(err.message);
+            }
+          });
+        })
+       
+           //tokens()
+    
 })
