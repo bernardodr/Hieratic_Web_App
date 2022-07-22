@@ -51,12 +51,12 @@ function sendGlyphtoVisualise() {
         .then((html) => {
             document.write(`<nav>
        <ul class="nav masthead-nav">
-       <li class="active" class="/index.html"><a href="#">Home Page</a></li>
+       <li class="active" class="/index.html"><a href="index.html">Home Page</a></li>
        <li><a href="pages/image_labeling.html">Image Labeling Tools</a></li>
        <li><a href="pages/ocr_system.html">OCR System</a></li>
        <li><a href="pages/database_editing.html">Database Editing</a></li>
         </ul>
-        </nav>` + html)
+        </nav>` + `<h3 class="masthead-brand" text-align:'center' >Visualisation of ${data.glyph.toUpperCase()}</h3>` + html)
         })
 
 }
