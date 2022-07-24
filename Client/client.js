@@ -1,4 +1,6 @@
-
+window.onload=function(){
+    document.getElementById('sendGardiner').disabled=false;
+}
 //function to display uploaded image. Access 'image input' id tag in html form, and displays chosen image in html img tag 'preview'
 function previewImage() {
     var file = document.getElementById("image_input").files;
@@ -30,6 +32,10 @@ function downloadZIP() {
 
 function sendGlyphtoVisualise() {
 
+    if (document.getElementById('Gardiner').value==''){
+        alert('Please input valid Gardiner sign')
+    }else{
+   
     data = {
         glyph: document.getElementById('Gardiner').value
     }
@@ -54,9 +60,12 @@ function sendGlyphtoVisualise() {
        <li class="active" class="/index.html"><a href="index.html">Home Page</a></li>
        <li><a href="pages/image_labeling.html">Image Labeling Tools</a></li>
        <li><a href="pages/ocr_system.html">OCR System</a></li>
-       <li><a href="pages/database_editing.html">Database Editing</a></li>
+       <li><a href="pages/database_editing.html">Database Display</a></li>
         </ul>
         </nav>` + `<h3 class="masthead-brand" text-align:'center' >Visualisation of ${data.glyph.toUpperCase()}</h3>` + html)
         })
 
+       document.getElementById('sendGardiner').disabled=true;
+
+    }
 }
